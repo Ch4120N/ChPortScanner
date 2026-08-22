@@ -29,3 +29,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 	if err != nil {
 		return err
 	}
+	return sockErr
