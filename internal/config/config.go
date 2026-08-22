@@ -37,3 +37,4 @@ type Config struct {
 	BannerTimeout int
 	HTTPProbe     bool
 	TLSCert       bool
+	RDNS          bool
