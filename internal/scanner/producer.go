@@ -17,3 +17,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	portIdx := s.state.CurPort
 	shardStart := s.state.ShardIdx
 	shardEnd := s.state.ShardEnd
+	count := int64(0)
