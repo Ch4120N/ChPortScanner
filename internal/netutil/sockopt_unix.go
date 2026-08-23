@@ -19,3 +19,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 			return
 		}
 		if e := syscall.SetsockoptInt(int(fd), syscall.SOL_SOCKET, syscall.SO_REUSEADDR, 1); e != nil {
+			sockErr = e
