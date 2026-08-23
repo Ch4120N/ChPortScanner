@@ -13,3 +13,4 @@ type Config struct {
 	Target      string
 	InputFile   string
 	ExcludeFile string
+	PingSweep   bool
