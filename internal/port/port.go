@@ -104,3 +104,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 				b := strings.SplitN(chunk, "-", 2)
 				lo, _ := strconv.Atoi(strings.TrimSpace(b[0]))
 				hi, _ := strconv.Atoi(strings.TrimSpace(b[1]))
+				if lo > hi {
