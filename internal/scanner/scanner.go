@@ -327,3 +327,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 		w = 4000
 	default:
 		w = 6000
+	}
