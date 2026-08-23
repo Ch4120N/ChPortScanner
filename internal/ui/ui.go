@@ -64,3 +64,4 @@ func Banner(name, version, owner string) {
 		return
 	}
 	if !UseColor {
+		fmt.Fprintf(os.Stderr, "== %s v%s by %s ==\n\n", name, version, owner)
