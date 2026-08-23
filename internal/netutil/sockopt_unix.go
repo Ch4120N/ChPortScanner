@@ -36,3 +36,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 // (success, oldLimit, newLimit). Silently returns (false, 0, 0) if unsupported.
 func RaiseUlimit(target uint64) (bool, uint64, uint64) {
 	var rLimit syscall.Rlimit
+	if err := syscall.Getrlimit(syscall.RLIMIT_NOFILE, &rLimit); err != nil {
