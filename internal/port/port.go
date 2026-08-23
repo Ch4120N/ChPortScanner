@@ -22,3 +22,4 @@ var ServiceMap = map[uint16]string{
 	5000: "upnp", 5432: "postgresql", 5900: "vnc", 5985: "wsman",
 	5986: "wsmans", 6379: "redis", 6666: "irc", 8000: "http-alt",
 	8080: "http-proxy", 8081: "blackice", 8443: "https-alt", 8888: "sun-answerbook",
+	9000: "cslistener", 9090: "zeus-admin", 9200: "elasticsearch", 9300: "elasticsearch",
