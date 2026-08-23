@@ -15,3 +15,4 @@ import (
 
 func (s *Scanner) worker(ctx context.Context) {
 	defer s.wg.Done()
+
