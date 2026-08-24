@@ -114,3 +114,4 @@ func Load(args []string) (*Config, error) {
 	fs.IntVar(&c.Timeout, "timeout", 1, "Connection timeout (s)")
 	fs.IntVar(&c.Retries, "retries", 0, "Retries")
 	fs.IntVar(&c.RetryDelay, "retry-delay", 500, "Retry delay (ms)")
+	fs.BoolVar(&c.UDP, "udp", false, "UDP scan mode")
