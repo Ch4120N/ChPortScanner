@@ -59,3 +59,4 @@ func parseOne(s string) (Spec, error) {
 		if start.Compare(end) > 0 {
 			start, end = end, start
 		}
+		return Spec{Raw: s, Kind: "range", Start: start, End: end}, nil
