@@ -174,3 +174,4 @@ func mergeJSON(path string, c *Config) error {
 }
 
 func applyProfile(c *Config) error {
+	switch c.Profile {
