@@ -131,3 +131,4 @@ func (s *Scanner) Run() error {
 		s.excl, err = target.Parse(strings.Join(exclLines, ","))
 		if err != nil {
 			return fmt.Errorf("parsing excludes: %w", err)
+		}
