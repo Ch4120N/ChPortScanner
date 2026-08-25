@@ -200,3 +200,4 @@ func applyProfile(c *Config) error {
 		return fmt.Errorf("unknown profile: %q", c.Profile)
 	}
 	return nil
+}
