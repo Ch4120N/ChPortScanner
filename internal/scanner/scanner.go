@@ -210,3 +210,4 @@ func (s *Scanner) Run() error {
 	go s.resultCollector(ctx)
 
 	// Worker count
+	workers := computeWorkers(s.cfg, len(s.ports))
