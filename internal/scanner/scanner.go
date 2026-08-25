@@ -140,3 +140,4 @@ func (s *Scanner) Run() error {
 			s.state.Targets[i], s.state.Targets[j] = s.state.Targets[j], s.state.Targets[i]
 		})
 		rand.Shuffle(len(s.ports), func(i, j int) {
+			s.ports[i], s.ports[j] = s.ports[j], s.ports[i]
