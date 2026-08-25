@@ -33,3 +33,4 @@ type Config struct {
 	SourceIP    string
 
 	// Probing
+	Banner        bool
