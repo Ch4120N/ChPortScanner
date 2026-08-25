@@ -10,3 +10,4 @@ import (
 )
 
 const (
+	Reset  = "\033[0m"
