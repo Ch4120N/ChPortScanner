@@ -164,3 +164,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-S", "Source IP to bind"},
 			{"--lite", "Low-resource mode"},
 			{"--turbo", "Maximum speed mode"},
+		}},
