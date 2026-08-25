@@ -24,3 +24,4 @@ type Config struct {
 	// Scanning
 	Rate        int
 	Workers     int
+	Timeout     int
