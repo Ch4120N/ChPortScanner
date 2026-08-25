@@ -92,3 +92,4 @@ func (s *Scanner) Run() error {
 	if err != nil {
 		return err
 	}
+	s.ports = ports
