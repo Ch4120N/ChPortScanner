@@ -123,3 +123,4 @@ func Load(args []string) (*Config, error) {
 
 	// Probing
 	fs.BoolVar(&c.Banner, "banner", false, "Enable banner grabbing")
+	fs.IntVar(&c.BannerTimeout, "banner-timeout", 2, "Banner timeout (s)")
