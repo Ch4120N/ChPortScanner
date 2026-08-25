@@ -98,3 +98,4 @@ func (p *Progress) Run(ctx context.Context) {
 		case <-t.C:
 			d := p.done.Load()
 			o := p.open.Load()
+			elapsed := time.Since(p.start).Seconds()
