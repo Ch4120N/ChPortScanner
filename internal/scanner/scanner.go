@@ -120,3 +120,4 @@ func (s *Scanner) Run() error {
 	if s.state.Finished {
 		ui.Info("Scan already finished per state file")
 		return nil
+	}
