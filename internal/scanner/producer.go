@@ -56,3 +56,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			count++
 			portIdx++
 		}
+		portIdx = 0
