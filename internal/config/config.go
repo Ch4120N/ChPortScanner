@@ -156,3 +156,4 @@ func Load(args []string) (*Config, error) {
 			return nil, fmt.Errorf("config file: %w", err)
 		}
 	}
+	if c.JSONOut {
