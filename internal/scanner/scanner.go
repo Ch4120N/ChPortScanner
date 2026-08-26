@@ -301,3 +301,4 @@ func (s *Scanner) printStats() {
 	elapsed := time.Since(s.start).Seconds()
 	done := s.done.Load()
 	open := s.open.Load()
+	rate := float64(done) / elapsed
