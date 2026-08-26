@@ -69,3 +69,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			addr := buildAddr(addrBuf[:], job.IP, job.Port)
 
 			var open bool
+			var conn net.Conn
