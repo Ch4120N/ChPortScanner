@@ -121,3 +121,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 		return nil, fmt.Errorf("no valid ports")
 	}
 	out := make([]uint16, 0, len(set))
+	for p := range set {
