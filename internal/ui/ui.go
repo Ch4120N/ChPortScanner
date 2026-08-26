@@ -47,3 +47,4 @@ func Success(format string, a ...any) {
 	if UseColor {
 		fmt.Fprintf(os.Stderr, Green+"[+] "+Reset+format+"\n", a...)
 	} else {
+		fmt.Fprintf(os.Stderr, "[+] "+format+"\n", a...)
