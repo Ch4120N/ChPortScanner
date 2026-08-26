@@ -9,3 +9,4 @@ import (
 	"strings"
 )
 
+type Spec struct {
