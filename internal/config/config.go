@@ -163,3 +163,4 @@ func Load(args []string) (*Config, error) {
 		return nil, err
 	}
 	return c, nil
+}
