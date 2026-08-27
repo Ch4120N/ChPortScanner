@@ -124,3 +124,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 	return false
 }
 
+func ReadLines(path string) ([]string, error) {
