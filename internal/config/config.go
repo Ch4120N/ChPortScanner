@@ -76,3 +76,4 @@ func New() *Config {
 		RetryDelay:    500,
 		BannerTimeout: 2,
 		Format:        "text",
+		StateFile:     "scan.state",
