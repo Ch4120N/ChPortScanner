@@ -118,3 +118,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				case <-ctx.Done():
 					return
 				}
+				s.open.Add(1)
