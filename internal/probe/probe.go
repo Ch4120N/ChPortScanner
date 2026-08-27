@@ -69,3 +69,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	return strings.Join(parts, " ")
 }
 
+// RDNS does reverse DNS lookup.
