@@ -57,3 +57,4 @@ func parseOne(s string) (Spec, error) {
 			return Spec{}, err
 		}
 		if start.Compare(end) > 0 {
+			start, end = end, start
