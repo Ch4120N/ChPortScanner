@@ -187,3 +187,4 @@ func (s *Scanner) Run() error {
 	if err != nil {
 		return err
 	}
+	defer s.writer.Close()
