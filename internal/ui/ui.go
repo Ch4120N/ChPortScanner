@@ -177,3 +177,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-oJ", "JSON output"},
 			{"--format", "text|json|jsonl|csv|grep"},
 			{"--no-color", "Disable colored output"},
+			{"-q, --quiet", "Quiet mode"},
