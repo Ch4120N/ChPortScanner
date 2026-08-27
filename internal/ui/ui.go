@@ -57,3 +57,4 @@ func Warn(format string, a ...any) {
 	} else {
 		fmt.Fprintf(os.Stderr, "[!] "+format+"\n", a...)
 	}
+}
