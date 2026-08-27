@@ -95,3 +95,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				}
 				if svc, ok := port.ServiceMap[job.Port]; ok {
 					res.Service = svc
+				}
