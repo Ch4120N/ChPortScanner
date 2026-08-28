@@ -167,3 +167,4 @@ func Load(args []string) (*Config, error) {
 
 func mergeJSON(path string, c *Config) error {
 	data, err := os.ReadFile(path)
+	if err != nil {
