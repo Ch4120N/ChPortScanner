@@ -46,3 +46,4 @@ type Config struct {
 	NoColor   bool
 	Quiet     bool
 	Verbose   bool
+	ShowStats bool
