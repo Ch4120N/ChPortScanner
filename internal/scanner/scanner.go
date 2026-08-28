@@ -53,3 +53,4 @@ func New(cfg *config.Config) *Scanner {
 	return &Scanner{cfg: cfg}
 }
 
+func (s *Scanner) Stop() {
