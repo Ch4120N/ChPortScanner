@@ -116,3 +116,4 @@ func Load(args []string) (*Config, error) {
 	fs.IntVar(&c.RetryDelay, "retry-delay", 500, "Retry delay (ms)")
 	fs.BoolVar(&c.UDP, "udp", false, "UDP scan mode")
 	fs.BoolVar(&c.Random, "random", false, "Randomize scan order")
+	fs.StringVar(&c.Shard, "shard", "", "Shard X/Y")
