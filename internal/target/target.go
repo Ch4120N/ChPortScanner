@@ -18,3 +18,4 @@ type Spec struct {
 	Prefix netip.Prefix `json:"prefix,omitempty"`
 }
 
+func Parse(raw string) ([]Spec, error) {
