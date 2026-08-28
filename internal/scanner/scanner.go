@@ -162,3 +162,4 @@ func (s *Scanner) Run() error {
 	// Shard
 	s.state.ShardIdx = 0
 	s.state.ShardEnd = s.total
+	if s.cfg.Shard != "" {
