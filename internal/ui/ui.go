@@ -81,3 +81,4 @@ type Progress struct {
 	done  *atomic.Uint64
 	open  *atomic.Uint64
 	total int64
+	start time.Time
