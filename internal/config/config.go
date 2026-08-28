@@ -51,3 +51,4 @@ type Config struct {
 	// Utilities
 	Extract      string
 	ExtractPorts bool
+	Resume       string
