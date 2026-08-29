@@ -78,3 +78,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 				lo, _ := strconv.Atoi(strings.TrimSpace(b[0]))
 				hi, _ := strconv.Atoi(strings.TrimSpace(b[1]))
 				if lo > hi {
+					lo, hi = hi, lo
