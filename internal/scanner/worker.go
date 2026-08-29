@@ -70,3 +70,4 @@ func (s *Scanner) worker(ctx context.Context) {
 
 			var open bool
 			var conn net.Conn
+
