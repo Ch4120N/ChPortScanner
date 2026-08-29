@@ -17,3 +17,4 @@ type State struct {
 	OpenCount uint64        `json:"open_count"`
 	Format    string        `json:"format"`
 	Output    string        `json:"output"`
+	ShardIdx  int64         `json:"shard_start_idx"`
