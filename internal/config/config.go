@@ -80,3 +80,4 @@ func New() *Config {
 		IsUnix:        runtime.GOOS != "windows",
 		IsWin:         runtime.GOOS == "windows",
 	}
+}
