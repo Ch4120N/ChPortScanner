@@ -317,3 +317,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	cpus := runtime.NumCPU()
 	var w int
 	switch {
+	case cfg.Lite || cpus <= 2:
