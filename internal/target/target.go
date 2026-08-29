@@ -89,3 +89,4 @@ func Count(s Spec) uint64 {
 	switch s.Kind {
 	case "single":
 		return 1
+	case "cidr", "range":
