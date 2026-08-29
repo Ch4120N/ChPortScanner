@@ -214,3 +214,4 @@ func (s *Scanner) Run() error {
 	ui.Info("Starting scan: %d workers | rate=%s | timeout=%ds | jobs=%d",
 		workers, rateLabel(s.cfg.Rate), s.cfg.Timeout, s.total)
 
+	s.wg.Add(1)
