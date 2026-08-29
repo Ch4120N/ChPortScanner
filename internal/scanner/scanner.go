@@ -80,3 +80,4 @@ func (s *Scanner) Run() error {
 		}
 	}
 	if targetStr == "" && s.cfg.Resume == "" {
+		return fmt.Errorf("no targets specified (use -t or -iL)")
