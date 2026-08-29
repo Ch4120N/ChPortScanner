@@ -60,3 +60,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			if s.tokens != nil {
 				select {
 				case <-s.tokens:
+				case <-ctx.Done():
