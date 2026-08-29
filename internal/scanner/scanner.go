@@ -128,3 +128,4 @@ func (s *Scanner) Run() error {
 		return fmt.Errorf("reading excludes: %w", err)
 	}
 	if len(exclLines) > 0 {
+		s.excl, err = target.Parse(strings.Join(exclLines, ","))
