@@ -83,3 +83,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				}
 				if attempt < retries {
 					time.Sleep(retryDelay)
+				}
