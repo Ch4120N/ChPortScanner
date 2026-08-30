@@ -260,3 +260,4 @@ func (s *Scanner) setupRateLimiter() {
 	go func() {
 		for range s.ticker.C {
 			for i := 0; i < batchSize; i++ {
+				select {
