@@ -313,3 +313,4 @@ func (s *Scanner) printStats() {
 func computeWorkers(cfg *config.Config, numPorts int) int {
 	if cfg.Workers > 0 {
 		return cfg.Workers
+	}
