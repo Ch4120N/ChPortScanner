@@ -231,3 +231,4 @@ func (s *Scanner) Run() error {
 	s.state.Finished = true
 	s.saveState()
 
+	if s.cfg.ShowStats {
