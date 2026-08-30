@@ -196,3 +196,4 @@ func (s *Scanner) Run() error {
 	s.cancel = cancel
 	defer cancel()
 
+	s.jobCh = make(chan Job, jobBufferSize(s.total, s.cfg))
