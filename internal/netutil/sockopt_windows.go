@@ -13,3 +13,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 }
 
 // RaiseUlimit is unsupported on Windows.
+func RaiseUlimit(target uint64) (bool, uint64, uint64) {
