@@ -103,3 +103,4 @@ func (s *Scanner) Run() error {
 		if err != nil {
 			return fmt.Errorf("resume ports: %w", err)
 		}
+		s.ports = ports
