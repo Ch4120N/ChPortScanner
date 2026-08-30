@@ -42,3 +42,4 @@ type Scanner struct {
 	tokens   chan struct{}
 	ticker   *time.Ticker
 
+	wg       sync.WaitGroup
