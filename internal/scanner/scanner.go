@@ -232,3 +232,4 @@ func (s *Scanner) Run() error {
 	s.saveState()
 
 	if s.cfg.ShowStats {
+		s.printStats()
