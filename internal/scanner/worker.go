@@ -156,3 +156,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	n, _ := conn.Read(buf)
 	if n <= 0 {
 		return ""
+	}
