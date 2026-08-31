@@ -73,3 +73,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 func RDNS(ip string) string {
 	names, err := net.LookupAddr(ip)
 	if err != nil || len(names) == 0 {
+		return ""
