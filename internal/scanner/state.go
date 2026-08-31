@@ -32,3 +32,4 @@ func (s *Scanner) loadState(path string) error {
 func (s *Scanner) saveState() {
 	s.state.OpenCount = s.open.Load()
 	data, _ := json.MarshalIndent(s.state, "", "  ")
+	_ = os.WriteFile(s.cfg.StateFile, data, 0644)
