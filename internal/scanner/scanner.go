@@ -117,3 +117,4 @@ func (s *Scanner) Run() error {
 		}
 	}
 
+	if s.state.Finished {
