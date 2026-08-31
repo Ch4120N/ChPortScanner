@@ -49,3 +49,4 @@ type Scanner struct {
 	progress *ui.Progress
 }
 
+func New(cfg *config.Config) *Scanner {
