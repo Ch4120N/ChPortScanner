@@ -21,3 +21,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		timeout = time.Second
 	}
 
+	dialer := &net.Dialer{
