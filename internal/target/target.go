@@ -104,3 +104,4 @@ func addrToInt(a netip.Addr) *big.Int {
 	return new(big.Int).SetBytes(b[:])
 }
 
+func IsExcluded(ip netip.Addr, ex []Spec) bool {
