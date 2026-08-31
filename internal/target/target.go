@@ -51,3 +51,4 @@ func parseOne(s string) (Spec, error) {
 		start, err := netip.ParseAddr(strings.TrimSpace(parts[0]))
 		if err != nil {
 			return Spec{}, err
+		}
