@@ -46,3 +46,4 @@ type Scanner struct {
 	cancel   context.CancelFunc
 	stopOnce sync.Once
 	writer   output.Writer
+	progress *ui.Progress
