@@ -46,3 +46,4 @@ func init() {
 			deduped = append(deduped, p)
 		}
 	}
+	topPorts = deduped
