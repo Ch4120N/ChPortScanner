@@ -96,3 +96,4 @@ func (p *Progress) Run(ctx context.Context) {
 		case <-ctx.Done():
 			return
 		case <-t.C:
+			d := p.done.Load()
