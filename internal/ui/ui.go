@@ -124,3 +124,4 @@ func (p *Progress) Run(ctx context.Context) {
 			if UseColor {
 				fmt.Fprintf(os.Stderr, "%s%s%s", Cyan, line, Reset)
 			} else {
+				fmt.Fprint(os.Stderr, line)
