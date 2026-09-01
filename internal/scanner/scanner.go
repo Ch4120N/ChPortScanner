@@ -129,3 +129,4 @@ func (s *Scanner) Run() error {
 	}
 	if len(exclLines) > 0 {
 		s.excl, err = target.Parse(strings.Join(exclLines, ","))
+		if err != nil {
