@@ -129,3 +129,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.RDNS, "rdns", false, "Reverse DNS lookup")
 
 	// Output
+	fs.StringVar(&c.Output, "o", "", "Output file")
