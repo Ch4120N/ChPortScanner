@@ -45,3 +45,4 @@ type Config struct {
 	Format    string
 	NoColor   bool
 	Quiet     bool
+	Verbose   bool
