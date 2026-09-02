@@ -44,3 +44,4 @@ type Scanner struct {
 
 	wg       sync.WaitGroup
 	cancel   context.CancelFunc
+	stopOnce sync.Once
