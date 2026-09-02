@@ -12,3 +12,4 @@ import (
 //   - TCP_NODELAY  → disables Nagle (irrelevant for connect, harmless)
 func SetFastClose(network, address string, c syscall.RawConn) error {
 	var sockErr error
+	err := c.Control(func(fd uintptr) {
