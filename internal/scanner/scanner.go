@@ -257,3 +257,4 @@ func (s *Scanner) setupRateLimiter() {
 		interval = time.Second / time.Duration(rate)
 	}
 	s.ticker = time.NewTicker(interval)
+	go func() {
