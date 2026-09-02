@@ -5,3 +5,4 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sync/atomic"
