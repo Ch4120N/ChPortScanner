@@ -21,3 +21,4 @@ type Config struct {
 	ExcludePorts string
 	Profile      string
 
+	// Scanning
