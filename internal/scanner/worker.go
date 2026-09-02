@@ -37,3 +37,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	}
 
 	network := "tcp"
+	if s.cfg.UDP {
