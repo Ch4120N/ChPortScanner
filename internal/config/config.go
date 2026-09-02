@@ -9,3 +9,4 @@ import (
 )
 
 type Config struct {
+	// Targeting
