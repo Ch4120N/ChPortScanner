@@ -147,3 +147,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-sn", "Ping sweep only"},
 		}},
 		{"PORTS", [][2]string{
+			{"-p, --ports", "Ports to scan (e.g. 80,443,1000-2000)"},
