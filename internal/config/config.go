@@ -165,3 +165,4 @@ func Load(args []string) (*Config, error) {
 	return c, nil
 }
 
+func mergeJSON(path string, c *Config) error {
