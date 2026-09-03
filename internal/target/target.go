@@ -43,3 +43,4 @@ func parseOne(s string) (Spec, error) {
 		pfx, err := netip.ParsePrefix(s)
 		if err != nil {
 			return Spec{}, err
+		}
