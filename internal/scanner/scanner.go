@@ -36,3 +36,4 @@ type Scanner struct {
 	done  atomic.Uint64
 	open  atomic.Uint64
 	start time.Time
+
