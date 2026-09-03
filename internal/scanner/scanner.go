@@ -72,3 +72,4 @@ func (s *Scanner) Run() error {
 		if err != nil {
 			return fmt.Errorf("reading input file: %w", err)
 		}
+		if len(lines) > 0 {
