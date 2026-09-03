@@ -15,3 +15,4 @@ type Config struct {
 	ExcludeFile string
 	PingSweep   bool
 
+	// Ports
