@@ -157,3 +157,4 @@ func (s *Scanner) Run() error {
 		s.total = math.MaxInt64
 	} else {
 		s.total = int64(totalIPs * uint64(len(s.ports)))
+	}
