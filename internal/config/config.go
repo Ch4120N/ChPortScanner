@@ -151,3 +151,4 @@ func Load(args []string) (*Config, error) {
 		return nil, err
 	}
 
+	if c.ConfFile != "" {
