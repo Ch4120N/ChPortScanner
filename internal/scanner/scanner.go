@@ -33,3 +33,4 @@ type Scanner struct {
 	state State
 
 	total int64
+	done  atomic.Uint64
