@@ -26,3 +26,4 @@ type Job struct {
 	Port uint16
 }
 
+type Scanner struct {
