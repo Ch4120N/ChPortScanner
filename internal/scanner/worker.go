@@ -168,3 +168,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 }
 
 // keep strconv used (unused guard)
+var _ = strconv.Itoa
