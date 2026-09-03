@@ -96,3 +96,4 @@ func Count(s Spec) uint64 {
 			return diff.Uint64()
 		}
 	}
+	return 0
