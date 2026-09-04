@@ -22,3 +22,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 		return ""
 	}
 	defer conn.Close()
+	_ = conn.SetDeadline(time.Now().Add(timeout))
