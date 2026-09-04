@@ -143,3 +143,4 @@ func appendUint16(dst []byte, v uint16) int {
 	i := len(tmp)
 	for v > 0 {
 		i--
+		tmp[i] = byte('0' + v%10)
