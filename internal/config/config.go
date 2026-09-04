@@ -102,3 +102,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.PingSweep, "sn", false, "Ping sweep only")
 
 	// Ports
+	fs.StringVar(&c.Ports, "p", "80,443", "Ports to scan")
