@@ -24,3 +24,4 @@ import (
 type Job struct {
 	IP   string // pre-formatted string (avoid allocation in worker)
 	Port uint16
+}
