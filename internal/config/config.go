@@ -41,3 +41,4 @@ type Config struct {
 
 	// Output
 	Output    string
+	JSONOut   bool
