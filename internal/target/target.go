@@ -90,3 +90,4 @@ func Count(s Spec) uint64 {
 	case "single":
 		return 1
 	case "cidr", "range":
+		diff := new(big.Int).Sub(addrToInt(s.End), addrToInt(s.Start))
