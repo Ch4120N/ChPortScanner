@@ -263,3 +263,4 @@ func (s *Scanner) setupRateLimiter() {
 				select {
 				case s.tokens <- struct{}{}:
 				default:
+					break
