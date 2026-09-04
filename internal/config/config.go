@@ -85,3 +85,4 @@ func New() *Config {
 func Load(args []string) (*Config, error) {
 	c := New()
 	fs := flag.NewFlagSet("chportscanner", flag.ContinueOnError)
+	fs.SetOutput(os.Stderr)
