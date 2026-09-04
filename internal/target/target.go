@@ -38,3 +38,4 @@ func Parse(raw string) ([]Spec, error) {
 	return out, nil
 }
 
+func parseOne(s string) (Spec, error) {
