@@ -254,3 +254,4 @@ func (s *Scanner) setupRateLimiter() {
 	interval := 10 * time.Millisecond
 	if batchSize < 1 {
 		batchSize = 1
+		interval = time.Second / time.Duration(rate)
