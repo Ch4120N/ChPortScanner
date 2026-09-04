@@ -11,3 +11,4 @@ import (
 //   - SO_REUSEADDR → allows quick rebinding
 //   - TCP_NODELAY  → disables Nagle (irrelevant for connect, harmless)
 func SetFastClose(network, address string, c syscall.RawConn) error {
+	var sockErr error
