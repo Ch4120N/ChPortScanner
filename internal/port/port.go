@@ -99,3 +99,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			chunk = strings.TrimSpace(chunk)
 			if chunk == "" {
 				continue
+			}
