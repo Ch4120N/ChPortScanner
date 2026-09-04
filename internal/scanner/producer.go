@@ -61,3 +61,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		s.state.CurPort = 0
 		return true
 	}
+
