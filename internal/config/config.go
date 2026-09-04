@@ -66,3 +66,4 @@ type Config struct {
 	IsWin   bool
 }
 
+func New() *Config {
