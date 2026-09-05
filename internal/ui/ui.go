@@ -189,3 +189,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-c", "JSON config file"},
 			{"-h, --help", "Show this help"},
 			{"-v, --version", "Show version"},
+		}},
