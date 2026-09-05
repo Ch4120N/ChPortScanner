@@ -30,3 +30,4 @@ func Init(noColor, quiet bool) {
 	}
 	Quiet = quiet
 }
+
