@@ -31,3 +31,4 @@ type Scanner struct {
 	ports []uint16
 	excl  []target.Spec
 	state State
+
