@@ -125,3 +125,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 		out = append(out, p)
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i] < out[j] })
+	return out, nil
