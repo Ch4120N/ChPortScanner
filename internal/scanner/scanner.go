@@ -285,3 +285,4 @@ func (s *Scanner) stateSaver(ctx context.Context) {
 
 func (s *Scanner) resultCollector(ctx context.Context) {
 	for {
+		select {
