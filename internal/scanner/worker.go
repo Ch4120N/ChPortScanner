@@ -147,3 +147,4 @@ func appendUint16(dst []byte, v uint16) int {
 		v /= 10
 	}
 	return copy(dst, tmp[i:])
+}
