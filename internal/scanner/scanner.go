@@ -111,3 +111,4 @@ func (s *Scanner) Run() error {
 		}
 		s.state = State{
 			Targets:  specs,
+			PortSpec: strings.Join(portStrs, ","),
