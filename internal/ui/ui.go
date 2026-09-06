@@ -102,3 +102,4 @@ func (p *Progress) Run(ctx context.Context) {
 			rate := float64(d) / elapsed
 			percent := 0.0
 			eta := ""
+			if p.total > 0 {
