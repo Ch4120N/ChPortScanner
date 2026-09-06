@@ -60,3 +60,4 @@ func Warn(format string, a ...any) {
 }
 
 func Banner(name, version, owner string) {
+	if Quiet {
