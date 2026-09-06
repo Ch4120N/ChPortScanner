@@ -81,3 +81,4 @@ func New() *Config {
 		IsWin:         runtime.GOOS == "windows",
 	}
 }
+
