@@ -101,3 +101,4 @@ func (p *Progress) Run(ctx context.Context) {
 			elapsed := time.Since(p.start).Seconds()
 			rate := float64(d) / elapsed
 			percent := 0.0
+			eta := ""
