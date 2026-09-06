@@ -189,3 +189,4 @@ func (s *Scanner) Run() error {
 	}
 	defer s.writer.Close()
 
+	// Rate limiter
