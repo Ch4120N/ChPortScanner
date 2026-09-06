@@ -18,3 +18,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	shardStart := s.state.ShardIdx
 	shardEnd := s.state.ShardEnd
 	count := int64(0)
+
