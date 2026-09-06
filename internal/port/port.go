@@ -71,3 +71,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 		for _, chunk := range strings.Split(spec, ",") {
 			chunk = strings.TrimSpace(chunk)
 			if chunk == "" {
+				continue
