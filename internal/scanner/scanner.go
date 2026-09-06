@@ -306,3 +306,4 @@ func (s *Scanner) printStats() {
 	ui.Info("Scanned     : %d", done)
 	ui.Info("Open        : %d", open)
 	ui.Info("Elapsed     : %.2fs", elapsed)
+	ui.Info("Avg rate    : %.0f pps", rate)
