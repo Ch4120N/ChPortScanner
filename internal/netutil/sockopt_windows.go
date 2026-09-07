@@ -7,3 +7,4 @@ import (
 )
 
 // SetFastClose is a no-op on Windows (Windows lacks SO_LINGER=0 semantics
+// for the connect-scan use case via the standard syscall package).
