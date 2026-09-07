@@ -84,3 +84,4 @@ type Progress struct {
 	start time.Time
 }
 
+func NewProgress(done, open *atomic.Uint64, total int64, start time.Time) *Progress {
