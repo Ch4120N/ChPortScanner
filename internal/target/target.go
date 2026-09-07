@@ -132,3 +132,4 @@ func ReadLines(path string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
+	var out []string
