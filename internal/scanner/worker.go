@@ -120,3 +120,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				}
 				s.open.Add(1)
 			}
+			s.done.Add(1)
