@@ -81,3 +81,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 					lo, hi = hi, lo
 				}
 				for p := lo; p <= hi; p++ {
+					if p >= 1 && p <= 65535 {
