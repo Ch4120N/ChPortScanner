@@ -116,3 +116,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				select {
 				case s.resultCh <- res:
 				case <-ctx.Done():
+					return
