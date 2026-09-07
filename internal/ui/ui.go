@@ -31,3 +31,4 @@ func Init(noColor, quiet bool) {
 	Quiet = quiet
 }
 
+func Info(format string, a ...any) {
