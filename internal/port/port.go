@@ -122,3 +122,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 	}
 	out := make([]uint16, 0, len(set))
 	for p := range set {
+		out = append(out, p)
