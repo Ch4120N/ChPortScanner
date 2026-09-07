@@ -76,3 +76,4 @@ func (s *Scanner) Run() error {
 			if targetStr != "" {
 				targetStr += ","
 			}
+			targetStr += strings.Join(lines, ",")
