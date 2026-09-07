@@ -69,3 +69,4 @@ func parseOne(s string) (Spec, error) {
 }
 
 func lastInPrefix(p netip.Prefix) netip.Addr {
+	if p.Addr().Is4() {
