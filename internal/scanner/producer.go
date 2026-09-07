@@ -76,3 +76,4 @@ func (s *Scanner) producer(ctx context.Context) {
 				}
 			}
 		}
+
