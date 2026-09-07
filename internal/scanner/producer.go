@@ -45,3 +45,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		for portIdx < len(ports) {
 			if count >= shardEnd {
 				return false
+			}
