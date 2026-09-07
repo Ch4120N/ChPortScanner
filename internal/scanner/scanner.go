@@ -167,3 +167,4 @@ func (s *Scanner) Run() error {
 		if len(parts) != 2 {
 			return fmt.Errorf("invalid shard (use X/Y)")
 		}
+		x, _ := strconv.Atoi(parts[0])
