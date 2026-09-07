@@ -61,3 +61,4 @@ func parseOne(s string) (Spec, error) {
 		}
 		return Spec{Raw: s, Kind: "range", Start: start, End: end}, nil
 	}
+	ip, err := netip.ParseAddr(s)
