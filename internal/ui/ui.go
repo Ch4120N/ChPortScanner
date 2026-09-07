@@ -69,3 +69,4 @@ func Banner(name, version, owner string) {
 	}
 	line := "══════════════════════════════════════════════════"
 	fmt.Fprintf(os.Stderr, "%s%s╔%s╗%s\n", Bold, Cyan, line, Reset)
+	fmt.Fprintf(os.Stderr, "%s%s║%s  %-46s%s%s║%s\n",
