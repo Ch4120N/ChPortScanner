@@ -66,3 +66,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 		parts = append(parts, "issuer="+c.Issuer.CommonName)
 	}
 	parts = append(parts, "expiry="+c.NotAfter.Format("2006-01-02"))
+	return strings.Join(parts, " ")
