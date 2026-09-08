@@ -165,3 +165,4 @@ func (s *Scanner) Run() error {
 	if s.cfg.Shard != "" {
 		parts := strings.SplitN(s.cfg.Shard, "/", 2)
 		if len(parts) != 2 {
+			return fmt.Errorf("invalid shard (use X/Y)")
