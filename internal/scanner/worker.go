@@ -64,3 +64,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					return
 				}
 			}
+
