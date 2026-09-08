@@ -13,3 +13,4 @@ type State struct {
 	CurSpec   int           `json:"cur_spec"`
 	CurIP     string        `json:"cur_ip"`
 	CurPort   int           `json:"cur_port"`
+	Finished  bool          `json:"finished"`
