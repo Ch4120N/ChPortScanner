@@ -192,3 +192,4 @@ func applyProfile(c *Config) error {
 	case "stealth":
 		if c.TopPorts == 0 {
 			c.TopPorts = 100
+		}
