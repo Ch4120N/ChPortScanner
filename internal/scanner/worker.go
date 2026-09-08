@@ -9,3 +9,4 @@ import (
 
 	"github.com/Ch4120N/ChPortScanner/internal/netutil"
 	"github.com/Ch4120N/ChPortScanner/internal/output"
+	"github.com/Ch4120N/ChPortScanner/internal/port"
