@@ -12,3 +12,4 @@ var ServiceMap = map[uint16]string{
 	67: "bootps", 68: "bootpc", 69: "tftp", 80: "http", 88: "kerberos",
 	110: "pop3", 111: "rpcbind", 123: "ntp", 135: "msrpc", 137: "netbios-ns",
 	138: "netbios-dgm", 139: "netbios-ssn", 143: "imap", 161: "snmp",
+	162: "snmptrap", 179: "bgp", 389: "ldap", 443: "https", 445: "microsoft-ds",
