@@ -100,3 +100,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				if s.cfg.Banner && network == "tcp" {
 					res.Banner = grabBanner(conn, s.cfg.BannerTimeout)
 				}
+				conn.Close()
