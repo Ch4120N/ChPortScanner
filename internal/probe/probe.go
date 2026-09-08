@@ -10,3 +10,4 @@ import (
 )
 
 var (
+	titleRe  = regexp.MustCompile(`(?is)<title>(.*?)</title>`)
