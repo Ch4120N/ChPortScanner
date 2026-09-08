@@ -48,3 +48,4 @@ type Scanner struct {
 	writer   output.Writer
 	progress *ui.Progress
 }
+
