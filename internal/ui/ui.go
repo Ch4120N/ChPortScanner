@@ -141,3 +141,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		Flags [][2]string
 	}{
 		{"TARGETING", [][2]string{
+			{"-t, --target", "Targets: IPs/CIDRs/ranges (comma-separated)"},
