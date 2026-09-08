@@ -25,3 +25,4 @@ type Config struct {
 	Rate        int
 	Workers     int
 	Timeout     int
+	Retries     int
