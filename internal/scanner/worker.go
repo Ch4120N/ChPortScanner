@@ -41,3 +41,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		network = "udp"
 	}
 
+	retryDelay := time.Duration(s.cfg.RetryDelay) * time.Millisecond
