@@ -365,3 +365,4 @@ func jobBufferSize(total int64, cfg *config.Config) int {
 	return 50000
 }
 
+func rateLabel(rate int) string {
