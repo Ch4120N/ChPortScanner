@@ -41,3 +41,4 @@ func Info(format string, a ...any) {
 	} else {
 		fmt.Fprintf(os.Stderr, "[i] "+msg+"\n")
 	}
+}
