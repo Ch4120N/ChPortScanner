@@ -38,3 +38,4 @@ type Scanner struct {
 	start time.Time
 
 	jobCh    chan Job
+	resultCh chan output.Result
