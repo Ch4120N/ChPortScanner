@@ -315,3 +315,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 		return cfg.Workers
 	}
 	cpus := runtime.NumCPU()
+	var w int
