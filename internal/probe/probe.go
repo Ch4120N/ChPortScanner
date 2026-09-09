@@ -59,3 +59,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	}
 	c := certs[0]
 	var parts []string
+	if c.Subject.CommonName != "" {
