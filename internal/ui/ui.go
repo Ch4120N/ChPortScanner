@@ -137,3 +137,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "%sUSAGE%s\n  %s [options] -t <IP/CIDR/range>\n\n", Yellow, Reset, name)
 
 	sections := []struct {
+		Title string
