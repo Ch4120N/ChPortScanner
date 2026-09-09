@@ -117,3 +117,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.UDP, "udp", false, "UDP scan mode")
 	fs.BoolVar(&c.Random, "random", false, "Randomize scan order")
 	fs.StringVar(&c.Shard, "shard", "", "Shard X/Y")
+	fs.StringVar(&c.SourceIP, "S", "", "Source IP to bind")
