@@ -74,3 +74,4 @@ func New() *Config {
 		Timeout:       1,
 		Retries:       0,
 		RetryDelay:    500,
+		BannerTimeout: 2,
