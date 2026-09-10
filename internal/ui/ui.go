@@ -37,3 +37,4 @@ func Info(format string, a ...any) {
 	}
 	msg := fmt.Sprintf(format, a...)
 	if UseColor {
+		fmt.Fprintf(os.Stderr, Cyan+"[i] "+Reset+msg+"\n")
