@@ -34,3 +34,4 @@ type Scanner struct {
 
 	total int64
 	done  atomic.Uint64
+	open  atomic.Uint64
