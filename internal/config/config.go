@@ -43,3 +43,4 @@ type Config struct {
 	Output    string
 	JSONOut   bool
 	Format    string
+	NoColor   bool
