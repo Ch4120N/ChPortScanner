@@ -51,3 +51,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 		&tls.Config{InsecureSkipVerify: true})
 	if err != nil {
 		return ""
+	}
