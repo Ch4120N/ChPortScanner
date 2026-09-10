@@ -80,3 +80,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		specIdx++
 		s.state.CurSpec = specIdx
 		s.state.CurIP = ""
+		s.state.CurPort = 0
