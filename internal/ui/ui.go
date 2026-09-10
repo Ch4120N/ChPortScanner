@@ -173,3 +173,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--rdns", "Reverse DNS lookup"},
 		}},
 		{"OUTPUT", [][2]string{
+			{"-o, --output", "Output file (default stdout)"},
