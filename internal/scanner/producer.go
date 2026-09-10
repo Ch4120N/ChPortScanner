@@ -47,3 +47,4 @@ func (s *Scanner) producer(ctx context.Context) {
 				return false
 			}
 			if count >= shardStart {
+				select {
