@@ -109,3 +109,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.Profile, "profile", "", "quick|default|full|stealth")
 
 	// Scanning
+	fs.IntVar(&c.Rate, "rate", 0, "Packets/sec (0 = unlimited)")
