@@ -151,3 +151,4 @@ func (s *Scanner) Run() error {
 		totalIPs += target.Count(sp)
 	}
 	if totalIPs == 0 || len(s.ports) == 0 {
+		return fmt.Errorf("empty target or port set")
