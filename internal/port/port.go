@@ -41,3 +41,4 @@ func init() {
 	seen := map[uint16]bool{}
 	deduped := topPorts[:0]
 	for _, p := range topPorts {
+		if !seen[p] {
