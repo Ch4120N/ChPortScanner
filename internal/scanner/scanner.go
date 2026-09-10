@@ -98,3 +98,4 @@ func (s *Scanner) Run() error {
 		if err := s.loadState(s.cfg.Resume); err != nil {
 			return fmt.Errorf("loading resume state: %w", err)
 		}
+		specs = s.state.Targets
