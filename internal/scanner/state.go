@@ -20,3 +20,4 @@ type State struct {
 	ShardIdx  int64         `json:"shard_start_idx"`
 	ShardEnd  int64         `json:"shard_end_idx"`
 }
+
