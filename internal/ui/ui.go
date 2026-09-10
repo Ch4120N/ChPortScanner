@@ -149,3 +149,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		{"PORTS", [][2]string{
 			{"-p, --ports", "Ports to scan (e.g. 80,443,1000-2000)"},
 			{"--top-ports N", "Scan top N common ports"},
+			{"--exclude-ports", "Ports to exclude"},
