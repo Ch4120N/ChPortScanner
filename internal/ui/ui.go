@@ -88,3 +88,4 @@ func NewProgress(done, open *atomic.Uint64, total int64, start time.Time) *Progr
 	return &Progress{done: done, open: open, total: total, start: start}
 }
 
+func (p *Progress) Run(ctx context.Context) {
