@@ -93,3 +93,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.ShowVersion, "v", false, "Show version")
 	fs.BoolVar(&c.ShowVersion, "version", false, "Show version")
 
+	// Targeting
