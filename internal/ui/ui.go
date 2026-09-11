@@ -202,3 +202,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 
 	fmt.Fprintf(w, "%sPERFORMANCE NOTES%s\n", Yellow, Reset)
 	fmt.Fprintf(w, "  • Uses TCP connect scan (no root required, works where masscan is blocked)\n")
+	fmt.Fprintf(w, "  • Applies SO_LINGER=0 to prevent TIME_WAIT exhaustion\n")
