@@ -275,3 +275,4 @@ func (s *Scanner) stateSaver(ctx context.Context) {
 	defer t.Stop()
 	for {
 		select {
+		case <-ctx.Done():
