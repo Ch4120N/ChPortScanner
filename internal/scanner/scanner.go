@@ -137,3 +137,4 @@ func (s *Scanner) Run() error {
 	// Randomize
 	if s.cfg.Random {
 		rand.Shuffle(len(s.state.Targets), func(i, j int) {
+			s.state.Targets[i], s.state.Targets[j] = s.state.Targets[j], s.state.Targets[i]
