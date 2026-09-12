@@ -34,3 +34,4 @@ type Config struct {
 
 	// Probing
 	Banner        bool
+	BannerTimeout int
