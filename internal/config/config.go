@@ -187,3 +187,4 @@ func applyProfile(c *Config) error {
 		}
 	case "full":
 		if c.Ports == "80,443" {
+			c.Ports = "1-65535"
