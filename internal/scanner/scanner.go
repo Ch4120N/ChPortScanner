@@ -163,3 +163,4 @@ func (s *Scanner) Run() error {
 	s.state.ShardIdx = 0
 	s.state.ShardEnd = s.total
 	if s.cfg.Shard != "" {
+		parts := strings.SplitN(s.cfg.Shard, "/", 2)
