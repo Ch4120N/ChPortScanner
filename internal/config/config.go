@@ -39,3 +39,4 @@ type Config struct {
 	TLSCert       bool
 	RDNS          bool
 
+	// Output
