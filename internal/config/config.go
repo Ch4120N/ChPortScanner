@@ -199,3 +199,4 @@ func applyProfile(c *Config) error {
 	default:
 		return fmt.Errorf("unknown profile: %q", c.Profile)
 	}
+	return nil
