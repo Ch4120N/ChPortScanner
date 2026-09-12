@@ -170,3 +170,4 @@ func mergeJSON(path string, c *Config) error {
 	if err != nil {
 		return err
 	}
+	return json.Unmarshal(data, c)
