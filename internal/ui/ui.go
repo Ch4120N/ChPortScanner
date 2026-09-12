@@ -186,3 +186,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--extract-ports", "Keep IP:port pairs on extraction"},
 			{"--resume", "Resume from state file"},
 			{"--state", "State file path"},
+			{"-c", "JSON config file"},
