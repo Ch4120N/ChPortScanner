@@ -136,3 +136,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.NoColor, "no-color", false, "Disable colors")
 	fs.BoolVar(&c.Quiet, "q", false, "Quiet mode")
 	fs.BoolVar(&c.Quiet, "quiet", false, "Quiet (long)")
+	fs.BoolVar(&c.Verbose, "V", false, "Verbose mode")
