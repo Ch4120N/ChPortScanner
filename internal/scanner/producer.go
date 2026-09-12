@@ -50,3 +50,4 @@ func (s *Scanner) producer(ctx context.Context) {
 				select {
 				case s.jobCh <- Job{IP: ipStr, Port: ports[portIdx]}:
 				case <-ctx.Done():
+					return false
