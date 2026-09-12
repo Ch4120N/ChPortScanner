@@ -371,3 +371,4 @@ func rateLabel(rate int) string {
 	}
 	return strconv.Itoa(rate)
 }
+
