@@ -7,3 +7,4 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Ch4120N/ChPortScanner/internal/netutil"
