@@ -44,3 +44,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	retryDelay := time.Duration(s.cfg.RetryDelay) * time.Millisecond
 	retries := s.cfg.Retries
 
+	// Small scratch buffer for building addresses (avoids JoinHostPort allocation)
