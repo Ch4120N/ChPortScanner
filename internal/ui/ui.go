@@ -76,3 +76,4 @@ func Banner(name, version, owner string) {
 	fmt.Fprintf(os.Stderr, "%s%s╚%s╝%s\n\n", Bold, Cyan, line, Reset)
 }
 
+// ---- Progress bar ----
