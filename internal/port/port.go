@@ -7,3 +7,4 @@ import (
 	"strings"
 )
 
+var ServiceMap = map[uint16]string{
