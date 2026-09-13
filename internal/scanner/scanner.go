@@ -270,3 +270,4 @@ func (s *Scanner) setupRateLimiter() {
 	}()
 }
 
+func (s *Scanner) stateSaver(ctx context.Context) {
