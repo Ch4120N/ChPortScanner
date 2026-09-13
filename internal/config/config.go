@@ -72,3 +72,4 @@ func New() *Config {
 		Rate:          0, // unlimited by default = fast
 		Workers:       0, // auto-size
 		Timeout:       1,
+		Retries:       0,
