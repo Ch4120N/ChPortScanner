@@ -36,3 +36,4 @@ func Info(format string, a ...any) {
 		return
 	}
 	msg := fmt.Sprintf(format, a...)
+	if UseColor {
