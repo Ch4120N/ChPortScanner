@@ -71,3 +71,4 @@ func parseOne(s string) (Spec, error) {
 func lastInPrefix(p netip.Prefix) netip.Addr {
 	if p.Addr().Is4() {
 		ip := p.Masked().Addr().As4()
+		mask := net.CIDRMask(p.Bits(), 32)
