@@ -74,3 +74,4 @@ func Banner(name, version, owner string) {
 	fmt.Fprintf(os.Stderr, "%s%s║%s  %-46s%s%s║%s\n",
 		Bold, Cyan, Reset, "Owner: "+owner, Bold, Cyan, Reset)
 	fmt.Fprintf(os.Stderr, "%s%s╚%s╝%s\n\n", Bold, Cyan, line, Reset)
+}
