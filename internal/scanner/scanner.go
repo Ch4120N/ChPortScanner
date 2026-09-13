@@ -341,3 +341,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	if cfg.Rate > 0 && w > cfg.Rate {
 		w = cfg.Rate
 	}
+	// Small job sets don't need huge pools
