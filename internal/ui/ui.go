@@ -107,3 +107,4 @@ func (p *Progress) Run(ctx context.Context) {
 				if rate > 0 {
 					rem := float64(p.total-int64(d)) / rate
 					eta = fmt.Sprintf(" ETA:%s", time.Duration(rem*float64(time.Second)))
+				}
