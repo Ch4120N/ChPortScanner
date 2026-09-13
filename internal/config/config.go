@@ -57,3 +57,4 @@ type Config struct {
 
 	// Meta
 	ShowHelp    bool
+	ShowVersion bool
