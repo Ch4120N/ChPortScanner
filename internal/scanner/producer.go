@@ -88,3 +88,4 @@ func (s *Scanner) producer(ctx context.Context) {
 				curIP = specs[specIdx].Start
 			}
 		}
+	}
