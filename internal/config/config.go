@@ -61,3 +61,4 @@ type Config struct {
 
 	// Internal
 	Lite    bool
+	Turbo   bool
