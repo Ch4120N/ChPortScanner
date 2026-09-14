@@ -56,3 +56,4 @@ type Config struct {
 	ConfFile     string
 
 	// Meta
+	ShowHelp    bool
