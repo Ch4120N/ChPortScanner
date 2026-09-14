@@ -111,3 +111,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 			if ip == e.IP {
 				return true
 			}
+		case "cidr":
