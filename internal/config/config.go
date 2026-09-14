@@ -52,3 +52,4 @@ type Config struct {
 	Extract      string
 	ExtractPorts bool
 	Resume       string
+	StateFile    string
