@@ -118,3 +118,4 @@ func (p *Progress) Run(ctx context.Context) {
 				} else {
 					bar[i] = '.'
 				}
+			}
