@@ -101,3 +101,4 @@ func (s *Scanner) Run() error {
 		specs = s.state.Targets
 		ports, err = port.Parse(s.state.PortSpec, "", 0)
 		if err != nil {
+			return fmt.Errorf("resume ports: %w", err)
