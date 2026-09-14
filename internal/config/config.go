@@ -83,3 +83,4 @@ func New() *Config {
 }
 
 func Load(args []string) (*Config, error) {
+	c := New()
