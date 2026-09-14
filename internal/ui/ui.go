@@ -121,3 +121,4 @@ func (p *Progress) Run(ctx context.Context) {
 			}
 			line := fmt.Sprintf("\r[%s] %6.2f%% | done:%d open:%d | %.0f pps%s",
 				string(bar), percent, d, o, rate, eta)
+			if UseColor {
