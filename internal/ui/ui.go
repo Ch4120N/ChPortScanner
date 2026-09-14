@@ -28,3 +28,4 @@ func Init(noColor, quiet bool) {
 	if noColor {
 		UseColor = false
 	}
+	Quiet = quiet
