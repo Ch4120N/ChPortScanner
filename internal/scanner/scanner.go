@@ -127,3 +127,4 @@ func (s *Scanner) Run() error {
 	if err != nil && s.cfg.ExcludeFile != "" {
 		return fmt.Errorf("reading excludes: %w", err)
 	}
+	if len(exclLines) > 0 {
