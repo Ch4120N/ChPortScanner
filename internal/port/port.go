@@ -75,3 +75,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			}
 			if strings.Contains(chunk, "-") {
 				b := strings.SplitN(chunk, "-", 2)
+				lo, _ := strconv.Atoi(strings.TrimSpace(b[0]))
