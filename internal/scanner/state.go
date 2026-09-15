@@ -9,3 +9,4 @@ import (
 
 type State struct {
 	Targets   []target.Spec `json:"targets"`
+	PortSpec  string        `json:"port_spec"`
