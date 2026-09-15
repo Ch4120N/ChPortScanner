@@ -160,3 +160,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--retry-delay", "Retry delay (ms)"},
 			{"-u, --udp", "UDP scan mode"},
 			{"--random", "Randomize scan order"},
+			{"--shard X/Y", "Shard (e.g. 1/4)"},
