@@ -50,3 +50,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 		fmt.Sprintf("%s:%d", ip, port),
 		&tls.Config{InsecureSkipVerify: true})
 	if err != nil {
+		return ""
