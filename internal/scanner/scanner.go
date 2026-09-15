@@ -41,3 +41,4 @@ type Scanner struct {
 	resultCh chan output.Result
 	tokens   chan struct{}
 	ticker   *time.Ticker
+
