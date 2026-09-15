@@ -16,3 +16,4 @@ type Config struct {
 	PingSweep   bool
 
 	// Ports
+	Ports        string
