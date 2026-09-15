@@ -90,3 +90,4 @@ func NewProgress(done, open *atomic.Uint64, total int64, start time.Time) *Progr
 
 func (p *Progress) Run(ctx context.Context) {
 	t := time.NewTicker(500 * time.Millisecond)
+	defer t.Stop()
