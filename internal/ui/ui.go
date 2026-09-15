@@ -210,3 +210,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "%sEXAMPLES%s\n", Yellow, Reset)
 	fmt.Fprintf(w, "  %s -t 192.168.1.0/24 -p 22,80,443\n", name)
 	fmt.Fprintf(w, "  %s -t 10.0.0.0/24 -p 1-10000 --turbo --stats\n", name)
+	fmt.Fprintf(w, "  %s -iL targets.txt --top-ports 1000 --rdns -oJ\n", name)
