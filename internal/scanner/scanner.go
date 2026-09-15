@@ -204,3 +204,4 @@ func (s *Scanner) Run() error {
 	if !s.cfg.Quiet {
 		s.progress = ui.NewProgress(&s.done, &s.open, s.total, s.start)
 		go s.progress.Run(ctx)
+	}
