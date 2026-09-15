@@ -113,3 +113,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					res.Hostname = probe.RDNS(job.IP)
 				}
 
+				select {
