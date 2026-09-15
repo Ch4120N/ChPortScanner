@@ -145,3 +145,4 @@ func appendUint16(dst []byte, v uint16) int {
 		i--
 		tmp[i] = byte('0' + v%10)
 		v /= 10
+	}
