@@ -10,3 +10,4 @@ import (
 // for the connect-scan use case via the standard syscall package).
 func SetFastClose(network, address string, c syscall.RawConn) error {
 	return nil
+}
