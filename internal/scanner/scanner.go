@@ -160,3 +160,4 @@ func (s *Scanner) Run() error {
 	}
 
 	// Shard
+	s.state.ShardIdx = 0
