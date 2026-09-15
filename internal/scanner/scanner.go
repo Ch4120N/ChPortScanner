@@ -113,3 +113,4 @@ func (s *Scanner) Run() error {
 			Targets:  specs,
 			PortSpec: strings.Join(portStrs, ","),
 			Format:   s.cfg.Format,
+			Output:   s.cfg.Output,
