@@ -174,3 +174,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		}},
 		{"OUTPUT", [][2]string{
 			{"-o, --output", "Output file (default stdout)"},
+			{"-oJ", "JSON output"},
