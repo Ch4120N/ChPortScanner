@@ -163,3 +163,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	b = strings.ReplaceAll(b, "\r", "\\r")
 	if len(b) > 200 {
 		b = b[:200] + "..."
+	}
