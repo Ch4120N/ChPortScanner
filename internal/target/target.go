@@ -97,3 +97,4 @@ func Count(s Spec) uint64 {
 		}
 	}
 	return 0
+}
