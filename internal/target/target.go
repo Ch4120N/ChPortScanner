@@ -137,3 +137,4 @@ func ReadLines(path string) ([]string, error) {
 		line = strings.TrimSpace(line)
 		if line == "" || strings.HasPrefix(line, "#") {
 			continue
+		}
