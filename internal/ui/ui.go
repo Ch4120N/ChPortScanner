@@ -180,3 +180,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-q, --quiet", "Quiet mode"},
 			{"-V, --verbose", "Verbose mode"},
 			{"--stats", "Show final stats"},
+		}},
