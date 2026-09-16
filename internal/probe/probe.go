@@ -57,3 +57,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	if len(certs) == 0 {
 		return ""
 	}
+	c := certs[0]
