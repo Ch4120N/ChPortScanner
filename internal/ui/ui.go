@@ -53,3 +53,4 @@ func Success(format string, a ...any) {
 
 func Warn(format string, a ...any) {
 	if UseColor {
+		fmt.Fprintf(os.Stderr, Yellow+"[!] "+Reset+format+"\n", a...)
