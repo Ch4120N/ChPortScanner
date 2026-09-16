@@ -101,3 +101,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.ExcludeFile, "exclude", "", "File with IPs/CIDRs to exclude")
 	fs.BoolVar(&c.PingSweep, "sn", false, "Ping sweep only")
 
+	// Ports
