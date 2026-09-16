@@ -25,3 +25,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			curIP = ip
 		}
 	}
+	if !curIP.IsValid() && specIdx < len(specs) {
