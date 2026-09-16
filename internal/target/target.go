@@ -16,3 +16,4 @@ type Spec struct {
 	Start  netip.Addr `json:"start,omitempty"`
 	End    netip.Addr `json:"end,omitempty"`
 	Prefix netip.Prefix `json:"prefix,omitempty"`
+}
