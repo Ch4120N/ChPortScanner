@@ -27,3 +27,4 @@ type Config struct {
 	Timeout     int
 	Retries     int
 	RetryDelay  int
+	UDP         bool
