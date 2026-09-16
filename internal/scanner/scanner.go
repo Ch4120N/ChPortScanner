@@ -281,3 +281,4 @@ func (s *Scanner) stateSaver(ctx context.Context) {
 			s.saveState()
 		}
 	}
+}
