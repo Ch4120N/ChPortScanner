@@ -63,3 +63,4 @@ func Banner(name, version, owner string) {
 	if Quiet {
 		return
 	}
+	if !UseColor {
