@@ -175,3 +175,4 @@ func (s *Scanner) Run() error {
 		chunk := s.total / int64(y)
 		s.state.ShardIdx = int64(x-1) * chunk
 		if x == y {
+			s.state.ShardEnd = s.total
