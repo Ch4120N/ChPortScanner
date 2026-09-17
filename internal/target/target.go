@@ -29,3 +29,4 @@ func Parse(raw string) ([]Spec, error) {
 		if p == "" {
 			continue
 		}
+		s, err := parseOne(p)
