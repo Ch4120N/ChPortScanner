@@ -54,3 +54,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		case job, ok := <-s.jobCh:
 			if !ok {
 				return
+			}
