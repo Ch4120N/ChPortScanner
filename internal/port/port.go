@@ -57,3 +57,4 @@ func TopN(n int) []uint16 {
 	return topPorts[:n]
 }
 
+func Parse(spec, exclude string, topN int) ([]uint16, error) {
