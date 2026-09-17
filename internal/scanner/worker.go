@@ -129,3 +129,4 @@ func (s *Scanner) worker(ctx context.Context) {
 func buildAddr(dst []byte, ip string, port uint16) string {
 	n := copy(dst, ip)
 	dst[n] = ':'
+	n++
