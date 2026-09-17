@@ -56,3 +56,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				return
 			}
 
+			// Rate limiting (only if configured)
