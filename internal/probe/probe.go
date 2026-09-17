@@ -28,3 +28,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 	n, _ := conn.Read(buf)
 	if n <= 0 {
 		return ""
+	}
