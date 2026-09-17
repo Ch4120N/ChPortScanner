@@ -321,3 +321,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 		w = 200 // low-end default
 	case cpus <= 4:
 		w = 1000
+	case cpus <= 8:
