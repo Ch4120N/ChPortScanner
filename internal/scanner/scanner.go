@@ -265,3 +265,4 @@ func (s *Scanner) setupRateLimiter() {
 				default:
 					break
 				}
+			}
