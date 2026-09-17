@@ -154,3 +154,4 @@ func Load(args []string) (*Config, error) {
 	if c.ConfFile != "" {
 		if err := mergeJSON(c.ConfFile, c); err != nil {
 			return nil, fmt.Errorf("config file: %w", err)
+		}
