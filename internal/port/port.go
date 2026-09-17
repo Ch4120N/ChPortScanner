@@ -50,3 +50,4 @@ func init() {
 	sort.Slice(topPorts, func(i, j int) bool { return topPorts[i] < topPorts[j] })
 }
 
+func TopN(n int) []uint16 {
