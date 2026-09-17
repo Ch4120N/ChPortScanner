@@ -65,3 +65,4 @@ type Config struct {
 	IsUnix  bool
 	IsWin   bool
 }
+
