@@ -164,3 +164,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	if len(b) > 200 {
 		b = b[:200] + "..."
 	}
+	return b
