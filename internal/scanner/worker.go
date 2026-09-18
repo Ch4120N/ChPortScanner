@@ -102,3 +102,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				}
 				conn.Close()
 
+				// Optional probes
