@@ -14,3 +14,4 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/Ch4120N/ChPortScanner/internal/config"
