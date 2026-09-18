@@ -99,3 +99,4 @@ func (p *Progress) Run(ctx context.Context) {
 			d := p.done.Load()
 			o := p.open.Load()
 			elapsed := time.Since(p.start).Seconds()
+			rate := float64(d) / elapsed
