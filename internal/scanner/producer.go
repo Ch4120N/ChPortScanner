@@ -15,3 +15,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	ports := s.ports
 	specIdx := s.state.CurSpec
 	portIdx := s.state.CurPort
+	shardStart := s.state.ShardIdx
