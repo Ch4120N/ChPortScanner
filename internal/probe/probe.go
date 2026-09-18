@@ -41,3 +41,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 		return "server:" + strings.TrimSpace(m[1])
 	}
 	return ""
+}
