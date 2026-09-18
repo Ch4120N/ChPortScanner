@@ -13,3 +13,4 @@ var ServiceMap = map[uint16]string{
 	110: "pop3", 111: "rpcbind", 123: "ntp", 135: "msrpc", 137: "netbios-ns",
 	138: "netbios-dgm", 139: "netbios-ssn", 143: "imap", 161: "snmp",
 	162: "snmptrap", 179: "bgp", 389: "ldap", 443: "https", 445: "microsoft-ds",
+	465: "smtps", 514: "syslog", 515: "printer", 548: "afp", 554: "rtsp",
