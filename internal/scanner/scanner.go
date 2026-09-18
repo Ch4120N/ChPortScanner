@@ -134,3 +134,4 @@ func (s *Scanner) Run() error {
 		}
 	}
 
+	// Randomize
