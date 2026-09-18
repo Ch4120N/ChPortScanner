@@ -55,3 +55,4 @@ type Config struct {
 	StateFile    string
 	ConfFile     string
 
+	// Meta
