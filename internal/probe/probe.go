@@ -13,3 +13,4 @@ var (
 	titleRe  = regexp.MustCompile(`(?is)<title>(.*?)</title>`)
 	serverRe = regexp.MustCompile(`(?i)server:\s*(.+)`)
 )
+
