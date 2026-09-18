@@ -95,3 +95,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 	}
 
 	if exclude != "" {
+		for _, chunk := range strings.Split(exclude, ",") {
