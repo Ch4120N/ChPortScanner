@@ -300,3 +300,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 func (s *Scanner) printStats() {
 	elapsed := time.Since(s.start).Seconds()
 	done := s.done.Load()
+	open := s.open.Load()
