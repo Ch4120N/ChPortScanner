@@ -141,3 +141,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.ShowStats, "stats", false, "Show final stats")
 
 	// Utilities
+	fs.StringVar(&c.Extract, "extract", "", "Extract IPs from output file")
