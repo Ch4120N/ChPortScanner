@@ -74,3 +74,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			for attempt := 0; attempt <= retries; attempt++ {
 				c, err := dialer.DialContext(ctx, network, addr)
 				if err == nil {
+					conn = c
