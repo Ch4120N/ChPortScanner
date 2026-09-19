@@ -88,3 +88,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			} else {
 				p, err := strconv.Atoi(chunk)
 				if err == nil && p >= 1 && p <= 65535 {
+					set[uint16(p)] = struct{}{}
