@@ -212,3 +212,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "  %s -t 10.0.0.0/24 -p 1-10000 --turbo --stats\n", name)
 	fmt.Fprintf(w, "  %s -iL targets.txt --top-ports 1000 --rdns -oJ\n", name)
 	fmt.Fprintf(w, "  %s -t 192.168.0.0/16 -p 22,80 --shard 1/4 --lite\n", name)
+	fmt.Fprintf(w, "  %s --resume scan.state\n", name)
