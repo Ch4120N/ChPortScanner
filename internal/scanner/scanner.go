@@ -70,3 +70,4 @@ func (s *Scanner) Run() error {
 	if s.cfg.InputFile != "" {
 		lines, err := target.ReadLines(s.cfg.InputFile)
 		if err != nil {
+			return fmt.Errorf("reading input file: %w", err)
