@@ -227,3 +227,4 @@ func (s *Scanner) Run() error {
 	// Drain result channel
 	close(s.resultCh)
 	time.Sleep(100 * time.Millisecond)
+
