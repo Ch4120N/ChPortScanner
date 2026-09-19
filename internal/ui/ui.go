@@ -83,3 +83,4 @@ type Progress struct {
 	total int64
 	start time.Time
 }
+
