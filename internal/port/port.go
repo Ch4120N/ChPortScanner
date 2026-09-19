@@ -66,3 +66,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 		}
 	} else {
 		if spec == "" {
+			return nil, fmt.Errorf("no ports given")
