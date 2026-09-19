@@ -52,3 +52,4 @@ func (s *Scanner) producer(ctx context.Context) {
 				case <-ctx.Done():
 					return false
 				}
+			}
