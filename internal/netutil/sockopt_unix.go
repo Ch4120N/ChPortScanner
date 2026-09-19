@@ -26,3 +26,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 			_ = syscall.SetsockoptInt(int(fd), syscall.IPPROTO_TCP, syscall.TCP_NODELAY, 1)
 		}
 	})
+	if err != nil {
