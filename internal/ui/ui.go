@@ -197,3 +197,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		for _, f := range s.Flags {
 			fmt.Fprintf(w, "  %-22s %s\n", f[0], f[1])
 		}
+		fmt.Fprintln(w)
