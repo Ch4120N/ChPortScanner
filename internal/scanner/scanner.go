@@ -170,3 +170,4 @@ func (s *Scanner) Run() error {
 		x, _ := strconv.Atoi(parts[0])
 		y, _ := strconv.Atoi(parts[1])
 		if y < 1 || x < 1 || x > y {
+			return fmt.Errorf("invalid shard values")
