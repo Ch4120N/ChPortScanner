@@ -76,3 +76,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				if err == nil {
 					conn = c
 					open = true
+					break
