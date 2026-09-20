@@ -78,3 +78,4 @@ func Banner(name, version, owner string) {
 
 // ---- Progress bar ----
 type Progress struct {
+	done  *atomic.Uint64
