@@ -99,3 +99,4 @@ func Count(s Spec) uint64 {
 	return 0
 }
 
+func addrToInt(a netip.Addr) *big.Int {
