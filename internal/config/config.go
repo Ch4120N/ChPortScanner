@@ -96,3 +96,4 @@ func Load(args []string) (*Config, error) {
 	// Targeting
 	fs.StringVar(&c.Target, "t", "", "Targets: IPs/CIDRs/ranges (comma-separated)")
 	fs.StringVar(&c.Target, "target", "", "Targets (long)")
+	fs.StringVar(&c.InputFile, "iL", "", "Input file with targets")
