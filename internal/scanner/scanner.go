@@ -159,3 +159,4 @@ func (s *Scanner) Run() error {
 		s.total = int64(totalIPs * uint64(len(s.ports)))
 	}
 
+	// Shard
