@@ -29,3 +29,4 @@ func Init(noColor, quiet bool) {
 		UseColor = false
 	}
 	Quiet = quiet
+}
