@@ -47,3 +47,4 @@ func RaiseUlimit(target uint64) (bool, uint64, uint64) {
 	if newCur > rLimit.Max {
 		newCur = rLimit.Max
 	}
+	rLimit.Cur = newCur
