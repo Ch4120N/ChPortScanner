@@ -296,3 +296,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 		}
 	}
 }
+
