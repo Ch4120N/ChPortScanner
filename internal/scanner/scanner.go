@@ -28,3 +28,4 @@ type Job struct {
 
 type Scanner struct {
 	cfg   *config.Config
+	ports []uint16
