@@ -19,3 +19,4 @@ type Config struct {
 	Ports        string
 	TopPorts     int
 	ExcludePorts string
+	Profile      string
