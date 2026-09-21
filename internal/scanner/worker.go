@@ -58,3 +58,4 @@ func (s *Scanner) worker(ctx context.Context) {
 
 			// Rate limiting (only if configured)
 			if s.tokens != nil {
+				select {
