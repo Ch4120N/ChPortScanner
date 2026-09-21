@@ -44,3 +44,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 }
 
 // TLSCertInfo returns CN + issuer + expiry.
+func TLSCertInfo(ip string, port int, timeout time.Duration) string {
