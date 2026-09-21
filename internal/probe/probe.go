@@ -14,3 +14,4 @@ var (
 	serverRe = regexp.MustCompile(`(?i)server:\s*(.+)`)
 )
 
+// HTTPTitle fetches the page title from a web port.
