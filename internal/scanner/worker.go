@@ -110,3 +110,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					res.TLSInfo = probe.TLSCertInfo(job.IP, int(job.Port), timeout)
 				}
 				if s.cfg.RDNS {
+					res.Hostname = probe.RDNS(job.IP)
