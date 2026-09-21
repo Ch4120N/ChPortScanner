@@ -25,3 +25,4 @@ var (
 )
 
 func Init(noColor, quiet bool) {
+	if noColor {
