@@ -21,3 +21,4 @@ import (
 	"github.com/Ch4120N/ChPortScanner/internal/ui"
 )
 
+type Job struct {
