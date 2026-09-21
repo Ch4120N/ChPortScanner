@@ -103,3 +103,4 @@ func (p *Progress) Run(ctx context.Context) {
 			percent := 0.0
 			eta := ""
 			if p.total > 0 {
+				percent = float64(d) / float64(p.total) * 100
