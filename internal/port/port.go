@@ -74,3 +74,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 				continue
 			}
 			if strings.Contains(chunk, "-") {
+				b := strings.SplitN(chunk, "-", 2)
