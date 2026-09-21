@@ -193,3 +193,4 @@ func (s *Scanner) Run() error {
 	s.setupRateLimiter()
 
 	ctx, cancel := context.WithCancel(context.Background())
+	s.cancel = cancel
