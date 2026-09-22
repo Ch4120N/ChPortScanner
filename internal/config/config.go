@@ -89,3 +89,4 @@ func Load(args []string) (*Config, error) {
 
 	// Meta
 	fs.BoolVar(&c.ShowHelp, "h", false, "Show help")
+	fs.BoolVar(&c.ShowHelp, "help", false, "Show help")
