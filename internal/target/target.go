@@ -60,3 +60,4 @@ func parseOne(s string) (Spec, error) {
 			start, end = end, start
 		}
 		return Spec{Raw: s, Kind: "range", Start: start, End: end}, nil
+	}
