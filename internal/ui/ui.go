@@ -52,3 +52,4 @@ func Success(format string, a ...any) {
 }
 
 func Warn(format string, a ...any) {
+	if UseColor {
