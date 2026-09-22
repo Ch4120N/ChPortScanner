@@ -149,3 +149,4 @@ func (s *Scanner) Run() error {
 	var totalIPs uint64
 	for _, sp := range s.state.Targets {
 		totalIPs += target.Count(sp)
+	}
