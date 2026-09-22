@@ -82,3 +82,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		s.state.CurIP = ""
 		s.state.CurPort = 0
 		if specIdx < len(specs) {
+			if specs[specIdx].Kind == "single" {
