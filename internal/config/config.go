@@ -172,3 +172,4 @@ func mergeJSON(path string, c *Config) error {
 	}
 	return json.Unmarshal(data, c)
 }
+
