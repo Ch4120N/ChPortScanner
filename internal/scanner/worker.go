@@ -29,3 +29,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	if s.cfg.SourceIP != "" {
 		if ip := net.ParseIP(s.cfg.SourceIP); ip != nil {
 			if s.cfg.UDP {
+				dialer.LocalAddr = &net.UDPAddr{IP: ip}
