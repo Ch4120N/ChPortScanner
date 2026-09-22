@@ -16,3 +16,4 @@ var ServiceMap = map[uint16]string{
 	465: "smtps", 514: "syslog", 515: "printer", 548: "afp", 554: "rtsp",
 	587: "submission", 631: "ipp", 636: "ldaps", 873: "rsync", 990: "ftps",
 	993: "imaps", 995: "pop3s", 1433: "ms-sql-s", 1434: "ms-sql-m",
+	1521: "oracle", 1723: "pptp", 2049: "nfs", 2082: "cpanel",
