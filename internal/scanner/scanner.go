@@ -47,3 +47,4 @@ type Scanner struct {
 	stopOnce sync.Once
 	writer   output.Writer
 	progress *ui.Progress
+}
