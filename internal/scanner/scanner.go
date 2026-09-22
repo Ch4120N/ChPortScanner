@@ -369,3 +369,4 @@ func rateLabel(rate int) string {
 	if rate <= 0 {
 		return "unlimited"
 	}
+	return strconv.Itoa(rate)
