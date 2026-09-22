@@ -251,3 +251,4 @@ func (s *Scanner) setupRateLimiter() {
 	rate := s.cfg.Rate
 	s.tokens = make(chan struct{}, rate)
 	batchSize := rate / 100
+	interval := 10 * time.Millisecond
