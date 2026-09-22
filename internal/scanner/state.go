@@ -21,3 +21,4 @@ type State struct {
 	ShardEnd  int64         `json:"shard_end_idx"`
 }
 
+func (s *Scanner) loadState(path string) error {
