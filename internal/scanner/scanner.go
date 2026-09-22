@@ -261,3 +261,4 @@ func (s *Scanner) setupRateLimiter() {
 		for range s.ticker.C {
 			for i := 0; i < batchSize; i++ {
 				select {
+				case s.tokens <- struct{}{}:
