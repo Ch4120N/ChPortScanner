@@ -250,3 +250,4 @@ func (s *Scanner) setupRateLimiter() {
 	// Keeps timer overhead low even at very high rates.
 	rate := s.cfg.Rate
 	s.tokens = make(chan struct{}, rate)
+	batchSize := rate / 100
