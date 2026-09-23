@@ -220,3 +220,4 @@ func (s *Scanner) Run() error {
 	for i := 0; i < workers; i++ {
 		s.wg.Add(1)
 		go s.worker(ctx)
+	}
