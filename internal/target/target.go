@@ -10,3 +10,4 @@ import (
 )
 
 type Spec struct {
+	Raw    string     `json:"raw"`
