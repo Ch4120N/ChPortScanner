@@ -30,3 +30,4 @@ func (s *Scanner) loadState(path string) error {
 }
 
 func (s *Scanner) saveState() {
+	s.state.OpenCount = s.open.Load()
