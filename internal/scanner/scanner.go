@@ -309,3 +309,4 @@ func (s *Scanner) printStats() {
 	ui.Info("Avg rate    : %.0f pps", rate)
 }
 
+// computeWorkers auto-sizes the worker pool based on hardware and config.
