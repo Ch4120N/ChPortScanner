@@ -169,3 +169,4 @@ func mergeJSON(path string, c *Config) error {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return err
+	}
