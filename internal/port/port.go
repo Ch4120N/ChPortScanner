@@ -69,3 +69,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			return nil, fmt.Errorf("no ports given")
 		}
 		for _, chunk := range strings.Split(spec, ",") {
+			chunk = strings.TrimSpace(chunk)
