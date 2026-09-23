@@ -186,3 +186,4 @@ func (s *Scanner) Run() error {
 	s.writer, err = output.NewWriter(s.cfg)
 	if err != nil {
 		return err
+	}
