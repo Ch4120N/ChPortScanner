@@ -115,3 +115,4 @@ func (s *Scanner) Run() error {
 			Format:   s.cfg.Format,
 			Output:   s.cfg.Output,
 		}
+	}
