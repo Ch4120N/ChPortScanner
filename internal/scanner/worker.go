@@ -63,3 +63,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				case <-ctx.Done():
 					return
 				}
+			}
