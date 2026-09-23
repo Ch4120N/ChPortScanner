@@ -35,3 +35,4 @@ func (s *Scanner) producer(ctx context.Context) {
 
 	// Pre-size the string buffer used for ip.String() to minimize allocations.
 	emit := func(ip netip.Addr) bool {
+		if target.IsExcluded(ip, s.excl) {
