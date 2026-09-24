@@ -292,3 +292,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 			if !ok {
 				return
 			}
+			s.writer.Write(res)
