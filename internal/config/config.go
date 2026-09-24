@@ -127,3 +127,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.HTTPProbe, "http-probe", false, "Fetch HTTP page title")
 	fs.BoolVar(&c.TLSCert, "tls-cert", false, "Extract TLS cert info")
 	fs.BoolVar(&c.RDNS, "rdns", false, "Reverse DNS lookup")
+
