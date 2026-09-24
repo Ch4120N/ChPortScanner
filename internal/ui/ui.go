@@ -187,3 +187,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--resume", "Resume from state file"},
 			{"--state", "State file path"},
 			{"-c", "JSON config file"},
+			{"-h, --help", "Show this help"},
