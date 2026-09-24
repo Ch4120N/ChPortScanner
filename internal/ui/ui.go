@@ -191,3 +191,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-v, --version", "Show version"},
 		}},
 	}
+
