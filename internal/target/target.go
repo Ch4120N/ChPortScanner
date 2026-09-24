@@ -144,3 +144,4 @@ func ReadLines(path string) ([]string, error) {
 				out = append(out, part)
 			}
 		}
+	}
