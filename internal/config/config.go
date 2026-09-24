@@ -186,3 +186,4 @@ func applyProfile(c *Config) error {
 			c.TopPorts = 1000
 		}
 	case "full":
+		if c.Ports == "80,443" {
