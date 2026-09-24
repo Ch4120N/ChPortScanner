@@ -21,3 +21,4 @@ const (
 
 var (
 	UseColor = true
+	Quiet    = false
