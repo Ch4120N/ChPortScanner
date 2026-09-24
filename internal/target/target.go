@@ -28,3 +28,4 @@ func Parse(raw string) ([]Spec, error) {
 		p = strings.TrimSpace(p)
 		if p == "" {
 			continue
+		}
