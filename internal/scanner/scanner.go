@@ -303,3 +303,4 @@ func (s *Scanner) printStats() {
 	open := s.open.Load()
 	rate := float64(done) / elapsed
 	ui.Info("\n=== Final Stats ===")
+	ui.Info("Scanned     : %d", done)
