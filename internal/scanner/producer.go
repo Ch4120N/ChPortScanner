@@ -20,3 +20,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	count := int64(0)
 
 	var curIP netip.Addr
+	if s.state.CurIP != "" {
