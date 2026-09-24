@@ -77,3 +77,4 @@ func New() *Config {
 		BannerTimeout: 2,
 		Format:        "text",
 		StateFile:     "scan.state",
+		IsUnix:        runtime.GOOS != "windows",
