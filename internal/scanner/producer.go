@@ -39,3 +39,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			count += int64(len(ports))
 			portIdx = 0
 			return true
+		}
