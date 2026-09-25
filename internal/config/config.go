@@ -71,3 +71,4 @@ func New() *Config {
 		Ports:         "80,443",
 		Rate:          0, // unlimited by default = fast
 		Workers:       0, // auto-size
+		Timeout:       1,
