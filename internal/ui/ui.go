@@ -206,3 +206,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "  • Auto-tunes worker count based on CPU count\n")
 	fmt.Fprintf(w, "  • Auto-raises ulimit -n on Unix for more concurrent sockets\n")
 	fmt.Fprintf(w, "  • Use --lite on 2-core / <4GB RAM systems\n\n")
+
