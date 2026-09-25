@@ -40,3 +40,4 @@ type Config struct {
 	RDNS          bool
 
 	// Output
+	Output    string
