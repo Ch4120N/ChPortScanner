@@ -49,3 +49,4 @@ func parseOne(s string) (Spec, error) {
 	if strings.Contains(s, "-") {
 		parts := strings.SplitN(s, "-", 2)
 		start, err := netip.ParseAddr(strings.TrimSpace(parts[0]))
+		if err != nil {
