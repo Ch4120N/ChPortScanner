@@ -20,3 +20,4 @@ import (
 	"github.com/Ch4120N/ChPortScanner/internal/target"
 	"github.com/Ch4120N/ChPortScanner/internal/ui"
 )
+
