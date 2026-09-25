@@ -75,3 +75,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				c, err := dialer.DialContext(ctx, network, addr)
 				if err == nil {
 					conn = c
+					open = true
