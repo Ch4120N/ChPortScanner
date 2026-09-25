@@ -45,3 +45,4 @@ func init() {
 			seen[p] = true
 			deduped = append(deduped, p)
 		}
+	}
