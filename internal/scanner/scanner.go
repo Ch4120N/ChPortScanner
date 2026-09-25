@@ -62,3 +62,4 @@ func (s *Scanner) Stop() {
 			s.ticker.Stop()
 		}
 		s.saveState()
+	})
