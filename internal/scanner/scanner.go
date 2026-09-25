@@ -238,3 +238,4 @@ func (s *Scanner) Run() error {
 		fmt.Fprintln(os.Stderr)
 		ui.Success("Scan completed: %d open port(s)", s.open.Load())
 	}
+	return nil
