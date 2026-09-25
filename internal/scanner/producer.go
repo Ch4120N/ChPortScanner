@@ -12,3 +12,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	defer close(s.jobCh)
 
 	specs := s.state.Targets
+	ports := s.ports
