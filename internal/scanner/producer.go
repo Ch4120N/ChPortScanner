@@ -72,3 +72,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		} else {
 			for ip := curIP; ip.IsValid() && ip.Compare(spec.End) <= 0; ip = ip.Next() {
 				if !emit(ip) {
+					return
