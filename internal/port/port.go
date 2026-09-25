@@ -26,3 +26,4 @@ var ServiceMap = map[uint16]string{
 	27017: "mongodb", 28017: "mongodb-web", 50000: "sap",
 }
 
+var topPorts = []uint16{
