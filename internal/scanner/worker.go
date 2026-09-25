@@ -101,3 +101,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					res.Banner = grabBanner(conn, s.cfg.BannerTimeout)
 				}
 				conn.Close()
+
