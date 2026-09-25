@@ -89,3 +89,4 @@ func (s *Scanner) Run() error {
 	}
 
 	ports, err := port.Parse(s.cfg.Ports, s.cfg.ExcludePorts, s.cfg.TopPorts)
+	if err != nil {
