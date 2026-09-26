@@ -37,3 +37,4 @@ type Scanner struct {
 	open  atomic.Uint64
 	start time.Time
 
+	jobCh    chan Job
