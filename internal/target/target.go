@@ -85,3 +85,4 @@ func lastInPrefix(p netip.Prefix) netip.Addr {
 	return netip.AddrFrom16(ip16)
 }
 
+func Count(s Spec) uint64 {
