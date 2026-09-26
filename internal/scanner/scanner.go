@@ -43,3 +43,4 @@ type Scanner struct {
 	ticker   *time.Ticker
 
 	wg       sync.WaitGroup
+	cancel   context.CancelFunc
