@@ -35,3 +35,4 @@ func Parse(raw string) ([]Spec, error) {
 		}
 		out = append(out, s)
 	}
+	return out, nil
