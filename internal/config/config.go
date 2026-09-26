@@ -148,3 +148,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.ConfFile, "c", "", "JSON config file")
 
 	if err := fs.Parse(args); err != nil {
+		return nil, err
