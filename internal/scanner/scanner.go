@@ -99,3 +99,4 @@ func (s *Scanner) Run() error {
 			return fmt.Errorf("loading resume state: %w", err)
 		}
 		specs = s.state.Targets
+		ports, err = port.Parse(s.state.PortSpec, "", 0)
