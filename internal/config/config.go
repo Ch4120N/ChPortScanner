@@ -4,3 +4,4 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"os"
