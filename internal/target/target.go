@@ -112,3 +112,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 				return true
 			}
 		case "cidr":
+			if e.Prefix.Contains(ip) {
