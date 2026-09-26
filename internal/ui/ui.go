@@ -139,3 +139,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 	sections := []struct {
 		Title string
 		Flags [][2]string
+	}{
