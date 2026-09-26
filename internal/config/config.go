@@ -94,3 +94,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.ShowVersion, "version", false, "Show version")
 
 	// Targeting
+	fs.StringVar(&c.Target, "t", "", "Targets: IPs/CIDRs/ranges (comma-separated)")
