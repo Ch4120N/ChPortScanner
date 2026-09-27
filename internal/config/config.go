@@ -75,3 +75,4 @@ func New() *Config {
 		Retries:       0,
 		RetryDelay:    500,
 		BannerTimeout: 2,
+		Format:        "text",
