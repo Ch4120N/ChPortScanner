@@ -140,3 +140,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.Verbose, "verbose", false, "Verbose (long)")
 	fs.BoolVar(&c.ShowStats, "stats", false, "Show final stats")
 
+	// Utilities
