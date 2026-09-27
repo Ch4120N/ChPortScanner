@@ -112,3 +112,4 @@ func Load(args []string) (*Config, error) {
 	fs.IntVar(&c.Rate, "rate", 0, "Packets/sec (0 = unlimited)")
 	fs.IntVar(&c.Workers, "workers", 0, "Concurrent workers (0 = auto)")
 	fs.IntVar(&c.Timeout, "timeout", 1, "Connection timeout (s)")
+	fs.IntVar(&c.Retries, "retries", 0, "Retries")
