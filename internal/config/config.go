@@ -133,3 +133,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.Output, "output", "", "Output file (long)")
 	fs.BoolVar(&c.JSONOut, "oJ", false, "JSON output")
 	fs.StringVar(&c.Format, "format", "text", "text|json|jsonl|csv|grep")
+	fs.BoolVar(&c.NoColor, "no-color", false, "Disable colors")
