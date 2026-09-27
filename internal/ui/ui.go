@@ -92,3 +92,4 @@ func (p *Progress) Run(ctx context.Context) {
 	t := time.NewTicker(500 * time.Millisecond)
 	defer t.Stop()
 	for {
+		select {
