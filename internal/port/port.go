@@ -43,3 +43,4 @@ func init() {
 	for _, p := range topPorts {
 		if !seen[p] {
 			seen[p] = true
+			deduped = append(deduped, p)
