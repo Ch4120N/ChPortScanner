@@ -48,3 +48,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	var addrBuf [64]byte
 
 	for {
+		select {
