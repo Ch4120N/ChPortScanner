@@ -95,3 +95,4 @@ func Count(s Spec) uint64 {
 		if diff.IsUint64() {
 			return diff.Uint64()
 		}
+	}
