@@ -158,3 +158,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--timeout N", "Connection timeout (seconds)"},
 			{"--retries N", "Retries for failed connections"},
 			{"--retry-delay", "Retry delay (ms)"},
+			{"-u, --udp", "UDP scan mode"},
