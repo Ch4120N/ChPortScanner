@@ -108,3 +108,4 @@ func (s *Scanner) Run() error {
 		portStrs := make([]string, len(ports))
 		for i, p := range ports {
 			portStrs[i] = strconv.Itoa(int(p))
+		}
