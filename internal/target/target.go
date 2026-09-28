@@ -77,3 +77,4 @@ func lastInPrefix(p netip.Prefix) netip.Addr {
 		}
 		return netip.AddrFrom4(ip)
 	}
+	ip16 := p.Masked().Addr().As16()
