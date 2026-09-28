@@ -166,3 +166,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--turbo", "Maximum speed mode"},
 		}},
 		{"PROBING", [][2]string{
+			{"--banner", "Enable banner grabbing"},
