@@ -206,3 +206,4 @@ func (s *Scanner) Run() error {
 		go s.progress.Run(ctx)
 	}
 
+	go s.stateSaver(ctx)
