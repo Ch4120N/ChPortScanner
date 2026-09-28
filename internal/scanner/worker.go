@@ -123,3 +123,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			s.done.Add(1)
 		}
 	}
+}
