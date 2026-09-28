@@ -194,3 +194,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 
 	for _, s := range sections {
 		fmt.Fprintf(w, "%s%s%s\n", Yellow, s.Title, Reset)
+		for _, f := range s.Flags {
