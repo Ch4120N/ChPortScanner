@@ -235,3 +235,4 @@ func (s *Scanner) Run() error {
 		s.printStats()
 	}
 	if !s.cfg.Quiet {
+		fmt.Fprintln(os.Stderr)
