@@ -144,3 +144,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-t, --target", "Targets: IPs/CIDRs/ranges (comma-separated)"},
 			{"-iL, --input", "Input file with targets"},
 			{"--exclude", "File with IPs/CIDRs to exclude"},
+			{"-sn", "Ping sweep only"},
