@@ -36,3 +36,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 			t = t[:80] + "..."
 		}
 		return t
+	}
