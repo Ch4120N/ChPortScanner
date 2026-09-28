@@ -72,3 +72,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			var conn net.Conn
 
 			for attempt := 0; attempt <= retries; attempt++ {
+				c, err := dialer.DialContext(ctx, network, addr)
