@@ -153,3 +153,4 @@ func (s *Scanner) Run() error {
 	if totalIPs == 0 || len(s.ports) == 0 {
 		return fmt.Errorf("empty target or port set")
 	}
+	if totalIPs > math.MaxInt64/uint64(len(s.ports)) {
