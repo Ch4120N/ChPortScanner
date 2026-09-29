@@ -36,3 +36,4 @@ type Config struct {
 	Banner        bool
 	BannerTimeout int
 	HTTPProbe     bool
+	TLSCert       bool
