@@ -200,3 +200,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		fmt.Fprintln(w)
 	}
 
+	fmt.Fprintf(w, "%sPERFORMANCE NOTES%s\n", Yellow, Reset)
