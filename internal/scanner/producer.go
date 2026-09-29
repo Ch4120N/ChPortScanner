@@ -24,3 +24,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		if ip, err := netip.ParseAddr(s.state.CurIP); err == nil {
 			curIP = ip
 		}
+	}
