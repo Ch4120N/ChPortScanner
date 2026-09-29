@@ -43,3 +43,4 @@ func Info(format string, a ...any) {
 	}
 }
 
+func Success(format string, a ...any) {
