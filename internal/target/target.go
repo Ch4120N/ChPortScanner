@@ -30,3 +30,4 @@ func Parse(raw string) ([]Spec, error) {
 			continue
 		}
 		s, err := parseOne(p)
+		if err != nil {
