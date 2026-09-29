@@ -54,3 +54,4 @@ func TopN(n int) []uint16 {
 	if n <= 0 || n > len(topPorts) {
 		n = len(topPorts)
 	}
+	return topPorts[:n]
