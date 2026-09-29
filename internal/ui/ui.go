@@ -162,3 +162,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--random", "Randomize scan order"},
 			{"--shard X/Y", "Shard (e.g. 1/4)"},
 			{"-S", "Source IP to bind"},
+			{"--lite", "Low-resource mode"},
