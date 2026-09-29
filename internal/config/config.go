@@ -194,3 +194,4 @@ func applyProfile(c *Config) error {
 			c.TopPorts = 100
 		}
 		c.Rate = 100
+		c.Random = true
