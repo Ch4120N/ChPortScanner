@@ -24,3 +24,4 @@ var (
 	Quiet    = false
 )
 
+func Init(noColor, quiet bool) {
