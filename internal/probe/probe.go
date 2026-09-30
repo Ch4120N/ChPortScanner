@@ -39,3 +39,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 	}
 	if m := serverRe.FindStringSubmatch(body); len(m) > 1 {
 		return "server:" + strings.TrimSpace(m[1])
+	}
