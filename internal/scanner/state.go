@@ -8,3 +8,4 @@ import (
 )
 
 type State struct {
+	Targets   []target.Spec `json:"targets"`
