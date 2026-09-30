@@ -125,3 +125,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	}
 }
 
+// buildAddr formats "ip:port" into dst without allocation.
