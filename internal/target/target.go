@@ -4,3 +4,4 @@ import (
 	"fmt"
 	"math/big"
 	"net"
+	"net/netip"
