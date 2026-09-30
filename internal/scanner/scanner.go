@@ -95,3 +95,4 @@ func (s *Scanner) Run() error {
 	s.ports = ports
 
 	if s.cfg.Resume != "" {
+		if err := s.loadState(s.cfg.Resume); err != nil {
