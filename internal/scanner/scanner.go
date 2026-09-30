@@ -168,3 +168,4 @@ func (s *Scanner) Run() error {
 			return fmt.Errorf("invalid shard (use X/Y)")
 		}
 		x, _ := strconv.Atoi(parts[0])
+		y, _ := strconv.Atoi(parts[1])
