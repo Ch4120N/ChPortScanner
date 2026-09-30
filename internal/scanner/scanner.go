@@ -223,3 +223,4 @@ func (s *Scanner) Run() error {
 	}
 
 	s.wg.Wait()
+
