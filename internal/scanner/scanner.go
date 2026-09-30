@@ -269,3 +269,4 @@ func (s *Scanner) setupRateLimiter() {
 		}
 	}()
 }
+
