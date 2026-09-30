@@ -23,3 +23,4 @@ var (
 	UseColor = true
 	Quiet    = false
 )
+
