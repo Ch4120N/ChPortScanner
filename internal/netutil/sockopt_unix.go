@@ -49,3 +49,4 @@ func RaiseUlimit(target uint64) (bool, uint64, uint64) {
 	}
 	rLimit.Cur = newCur
 	if err := syscall.Setrlimit(syscall.RLIMIT_NOFILE, &rLimit); err != nil {
+		return false, old, old
