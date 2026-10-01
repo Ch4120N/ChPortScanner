@@ -57,3 +57,4 @@ func (s *Scanner) Stop() {
 	s.stopOnce.Do(func() {
 		if s.cancel != nil {
 			s.cancel()
+		}
