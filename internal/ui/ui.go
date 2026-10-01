@@ -40,3 +40,4 @@ func Info(format string, a ...any) {
 		fmt.Fprintf(os.Stderr, Cyan+"[i] "+Reset+msg+"\n")
 	} else {
 		fmt.Fprintf(os.Stderr, "[i] "+msg+"\n")
+	}
