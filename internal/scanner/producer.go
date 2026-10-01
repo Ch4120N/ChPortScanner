@@ -8,3 +8,4 @@ import (
 )
 
 func (s *Scanner) producer(ctx context.Context) {
+	defer s.wg.Done()
