@@ -359,3 +359,4 @@ func jobBufferSize(total int64, cfg *config.Config) int {
 	if total <= 0 {
 		return 10000
 	}
+	if total < 50000 {
