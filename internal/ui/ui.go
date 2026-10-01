@@ -19,3 +19,4 @@ const (
 	Bold   = "\033[1m"
 )
 
+var (
