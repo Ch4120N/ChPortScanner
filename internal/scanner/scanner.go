@@ -318,3 +318,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	var w int
 	switch {
 	case cfg.Lite || cpus <= 2:
+		w = 200 // low-end default
