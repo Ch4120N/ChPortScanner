@@ -59,3 +59,4 @@ type Config struct {
 	ShowHelp    bool
 	ShowVersion bool
 
+	// Internal
