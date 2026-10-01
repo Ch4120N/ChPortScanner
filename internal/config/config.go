@@ -135,3 +135,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.Format, "format", "text", "text|json|jsonl|csv|grep")
 	fs.BoolVar(&c.NoColor, "no-color", false, "Disable colors")
 	fs.BoolVar(&c.Quiet, "q", false, "Quiet mode")
+	fs.BoolVar(&c.Quiet, "quiet", false, "Quiet (long)")
