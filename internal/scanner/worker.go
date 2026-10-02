@@ -55,3 +55,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			if !ok {
 				return
 			}
+
