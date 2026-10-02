@@ -347,3 +347,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 		if w > maxUseful {
 			w = maxUseful
 		}
+	}
