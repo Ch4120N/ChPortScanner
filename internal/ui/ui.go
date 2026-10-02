@@ -128,3 +128,4 @@ func (p *Progress) Run(ctx context.Context) {
 			}
 		}
 	}
+}
