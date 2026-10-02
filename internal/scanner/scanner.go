@@ -279,3 +279,4 @@ func (s *Scanner) stateSaver(ctx context.Context) {
 			return
 		case <-t.C:
 			s.saveState()
+		}
