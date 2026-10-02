@@ -109,3 +109,4 @@ func (s *Scanner) Run() error {
 		for i, p := range ports {
 			portStrs[i] = strconv.Itoa(int(p))
 		}
+		s.state = State{
