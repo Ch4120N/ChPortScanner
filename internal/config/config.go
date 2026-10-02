@@ -68,3 +68,4 @@ type Config struct {
 
 func New() *Config {
 	return &Config{
+		Ports:         "80,443",
