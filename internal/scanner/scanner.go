@@ -202,3 +202,4 @@ func (s *Scanner) Run() error {
 	s.start = time.Now()
 
 	if !s.cfg.Quiet {
+		s.progress = ui.NewProgress(&s.done, &s.open, s.total, s.start)
