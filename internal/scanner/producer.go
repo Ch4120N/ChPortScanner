@@ -42,3 +42,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		}
 		// Format IP once per host, reuse for all ports.
 		ipStr := ip.String()
+		for portIdx < len(ports) {
