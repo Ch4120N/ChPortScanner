@@ -287,3 +287,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
+			return
