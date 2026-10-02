@@ -353,3 +353,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 
 // jobBufferSize returns a channel buffer sized to memory availability.
 func jobBufferSize(total int64, cfg *config.Config) int {
+	if cfg.Lite {
