@@ -48,3 +48,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	dialer := &net.Dialer{Timeout: timeout}
 	conn, err := tls.DialWithDialer(dialer, "tcp",
 		fmt.Sprintf("%s:%d", ip, port),
+		&tls.Config{InsecureSkipVerify: true})
