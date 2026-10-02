@@ -259,3 +259,4 @@ func (s *Scanner) setupRateLimiter() {
 	s.ticker = time.NewTicker(interval)
 	go func() {
 		for range s.ticker.C {
+			for i := 0; i < batchSize; i++ {
