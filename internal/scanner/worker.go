@@ -142,3 +142,4 @@ func appendUint16(dst []byte, v uint16) int {
 	var tmp [5]byte
 	i := len(tmp)
 	for v > 0 {
+		i--
