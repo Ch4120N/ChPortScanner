@@ -256,3 +256,4 @@ func (s *Scanner) setupRateLimiter() {
 		batchSize = 1
 		interval = time.Second / time.Duration(rate)
 	}
+	s.ticker = time.NewTicker(interval)
