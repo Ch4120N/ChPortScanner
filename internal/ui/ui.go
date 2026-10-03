@@ -35,3 +35,4 @@ func Info(format string, a ...any) {
 	if Quiet {
 		return
 	}
+	msg := fmt.Sprintf(format, a...)
