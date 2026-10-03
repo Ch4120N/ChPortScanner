@@ -115,3 +115,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 			if e.Prefix.Contains(ip) {
 				return true
 			}
+		case "range":
