@@ -190,3 +190,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"-h, --help", "Show this help"},
 			{"-v, --version", "Show version"},
 		}},
+	}
