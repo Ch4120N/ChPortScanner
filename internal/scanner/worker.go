@@ -92,3 +92,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					Port:     int(job.Port),
 					Protocol: network,
 					State:    "open",
+				}
