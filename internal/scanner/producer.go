@@ -14,3 +14,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	specs := s.state.Targets
 	ports := s.ports
 	specIdx := s.state.CurSpec
+	portIdx := s.state.CurPort
