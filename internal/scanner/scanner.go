@@ -328,3 +328,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	default:
 		w = 6000
 	}
+	if cfg.Turbo {
