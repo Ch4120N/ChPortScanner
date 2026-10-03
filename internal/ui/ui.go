@@ -163,3 +163,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--shard X/Y", "Shard (e.g. 1/4)"},
 			{"-S", "Source IP to bind"},
 			{"--lite", "Low-resource mode"},
+			{"--turbo", "Maximum speed mode"},
