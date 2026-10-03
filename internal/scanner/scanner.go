@@ -74,3 +74,4 @@ func (s *Scanner) Run() error {
 		}
 		if len(lines) > 0 {
 			if targetStr != "" {
+				targetStr += ","
