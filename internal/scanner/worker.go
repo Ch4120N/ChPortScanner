@@ -117,3 +117,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				case s.resultCh <- res:
 				case <-ctx.Done():
 					return
+				}
