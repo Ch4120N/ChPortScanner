@@ -30,3 +30,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 		return ""
 	}
 	body := string(buf[:n])
+	if m := titleRe.FindStringSubmatch(body); len(m) > 1 {
