@@ -94,3 +94,4 @@ func (s *Scanner) Run() error {
 	}
 	s.ports = ports
 
+	if s.cfg.Resume != "" {
