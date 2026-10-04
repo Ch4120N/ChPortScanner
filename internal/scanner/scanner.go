@@ -262,3 +262,4 @@ func (s *Scanner) setupRateLimiter() {
 			for i := 0; i < batchSize; i++ {
 				select {
 				case s.tokens <- struct{}{}:
+				default:
