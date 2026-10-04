@@ -140,3 +140,4 @@ func ReadLines(path string) ([]string, error) {
 		}
 		for _, part := range strings.Split(line, ",") {
 			part = strings.TrimSpace(part)
+			if part != "" {
