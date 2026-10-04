@@ -95,3 +95,4 @@ func (p *Progress) Run(ctx context.Context) {
 		select {
 		case <-ctx.Done():
 			return
+		case <-t.C:
