@@ -63,3 +63,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	}
 
 	for specIdx < len(specs) {
+		spec := specs[specIdx]
