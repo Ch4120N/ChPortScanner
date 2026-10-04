@@ -78,3 +78,4 @@ func New() *Config {
 		Format:        "text",
 		StateFile:     "scan.state",
 		IsUnix:        runtime.GOOS != "windows",
+		IsWin:         runtime.GOOS == "windows",
