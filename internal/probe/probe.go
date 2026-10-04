@@ -64,3 +64,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	}
 	if c.Issuer.CommonName != "" {
 		parts = append(parts, "issuer="+c.Issuer.CommonName)
+	}
