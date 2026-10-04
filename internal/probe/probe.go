@@ -56,3 +56,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	certs := conn.ConnectionState().PeerCertificates
 	if len(certs) == 0 {
 		return ""
+	}
