@@ -27,3 +27,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		Control:   netutil.SetFastClose,
 	}
 	if s.cfg.SourceIP != "" {
+		if ip := net.ParseIP(s.cfg.SourceIP); ip != nil {
