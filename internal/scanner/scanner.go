@@ -372,3 +372,4 @@ func rateLabel(rate int) string {
 	return strconv.Itoa(rate)
 }
 
+// saveState + loadState live in state.go.
