@@ -105,3 +105,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				// Optional probes
 				if s.cfg.HTTPProbe {
 					res.Title = probe.HTTPTitle(job.IP, int(job.Port), timeout)
+				}
