@@ -264,3 +264,4 @@ func (s *Scanner) setupRateLimiter() {
 				case s.tokens <- struct{}{}:
 				default:
 					break
+				}
