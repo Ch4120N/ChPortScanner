@@ -109,3 +109,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 		switch e.Kind {
 		case "single":
 			if ip == e.IP {
+				return true
