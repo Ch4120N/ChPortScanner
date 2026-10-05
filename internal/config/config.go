@@ -73,3 +73,4 @@ func New() *Config {
 		Workers:       0, // auto-size
 		Timeout:       1,
 		Retries:       0,
+		RetryDelay:    500,
