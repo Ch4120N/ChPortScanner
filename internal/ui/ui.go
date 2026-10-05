@@ -184,3 +184,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		{"UTILITIES", [][2]string{
 			{"--extract FILE", "Extract unique IPs from output file"},
 			{"--extract-ports", "Keep IP:port pairs on extraction"},
+			{"--resume", "Resume from state file"},
