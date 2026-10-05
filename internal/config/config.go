@@ -30,3 +30,4 @@ type Config struct {
 	UDP         bool
 	Random      bool
 	Shard       string
+	SourceIP    string
