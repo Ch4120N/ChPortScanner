@@ -118,3 +118,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 	}
 
 	if len(set) == 0 {
+		return nil, fmt.Errorf("no valid ports")
