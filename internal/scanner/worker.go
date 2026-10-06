@@ -90,3 +90,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				res := output.Result{
 					IP:       job.IP,
 					Port:     int(job.Port),
+					Protocol: network,
