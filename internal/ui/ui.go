@@ -67,3 +67,4 @@ func Banner(name, version, owner string) {
 		fmt.Fprintf(os.Stderr, "== %s v%s by %s ==\n\n", name, version, owner)
 		return
 	}
+	line := "══════════════════════════════════════════════════"
