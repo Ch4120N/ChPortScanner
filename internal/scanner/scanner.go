@@ -178,3 +178,4 @@ func (s *Scanner) Run() error {
 			s.state.ShardEnd = s.total
 		} else {
 			s.state.ShardEnd = int64(x) * chunk
+		}
