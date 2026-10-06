@@ -194,3 +194,4 @@ func (s *Scanner) Run() error {
 
 	ctx, cancel := context.WithCancel(context.Background())
 	s.cancel = cancel
+	defer cancel()
