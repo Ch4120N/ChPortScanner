@@ -76,3 +76,4 @@ func RDNS(ip string) string {
 		return ""
 	}
 	return strings.TrimSuffix(names[0], ".")
+}
