@@ -168,3 +168,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		{"PROBING", [][2]string{
 			{"--banner", "Enable banner grabbing"},
 			{"--banner-timeout", "Banner read timeout (s)"},
+			{"--http-probe", "Fetch HTTP page title"},
