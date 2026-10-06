@@ -195,3 +195,4 @@ func applyProfile(c *Config) error {
 		}
 		c.Rate = 100
 		c.Random = true
+		c.Timeout = 3
