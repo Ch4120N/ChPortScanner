@@ -142,3 +142,4 @@ func ReadLines(path string) ([]string, error) {
 			part = strings.TrimSpace(part)
 			if part != "" {
 				out = append(out, part)
+			}
