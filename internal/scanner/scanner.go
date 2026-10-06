@@ -274,3 +274,4 @@ func (s *Scanner) stateSaver(ctx context.Context) {
 	t := time.NewTicker(2 * time.Second)
 	defer t.Stop()
 	for {
+		select {
