@@ -109,3 +109,4 @@ func (p *Progress) Run(ctx context.Context) {
 					eta = fmt.Sprintf(" ETA:%s", time.Duration(rem*float64(time.Second)))
 				}
 			}
+			barWidth := 20
