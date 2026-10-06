@@ -128,3 +128,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.TLSCert, "tls-cert", false, "Extract TLS cert info")
 	fs.BoolVar(&c.RDNS, "rdns", false, "Reverse DNS lookup")
 
+	// Output
