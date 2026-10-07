@@ -26,3 +26,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		}
 	}
 	if !curIP.IsValid() && specIdx < len(specs) {
+		if specs[specIdx].Kind == "single" {
