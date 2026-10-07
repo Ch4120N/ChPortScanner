@@ -42,3 +42,4 @@ func parseOne(s string) (Spec, error) {
 	if strings.Contains(s, "/") {
 		pfx, err := netip.ParsePrefix(s)
 		if err != nil {
+			return Spec{}, err
