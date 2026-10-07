@@ -22,3 +22,4 @@ type Config struct {
 	Profile      string
 
 	// Scanning
+	Rate        int
