@@ -14,3 +14,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 	var sockErr error
 	err := c.Control(func(fd uintptr) {
 		linger := syscall.Linger{Onoff: 1, Linger: 0}
+		if e := syscall.SetsockoptLinger(int(fd), syscall.SOL_SOCKET, syscall.SO_LINGER, &linger); e != nil {
