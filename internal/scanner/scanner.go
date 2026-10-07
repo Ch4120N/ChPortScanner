@@ -335,3 +335,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 		w = 10000
 	}
 	if w < 50 {
+		w = 50
