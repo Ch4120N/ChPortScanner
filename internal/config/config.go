@@ -26,3 +26,4 @@ type Config struct {
 	Workers     int
 	Timeout     int
 	Retries     int
+	RetryDelay  int
