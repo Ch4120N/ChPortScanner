@@ -75,3 +75,4 @@ func lastInPrefix(p netip.Prefix) netip.Addr {
 		for i := range ip {
 			ip[i] |= ^mask[i]
 		}
+		return netip.AddrFrom4(ip)
