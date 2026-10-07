@@ -43,3 +43,4 @@ func RaiseUlimit(target uint64) (bool, uint64, uint64) {
 	if old >= target {
 		return true, old, old
 	}
+	newCur := target
