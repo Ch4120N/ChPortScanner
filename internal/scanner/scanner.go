@@ -324,3 +324,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	case cpus <= 8:
 		w = 2500
 	case cpus <= 16:
+		w = 4000
