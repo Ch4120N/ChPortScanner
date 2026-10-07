@@ -239,3 +239,4 @@ func (s *Scanner) Run() error {
 		ui.Success("Scan completed: %d open port(s)", s.open.Load())
 	}
 	return nil
+}
