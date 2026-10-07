@@ -99,3 +99,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.InputFile, "iL", "", "Input file with targets")
 	fs.StringVar(&c.InputFile, "input", "", "Input file (long)")
 	fs.StringVar(&c.ExcludeFile, "exclude", "", "File with IPs/CIDRs to exclude")
+	fs.BoolVar(&c.PingSweep, "sn", false, "Ping sweep only")
