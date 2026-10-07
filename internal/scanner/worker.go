@@ -134,3 +134,4 @@ func buildAddr(dst []byte, ip string, port uint16) string {
 	return string(dst[:n])
 }
 
+func appendUint16(dst []byte, v uint16) int {
