@@ -63,3 +63,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 	if topN > 0 {
 		for _, p := range TopN(topN) {
 			set[p] = struct{}{}
+		}
