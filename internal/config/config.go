@@ -8,3 +8,4 @@ import (
 	"runtime"
 )
 
+type Config struct {
