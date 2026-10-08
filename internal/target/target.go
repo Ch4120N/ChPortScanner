@@ -32,3 +32,4 @@ func Parse(raw string) ([]Spec, error) {
 		s, err := parseOne(p)
 		if err != nil {
 			return nil, fmt.Errorf("invalid target %q: %w", p, err)
+		}
