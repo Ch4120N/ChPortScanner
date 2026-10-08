@@ -105,3 +105,4 @@ func addrToInt(a netip.Addr) *big.Int {
 }
 
 func IsExcluded(ip netip.Addr, ex []Spec) bool {
+	for _, e := range ex {
