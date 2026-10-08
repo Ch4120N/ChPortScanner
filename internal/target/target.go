@@ -92,3 +92,4 @@ func Count(s Spec) uint64 {
 	case "cidr", "range":
 		diff := new(big.Int).Sub(addrToInt(s.End), addrToInt(s.Start))
 		diff.Add(diff, big.NewInt(1))
+		if diff.IsUint64() {
