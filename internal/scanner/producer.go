@@ -19,3 +19,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	shardEnd := s.state.ShardEnd
 	count := int64(0)
 
+	var curIP netip.Addr
