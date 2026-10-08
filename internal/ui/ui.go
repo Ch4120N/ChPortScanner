@@ -131,3 +131,4 @@ func (p *Progress) Run(ctx context.Context) {
 }
 
 // PrintHelp writes the full help to w.
+func PrintHelp(w io.Writer, name, version, owner string) {
