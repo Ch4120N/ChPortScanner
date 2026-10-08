@@ -29,3 +29,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 	if n <= 0 {
 		return ""
 	}
+	body := string(buf[:n])
