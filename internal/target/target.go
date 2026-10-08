@@ -138,3 +138,4 @@ func ReadLines(path string) ([]string, error) {
 		if line == "" || strings.HasPrefix(line, "#") {
 			continue
 		}
+		for _, part := range strings.Split(line, ",") {
