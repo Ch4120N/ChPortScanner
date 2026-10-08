@@ -16,3 +16,4 @@ type State struct {
 	Finished  bool          `json:"finished"`
 	OpenCount uint64        `json:"open_count"`
 	Format    string        `json:"format"`
+	Output    string        `json:"output"`
