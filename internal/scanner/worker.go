@@ -71,3 +71,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			var open bool
 			var conn net.Conn
 
+			for attempt := 0; attempt <= retries; attempt++ {
