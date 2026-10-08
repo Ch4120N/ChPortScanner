@@ -311,3 +311,4 @@ func (s *Scanner) printStats() {
 
 // computeWorkers auto-sizes the worker pool based on hardware and config.
 func computeWorkers(cfg *config.Config, numPorts int) int {
+	if cfg.Workers > 0 {
