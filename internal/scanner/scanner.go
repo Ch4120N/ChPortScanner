@@ -158,3 +158,4 @@ func (s *Scanner) Run() error {
 	} else {
 		s.total = int64(totalIPs * uint64(len(s.ports)))
 	}
+
