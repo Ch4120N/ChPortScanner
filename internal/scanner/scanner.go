@@ -59,3 +59,4 @@ func (s *Scanner) Stop() {
 			s.cancel()
 		}
 		if s.ticker != nil {
+			s.ticker.Stop()
