@@ -66,3 +66,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			}
 
 			// Build "ip:port" without allocation
+			addr := buildAddr(addrBuf[:], job.IP, job.Port)
