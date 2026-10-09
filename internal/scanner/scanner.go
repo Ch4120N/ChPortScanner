@@ -271,3 +271,4 @@ func (s *Scanner) setupRateLimiter() {
 }
 
 func (s *Scanner) stateSaver(ctx context.Context) {
+	t := time.NewTicker(2 * time.Second)
