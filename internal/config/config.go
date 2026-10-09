@@ -28,3 +28,4 @@ type Config struct {
 	Retries     int
 	RetryDelay  int
 	UDP         bool
+	Random      bool
