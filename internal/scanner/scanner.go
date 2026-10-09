@@ -79,3 +79,4 @@ func (s *Scanner) Run() error {
 			targetStr += strings.Join(lines, ",")
 		}
 	}
+	if targetStr == "" && s.cfg.Resume == "" {
