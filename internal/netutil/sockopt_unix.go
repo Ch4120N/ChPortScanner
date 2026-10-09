@@ -10,3 +10,4 @@ import (
 //   - SO_LINGER=0  → sends RST on close (no TIME_WAIT accumulation)
 //   - SO_REUSEADDR → allows quick rebinding
 //   - TCP_NODELAY  → disables Nagle (irrelevant for connect, harmless)
+func SetFastClose(network, address string, c syscall.RawConn) error {
