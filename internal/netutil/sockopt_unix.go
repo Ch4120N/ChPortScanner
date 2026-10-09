@@ -35,3 +35,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 // RaiseUlimit tries to raise the RLIMIT_NOFILE soft limit. Returns
 // (success, oldLimit, newLimit). Silently returns (false, 0, 0) if unsupported.
 func RaiseUlimit(target uint64) (bool, uint64, uint64) {
+	var rLimit syscall.Rlimit
