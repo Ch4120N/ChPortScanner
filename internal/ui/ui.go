@@ -110,3 +110,4 @@ func (p *Progress) Run(ctx context.Context) {
 				}
 			}
 			barWidth := 20
+			fill := int(percent / 100 * float64(barWidth))
