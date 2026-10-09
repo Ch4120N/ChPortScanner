@@ -159,3 +159,4 @@ func Load(args []string) (*Config, error) {
 	if c.JSONOut {
 		c.Format = "json"
 	}
+	if err := applyProfile(c); err != nil {
