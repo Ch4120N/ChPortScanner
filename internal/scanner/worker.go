@@ -166,3 +166,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	}
 	return b
 }
+
