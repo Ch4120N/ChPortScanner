@@ -22,3 +22,4 @@ func SetFastClose(network, address string, c syscall.RawConn) error {
 			sockErr = e
 			return
 		}
+		if network == "tcp" || network == "tcp4" || network == "tcp6" {
