@@ -93,3 +93,4 @@ func (p *Progress) Run(ctx context.Context) {
 	defer t.Stop()
 	for {
 		select {
+		case <-ctx.Done():
