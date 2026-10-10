@@ -196,3 +196,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		fmt.Fprintf(w, "%s%s%s\n", Yellow, s.Title, Reset)
 		for _, f := range s.Flags {
 			fmt.Fprintf(w, "  %-22s %s\n", f[0], f[1])
+		}
