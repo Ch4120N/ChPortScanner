@@ -150,3 +150,4 @@ func (s *Scanner) Run() error {
 	for _, sp := range s.state.Targets {
 		totalIPs += target.Count(sp)
 	}
+	if totalIPs == 0 || len(s.ports) == 0 {
