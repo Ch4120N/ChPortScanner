@@ -45,3 +45,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	retries := s.cfg.Retries
 
 	// Small scratch buffer for building addresses (avoids JoinHostPort allocation)
+	var addrBuf [64]byte
