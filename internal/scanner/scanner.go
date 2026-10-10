@@ -180,3 +180,4 @@ func (s *Scanner) Run() error {
 			s.state.ShardEnd = int64(x) * chunk
 		}
 		ui.Info("Shard %s: jobs %d → %d", s.cfg.Shard, s.state.ShardIdx, s.state.ShardEnd)
+	}
