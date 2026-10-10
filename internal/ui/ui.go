@@ -42,3 +42,4 @@ func Info(format string, a ...any) {
 		fmt.Fprintf(os.Stderr, "[i] "+msg+"\n")
 	}
 }
+
