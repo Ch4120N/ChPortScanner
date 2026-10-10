@@ -146,3 +146,4 @@ func (s *Scanner) Run() error {
 	}
 
 	// Totals
+	var totalIPs uint64
