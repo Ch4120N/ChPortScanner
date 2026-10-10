@@ -117,3 +117,4 @@ func IsExcluded(ip netip.Addr, ex []Spec) bool {
 			}
 		case "range":
 			if e.Start.Compare(ip) <= 0 && ip.Compare(e.End) <= 0 {
+				return true
