@@ -171,3 +171,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--http-probe", "Fetch HTTP page title"},
 			{"--tls-cert", "Extract TLS certificate info"},
 			{"--rdns", "Reverse DNS lookup"},
+		}},
