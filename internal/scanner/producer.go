@@ -31,3 +31,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		} else {
 			curIP = specs[specIdx].Start
 		}
+	}
