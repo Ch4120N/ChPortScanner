@@ -192,3 +192,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 		}},
 	}
 
+	for _, s := range sections {
