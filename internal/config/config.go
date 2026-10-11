@@ -110,3 +110,4 @@ func Load(args []string) (*Config, error) {
 
 	// Scanning
 	fs.IntVar(&c.Rate, "rate", 0, "Packets/sec (0 = unlimited)")
+	fs.IntVar(&c.Workers, "workers", 0, "Concurrent workers (0 = auto)")
