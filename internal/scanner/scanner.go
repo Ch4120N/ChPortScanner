@@ -207,3 +207,4 @@ func (s *Scanner) Run() error {
 	}
 
 	go s.stateSaver(ctx)
+	go s.resultCollector(ctx)
