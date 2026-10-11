@@ -49,3 +49,4 @@ type Config struct {
 	ShowStats bool
 
 	// Utilities
+	Extract      string
