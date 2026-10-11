@@ -33,3 +33,4 @@ func Parse(raw string) ([]Spec, error) {
 		if err != nil {
 			return nil, fmt.Errorf("invalid target %q: %w", p, err)
 		}
+		out = append(out, s)
