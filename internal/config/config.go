@@ -181,3 +181,4 @@ func applyProfile(c *Config) error {
 		if c.TopPorts == 0 {
 			c.TopPorts = 100
 		}
+	case "default":
