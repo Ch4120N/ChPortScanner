@@ -96,3 +96,4 @@ func (s *Scanner) Run() error {
 
 	if s.cfg.Resume != "" {
 		if err := s.loadState(s.cfg.Resume); err != nil {
+			return fmt.Errorf("loading resume state: %w", err)
