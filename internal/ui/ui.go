@@ -125,3 +125,4 @@ func (p *Progress) Run(ctx context.Context) {
 				fmt.Fprintf(os.Stderr, "%s%s%s", Cyan, line, Reset)
 			} else {
 				fmt.Fprint(os.Stderr, line)
+			}
