@@ -103,3 +103,4 @@ func Load(args []string) (*Config, error) {
 
 	// Ports
 	fs.StringVar(&c.Ports, "p", "80,443", "Ports to scan")
+	fs.StringVar(&c.Ports, "ports", "80,443", "Ports (long)")
