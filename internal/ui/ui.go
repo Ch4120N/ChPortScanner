@@ -179,3 +179,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--no-color", "Disable colored output"},
 			{"-q, --quiet", "Quiet mode"},
 			{"-V, --verbose", "Verbose mode"},
+			{"--stats", "Show final stats"},
