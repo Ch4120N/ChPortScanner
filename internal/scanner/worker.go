@@ -89,3 +89,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			if open && conn != nil {
 				res := output.Result{
 					IP:       job.IP,
+					Port:     int(job.Port),
