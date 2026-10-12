@@ -134,3 +134,4 @@ func (p *Progress) Run(ctx context.Context) {
 func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "%s%s %s%s — High-Speed Port Scanner by %s\n", Bold, name, version, Reset, owner)
 	fmt.Fprintf(w, "Designed for restricted lab environments (no raw sockets, no root required)\n\n")
+	fmt.Fprintf(w, "%sUSAGE%s\n  %s [options] -t <IP/CIDR/range>\n\n", Yellow, Reset, name)
