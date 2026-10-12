@@ -12,3 +12,4 @@ type Config struct {
 	// Targeting
 	Target      string
 	InputFile   string
+	ExcludeFile string
