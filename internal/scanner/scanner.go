@@ -145,3 +145,4 @@ func (s *Scanner) Run() error {
 		ui.Info("Scan order randomized")
 	}
 
+	// Totals
