@@ -135,3 +135,4 @@ func (s *Scanner) Run() error {
 	}
 
 	// Randomize
+	if s.cfg.Random {
