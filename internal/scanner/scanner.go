@@ -173,3 +173,4 @@ func (s *Scanner) Run() error {
 			return fmt.Errorf("invalid shard values")
 		}
 		chunk := s.total / int64(y)
+		s.state.ShardIdx = int64(x-1) * chunk
