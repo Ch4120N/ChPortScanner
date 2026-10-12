@@ -23,3 +23,4 @@ func Parse(raw string) ([]Spec, error) {
 		return nil, nil
 	}
 	parts := strings.FieldsFunc(raw, func(r rune) bool { return r == ',' || r == ' ' })
+	out := make([]Spec, 0, len(parts))
