@@ -20,3 +20,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 	conn, err := dialer.Dial("tcp", fmt.Sprintf("%s:%d", ip, port))
 	if err != nil {
 		return ""
+	}
