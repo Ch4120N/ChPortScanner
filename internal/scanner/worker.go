@@ -97,3 +97,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					res.Service = svc
 				}
 
+				if s.cfg.Banner && network == "tcp" {
