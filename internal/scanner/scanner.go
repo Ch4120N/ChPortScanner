@@ -201,3 +201,4 @@ func (s *Scanner) Run() error {
 
 	s.start = time.Now()
 
+	if !s.cfg.Quiet {
