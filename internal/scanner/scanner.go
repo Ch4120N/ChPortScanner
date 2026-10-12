@@ -30,3 +30,4 @@ type Scanner struct {
 	cfg   *config.Config
 	ports []uint16
 	excl  []target.Spec
+	state State
