@@ -39,3 +39,4 @@ type Scanner struct {
 
 	jobCh    chan Job
 	resultCh chan output.Result
+	tokens   chan struct{}
