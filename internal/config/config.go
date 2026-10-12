@@ -131,3 +131,4 @@ func Load(args []string) (*Config, error) {
 	// Output
 	fs.StringVar(&c.Output, "o", "", "Output file")
 	fs.StringVar(&c.Output, "output", "", "Output file (long)")
+	fs.BoolVar(&c.JSONOut, "oJ", false, "JSON output")
