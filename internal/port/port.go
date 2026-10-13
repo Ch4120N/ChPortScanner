@@ -40,3 +40,4 @@ var topPorts = []uint16{
 func init() {
 	seen := map[uint16]bool{}
 	deduped := topPorts[:0]
+	for _, p := range topPorts {
