@@ -78,3 +78,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					open = true
 					break
 				}
+				if s.cfg.UDP && strings.Contains(err.Error(), "connection refused") {
