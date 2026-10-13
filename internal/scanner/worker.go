@@ -26,3 +26,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		KeepAlive: -1, // disable TCP keepalive — saves syscalls
 		Control:   netutil.SetFastClose,
 	}
+	if s.cfg.SourceIP != "" {
