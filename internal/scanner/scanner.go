@@ -305,3 +305,4 @@ func (s *Scanner) printStats() {
 	ui.Info("\n=== Final Stats ===")
 	ui.Info("Scanned     : %d", done)
 	ui.Info("Open        : %d", open)
+	ui.Info("Elapsed     : %.2fs", elapsed)
