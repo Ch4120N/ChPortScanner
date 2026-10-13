@@ -122,3 +122,4 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.Turbo, "turbo", false, "Maximum speed mode")
 
 	// Probing
+	fs.BoolVar(&c.Banner, "banner", false, "Enable banner grabbing")
