@@ -32,3 +32,4 @@ type Scanner struct {
 	excl  []target.Spec
 	state State
 
+	total int64
