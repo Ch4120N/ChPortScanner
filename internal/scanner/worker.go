@@ -40,3 +40,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	if s.cfg.UDP {
 		network = "udp"
 	}
+
