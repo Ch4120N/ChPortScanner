@@ -181,3 +181,4 @@ func (s *Scanner) Run() error {
 		}
 		ui.Info("Shard %s: jobs %d → %d", s.cfg.Shard, s.state.ShardIdx, s.state.ShardEnd)
 	}
+
