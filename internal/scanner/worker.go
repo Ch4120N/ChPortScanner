@@ -25,3 +25,4 @@ func (s *Scanner) worker(ctx context.Context) {
 		Timeout:   timeout,
 		KeepAlive: -1, // disable TCP keepalive — saves syscalls
 		Control:   netutil.SetFastClose,
+	}
