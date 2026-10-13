@@ -180,3 +180,4 @@ func applyProfile(c *Config) error {
 	case "quick":
 		if c.TopPorts == 0 {
 			c.TopPorts = 100
+		}
