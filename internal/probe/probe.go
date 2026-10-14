@@ -26,3 +26,4 @@ func HTTPTitle(ip string, port int, timeout time.Duration) string {
 	fmt.Fprintf(conn, "GET / HTTP/1.1\r\nHost: %s\r\nUser-Agent: ChPortScanner/1.0\r\nConnection: close\r\n\r\n", ip)
 	buf := make([]byte, 4096)
 	n, _ := conn.Read(buf)
+	if n <= 0 {
