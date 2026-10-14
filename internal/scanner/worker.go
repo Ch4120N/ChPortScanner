@@ -153,3 +153,4 @@ func appendUint16(dst []byte, v uint16) int {
 func grabBanner(conn net.Conn, timeoutSec int) string {
 	_ = conn.SetReadDeadline(time.Now().Add(time.Duration(timeoutSec) * time.Second))
 	buf := make([]byte, 512)
+	n, _ := conn.Read(buf)
