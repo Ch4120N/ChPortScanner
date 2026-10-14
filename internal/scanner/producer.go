@@ -37,3 +37,4 @@ func (s *Scanner) producer(ctx context.Context) {
 	emit := func(ip netip.Addr) bool {
 		if target.IsExcluded(ip, s.excl) {
 			count += int64(len(ports))
+			portIdx = 0
