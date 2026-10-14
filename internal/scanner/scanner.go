@@ -217,3 +217,4 @@ func (s *Scanner) Run() error {
 	s.wg.Add(1)
 	go s.producer(ctx)
 
+	for i := 0; i < workers; i++ {
