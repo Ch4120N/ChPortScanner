@@ -50,3 +50,4 @@ func Success(format string, a ...any) {
 		fmt.Fprintf(os.Stderr, "[+] "+format+"\n", a...)
 	}
 }
+
