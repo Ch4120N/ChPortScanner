@@ -12,3 +12,4 @@ type State struct {
 	PortSpec  string        `json:"port_spec"`
 	CurSpec   int           `json:"cur_spec"`
 	CurIP     string        `json:"cur_ip"`
+	CurPort   int           `json:"cur_port"`
