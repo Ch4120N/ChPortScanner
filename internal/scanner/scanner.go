@@ -228,3 +228,4 @@ func (s *Scanner) Run() error {
 	close(s.resultCh)
 	time.Sleep(100 * time.Millisecond)
 
+	s.state.Finished = true
