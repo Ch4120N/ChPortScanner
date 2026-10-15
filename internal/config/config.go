@@ -146,3 +146,4 @@ func Load(args []string) (*Config, error) {
 	fs.StringVar(&c.Resume, "resume", "", "Resume from state file")
 	fs.StringVar(&c.StateFile, "state", "scan.state", "State file path")
 	fs.StringVar(&c.ConfFile, "c", "", "JSON config file")
+
