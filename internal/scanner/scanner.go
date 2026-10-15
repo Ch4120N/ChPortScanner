@@ -293,3 +293,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 				return
 			}
 			s.writer.Write(res)
+		}
