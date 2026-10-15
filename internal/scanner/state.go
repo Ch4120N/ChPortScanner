@@ -29,3 +29,4 @@ func (s *Scanner) loadState(path string) error {
 	return json.Unmarshal(data, &s.state)
 }
 
+func (s *Scanner) saveState() {
