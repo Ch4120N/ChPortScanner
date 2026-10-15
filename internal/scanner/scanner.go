@@ -63,3 +63,4 @@ func (s *Scanner) Stop() {
 		}
 		s.saveState()
 	})
+}
