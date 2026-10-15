@@ -111,3 +111,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 					delete(set, uint16(p))
 				}
 			} else {
+				p, _ := strconv.Atoi(chunk)
