@@ -52,3 +52,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 	if err != nil {
 		return ""
 	}
+	defer conn.Close()
