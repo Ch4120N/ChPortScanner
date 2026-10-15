@@ -133,3 +133,4 @@ func (s *Scanner) Run() error {
 			return fmt.Errorf("parsing excludes: %w", err)
 		}
 	}
+
