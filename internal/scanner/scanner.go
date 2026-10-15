@@ -68,3 +68,4 @@ func (s *Scanner) Stop() {
 func (s *Scanner) Run() error {
 	targetStr := s.cfg.Target
 	if s.cfg.InputFile != "" {
+		lines, err := target.ReadLines(s.cfg.InputFile)
