@@ -244,3 +244,4 @@ func (s *Scanner) Run() error {
 func (s *Scanner) setupRateLimiter() {
 	if s.cfg.Rate <= 0 {
 		s.tokens = nil
+		return
