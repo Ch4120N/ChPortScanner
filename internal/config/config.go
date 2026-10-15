@@ -178,3 +178,4 @@ func applyProfile(c *Config) error {
 	case "":
 		return nil
 	case "quick":
+		if c.TopPorts == 0 {
