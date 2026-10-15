@@ -1,3 +1,4 @@
 package scanner
 
 import (
+	"context"
