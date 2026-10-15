@@ -23,3 +23,4 @@ type State struct {
 
 func (s *Scanner) loadState(path string) error {
 	data, err := os.ReadFile(path)
+	if err != nil {
