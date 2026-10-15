@@ -26,3 +26,4 @@ func Parse(raw string) ([]Spec, error) {
 	out := make([]Spec, 0, len(parts))
 	for _, p := range parts {
 		p = strings.TrimSpace(p)
+		if p == "" {
