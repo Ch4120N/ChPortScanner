@@ -142,3 +142,4 @@ func Load(args []string) (*Config, error) {
 
 	// Utilities
 	fs.StringVar(&c.Extract, "extract", "", "Extract IPs from output file")
+	fs.BoolVar(&c.ExtractPorts, "extract-ports", false, "Keep IP:port pairs")
