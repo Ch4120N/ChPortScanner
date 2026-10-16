@@ -157,3 +157,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--workers N", "Concurrent workers (0 = auto)"},
 			{"--timeout N", "Connection timeout (seconds)"},
 			{"--retries N", "Retries for failed connections"},
+			{"--retry-delay", "Retry delay (ms)"},
