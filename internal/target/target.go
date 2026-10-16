@@ -128,3 +128,4 @@ func ReadLines(path string) ([]string, error) {
 	if path == "" {
 		return nil, nil
 	}
+	data, err := os.ReadFile(path)
