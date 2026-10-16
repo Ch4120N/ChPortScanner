@@ -17,3 +17,4 @@ var ServiceMap = map[uint16]string{
 	587: "submission", 631: "ipp", 636: "ldaps", 873: "rsync", 990: "ftps",
 	993: "imaps", 995: "pop3s", 1433: "ms-sql-s", 1434: "ms-sql-m",
 	1521: "oracle", 1723: "pptp", 2049: "nfs", 2082: "cpanel",
+	2083: "cpanel-ssl", 2181: "zookeeper", 2375: "docker", 2376: "docker-tls",
