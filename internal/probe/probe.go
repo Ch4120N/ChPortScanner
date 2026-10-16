@@ -71,3 +71,4 @@ func TLSCertInfo(ip string, port int, timeout time.Duration) string {
 
 // RDNS does reverse DNS lookup.
 func RDNS(ip string) string {
+	names, err := net.LookupAddr(ip)
