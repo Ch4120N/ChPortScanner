@@ -149,3 +149,4 @@ func appendUint16(dst []byte, v uint16) int {
 	return copy(dst, tmp[i:])
 }
 
+// grabBanner reads up to 512 bytes from the connection.
