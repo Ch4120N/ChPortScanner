@@ -172,3 +172,4 @@ func (s *Scanner) Run() error {
 		if y < 1 || x < 1 || x > y {
 			return fmt.Errorf("invalid shard values")
 		}
+		chunk := s.total / int64(y)
