@@ -215,3 +215,4 @@ func (s *Scanner) Run() error {
 		workers, rateLabel(s.cfg.Rate), s.cfg.Timeout, s.total)
 
 	s.wg.Add(1)
+	go s.producer(ctx)
