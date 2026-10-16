@@ -44,3 +44,4 @@ func parseOne(s string) (Spec, error) {
 		if err != nil {
 			return Spec{}, err
 		}
+		return Spec{Raw: s, Kind: "cidr", Start: pfx.Masked().Addr(), End: lastInPrefix(pfx), Prefix: pfx}, nil
