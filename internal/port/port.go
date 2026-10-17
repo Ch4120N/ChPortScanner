@@ -27,3 +27,4 @@ var ServiceMap = map[uint16]string{
 }
 
 var topPorts = []uint16{
+	7, 9, 13, 21, 22, 23, 25, 26, 37, 53, 79, 80, 81, 88, 106, 110, 111, 113,
