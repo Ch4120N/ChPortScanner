@@ -46,3 +46,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			if count >= shardEnd {
 				return false
 			}
+			if count >= shardStart {
