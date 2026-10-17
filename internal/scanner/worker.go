@@ -94,3 +94,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					State:    "open",
 				}
 				if svc, ok := port.ServiceMap[job.Port]; ok {
+					res.Service = svc
