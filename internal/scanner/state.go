@@ -15,3 +15,4 @@ type State struct {
 	CurPort   int           `json:"cur_port"`
 	Finished  bool          `json:"finished"`
 	OpenCount uint64        `json:"open_count"`
+	Format    string        `json:"format"`
