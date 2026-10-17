@@ -10,3 +10,4 @@ import (
 
 type Config struct {
 	// Targeting
+	Target      string
