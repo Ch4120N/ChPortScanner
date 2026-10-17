@@ -84,3 +84,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		if specIdx < len(specs) {
 			if specs[specIdx].Kind == "single" {
 				curIP = specs[specIdx].IP
+			} else {
