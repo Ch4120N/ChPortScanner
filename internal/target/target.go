@@ -65,3 +65,4 @@ func parseOne(s string) (Spec, error) {
 	if err != nil {
 		return Spec{}, err
 	}
+	return Spec{Raw: s, Kind: "single", IP: ip}, nil
