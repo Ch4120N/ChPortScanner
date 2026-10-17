@@ -48,3 +48,4 @@ func Success(format string, a ...any) {
 		fmt.Fprintf(os.Stderr, Green+"[+] "+Reset+format+"\n", a...)
 	} else {
 		fmt.Fprintf(os.Stderr, "[+] "+format+"\n", a...)
+	}
