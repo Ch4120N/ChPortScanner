@@ -107,3 +107,4 @@ func Load(args []string) (*Config, error) {
 	fs.IntVar(&c.TopPorts, "top-ports", 0, "Scan top N common ports")
 	fs.StringVar(&c.ExcludePorts, "exclude-ports", "", "Ports to exclude")
 	fs.StringVar(&c.Profile, "profile", "", "quick|default|full|stealth")
+
