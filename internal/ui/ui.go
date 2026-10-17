@@ -153,3 +153,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--profile", "quick|default|full|stealth"},
 		}},
 		{"SCANNING", [][2]string{
+			{"--rate N", "Packets per second (0 = unlimited)"},
