@@ -160,3 +160,4 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	b := string(buf[:n])
 	b = strings.TrimSpace(b)
 	b = strings.ReplaceAll(b, "\n", "\\n")
+	b = strings.ReplaceAll(b, "\r", "\\r")
