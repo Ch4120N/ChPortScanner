@@ -198,3 +198,4 @@ func (s *Scanner) Run() error {
 
 	s.jobCh = make(chan Job, jobBufferSize(s.total, s.cfg))
 	s.resultCh = make(chan output.Result, 512)
+
