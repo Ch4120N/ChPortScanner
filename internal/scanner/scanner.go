@@ -247,3 +247,4 @@ func (s *Scanner) setupRateLimiter() {
 		return
 	}
 	// Batch-fill: 10ms tick, fill rate/100 tokens per tick.
+	// Keeps timer overhead low even at very high rates.
