@@ -200,3 +200,4 @@ func (s *Scanner) Run() error {
 	s.resultCh = make(chan output.Result, 512)
 
 	s.start = time.Now()
+
