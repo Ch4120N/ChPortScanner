@@ -240,3 +240,4 @@ func (s *Scanner) Run() error {
 	}
 	return nil
 }
+
