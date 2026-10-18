@@ -33,3 +33,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			} else {
 				dialer.LocalAddr = &net.TCPAddr{IP: ip}
 			}
+		}
