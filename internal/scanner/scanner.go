@@ -222,3 +222,4 @@ func (s *Scanner) Run() error {
 		go s.worker(ctx)
 	}
 
+	s.wg.Wait()
