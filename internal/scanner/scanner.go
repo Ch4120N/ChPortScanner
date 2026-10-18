@@ -105,3 +105,4 @@ func (s *Scanner) Run() error {
 		}
 		s.ports = ports
 	} else {
+		portStrs := make([]string, len(ports))
