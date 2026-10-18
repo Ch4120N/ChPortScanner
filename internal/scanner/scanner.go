@@ -84,3 +84,4 @@ func (s *Scanner) Run() error {
 	}
 
 	specs, err := target.Parse(targetStr)
+	if err != nil {
