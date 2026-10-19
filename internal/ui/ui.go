@@ -123,3 +123,4 @@ func (p *Progress) Run(ctx context.Context) {
 				string(bar), percent, d, o, rate, eta)
 			if UseColor {
 				fmt.Fprintf(os.Stderr, "%s%s%s", Cyan, line, Reset)
+			} else {
