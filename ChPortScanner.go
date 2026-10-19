@@ -40,3 +40,4 @@ var (
 
 const (
 	AppName  = "ChPortScanner"
+	AppOwner = "Ch4120N"
