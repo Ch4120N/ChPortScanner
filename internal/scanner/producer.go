@@ -69,3 +69,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			if !emit(spec.IP) {
 				return
 			}
+		} else {
