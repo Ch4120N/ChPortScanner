@@ -229,3 +229,4 @@ func (s *Scanner) Run() error {
 	time.Sleep(100 * time.Millisecond)
 
 	s.state.Finished = true
+	s.saveState()
