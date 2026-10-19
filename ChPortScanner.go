@@ -36,3 +36,4 @@ var (
 	buildCommit  = "unknown"  // e.g. "a1b2c3d"
 	buildDate    = "unknown"  // e.g. "2026-10-24T12:34:56Z"
 )
+
