@@ -117,3 +117,4 @@ func printVersion() {
 		fmt.Printf("  built  : %s\n", buildDate)
 	} else {
 		fmt.Println("  build  : development (no ldflags injected)")
+	}
