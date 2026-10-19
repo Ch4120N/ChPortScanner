@@ -112,3 +112,4 @@ func (s *Scanner) worker(ctx context.Context) {
 				if s.cfg.RDNS {
 					res.Hostname = probe.RDNS(job.IP)
 				}
+
