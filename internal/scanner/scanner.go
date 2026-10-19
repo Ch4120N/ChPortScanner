@@ -211,3 +211,4 @@ func (s *Scanner) Run() error {
 
 	// Worker count
 	workers := computeWorkers(s.cfg, len(s.ports))
+	ui.Info("Starting scan: %d workers | rate=%s | timeout=%ds | jobs=%d",
