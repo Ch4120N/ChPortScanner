@@ -173,3 +173,4 @@ func mergeJSON(path string, c *Config) error {
 	return json.Unmarshal(data, c)
 }
 
+func applyProfile(c *Config) error {
