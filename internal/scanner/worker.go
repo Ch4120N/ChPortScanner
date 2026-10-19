@@ -19,3 +19,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	timeout := time.Duration(s.cfg.Timeout) * time.Second
 	if timeout <= 0 {
 		timeout = time.Second
+	}
