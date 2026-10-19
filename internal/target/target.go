@@ -88,3 +88,4 @@ func lastInPrefix(p netip.Prefix) netip.Addr {
 func Count(s Spec) uint64 {
 	switch s.Kind {
 	case "single":
+		return 1
