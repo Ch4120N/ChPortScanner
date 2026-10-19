@@ -102,3 +102,4 @@ func main() {
 // The dev fallback is shown when the binary was built without ldflags.
 func printVersion() {
 	// Colored output if terminal supports it
+	if ui.UseColor {
