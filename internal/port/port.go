@@ -110,3 +110,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 				for p := lo; p <= hi; p++ {
 					delete(set, uint16(p))
 				}
+			} else {
