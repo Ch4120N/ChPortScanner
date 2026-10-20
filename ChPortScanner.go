@@ -110,3 +110,4 @@ func printVersion() {
 		fmt.Printf("%s v%s by %s\n", AppName, buildVersion, AppOwner)
 	}
 
+	// Build metadata (only meaningful when built with ldflags)
