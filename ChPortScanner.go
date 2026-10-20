@@ -139,3 +139,4 @@ func humanDuration(d time.Duration) string {
 		return "seconds"
 	}
 	if d < time.Hour {
+		return fmt.Sprintf("%d minutes", int(d.Minutes()))
