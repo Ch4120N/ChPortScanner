@@ -95,3 +95,4 @@ func main() {
 	if err := s.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "%sError: %v%s\n", ui.Red, err, ui.Reset)
 		os.Exit(1)
+	}
