@@ -150,3 +150,4 @@ func humanDuration(d time.Duration) string {
 	}
 	if days < 30 {
 		return fmt.Sprintf("%d days", days)
+	}
