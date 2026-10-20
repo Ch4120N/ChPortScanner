@@ -249,3 +249,4 @@ func (s *Scanner) setupRateLimiter() {
 	// Batch-fill: 10ms tick, fill rate/100 tokens per tick.
 	// Keeps timer overhead low even at very high rates.
 	rate := s.cfg.Rate
+	s.tokens = make(chan struct{}, rate)
