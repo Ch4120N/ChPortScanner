@@ -177,3 +177,4 @@ func applyProfile(c *Config) error {
 	switch c.Profile {
 	case "":
 		return nil
+	case "quick":
