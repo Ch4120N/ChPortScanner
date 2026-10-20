@@ -88,3 +88,4 @@ func main() {
 		<-sigCh
 		fmt.Fprintf(os.Stderr, "\n%s[!] Interrupted — saving state and exiting...%s\n",
 			ui.Red, ui.Reset)
+		s.Stop()
