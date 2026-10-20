@@ -157,3 +157,4 @@ func Load(args []string) (*Config, error) {
 		}
 	}
 	if c.JSONOut {
+		c.Format = "json"
