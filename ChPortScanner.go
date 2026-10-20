@@ -108,3 +108,4 @@ func printVersion() {
 			ui.Green, AppOwner, ui.Reset)
 	} else {
 		fmt.Printf("%s v%s by %s\n", AppName, buildVersion, AppOwner)
+	}
