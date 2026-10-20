@@ -124,3 +124,4 @@ func printVersion() {
 	fmt.Printf("  os/arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
 
 	// Build age (nice touch when built with ldflags)
+	if buildDate != "unknown" {
