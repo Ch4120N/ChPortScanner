@@ -73,3 +73,4 @@ func main() {
 	
 	if cfg.Verbose {
 		ui.Info("Runtime : %s/%s", runtime.GOOS, runtime.GOARCH)
+		ui.Info("Go      : %s", runtime.Version())
