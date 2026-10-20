@@ -33,3 +33,4 @@ import (
 var (
 	buildVersion = "1.0.0"    // e.g. "1.0.0"
 	buildTag     = "dev"      // e.g. "v1.0.0"
+	buildCommit  = "unknown"  // e.g. "a1b2c3d"
