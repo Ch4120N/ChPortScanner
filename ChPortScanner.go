@@ -78,3 +78,4 @@ func main() {
 		if buildTag != "dev" {
 			ui.Info("Build   : %s (%s) built %s", buildTag, buildCommit, buildDate)
 		}
+	}
