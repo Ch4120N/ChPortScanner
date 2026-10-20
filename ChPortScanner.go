@@ -45,3 +45,4 @@ const (
 
 
 func main() {
+	// Parse configuration (handles -h/--help, -v/--version, all flags)
