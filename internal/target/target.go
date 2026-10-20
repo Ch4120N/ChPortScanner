@@ -58,3 +58,4 @@ func parseOne(s string) (Spec, error) {
 		}
 		if start.Compare(end) > 0 {
 			start, end = end, start
+		}
