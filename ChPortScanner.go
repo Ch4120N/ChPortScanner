@@ -69,3 +69,4 @@ func main() {
 		if ok, old, newLimit := netutil.RaiseUlimit(65535); ok && old != newLimit {
 			ui.Info("Raised file descriptor limit: %d → %d", old, newLimit)
 		}
+	}
