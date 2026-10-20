@@ -14,3 +14,4 @@ type State struct {
 	CurIP     string        `json:"cur_ip"`
 	CurPort   int           `json:"cur_port"`
 	Finished  bool          `json:"finished"`
+	OpenCount uint64        `json:"open_count"`
