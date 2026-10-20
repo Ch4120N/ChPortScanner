@@ -6,3 +6,4 @@
  * Build with version metadata injection:
  *   go build -trimpath \
  *     -ldflags "-s -w \
+ *       -X main.buildVersion=1.0.0 \
