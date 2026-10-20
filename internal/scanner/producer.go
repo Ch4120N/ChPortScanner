@@ -66,3 +66,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		spec := specs[specIdx]
 
 		if spec.Kind == "single" {
+			if !emit(spec.IP) {
