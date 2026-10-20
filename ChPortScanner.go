@@ -66,3 +66,4 @@ func main() {
 	ui.Banner(AppName, buildVersion, AppOwner)
 	
 	if cfg.IsUnix {
+		if ok, old, newLimit := netutil.RaiseUlimit(65535); ok && old != newLimit {
