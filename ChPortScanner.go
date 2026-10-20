@@ -159,3 +159,4 @@ func humanDuration(d time.Duration) string {
 		return fmt.Sprintf("%d months", months)
 	}
 	years := months / 12
+	if years == 1 {
