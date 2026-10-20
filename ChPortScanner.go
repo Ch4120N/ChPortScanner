@@ -145,3 +145,4 @@ func humanDuration(d time.Duration) string {
 		return fmt.Sprintf("%d hours", int(d.Hours()))
 	}
 	days := int(d.Hours() / 24)
+	if days == 1 {
