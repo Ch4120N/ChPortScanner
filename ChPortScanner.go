@@ -122,3 +122,4 @@ func printVersion() {
 	// Platform info
 	fmt.Printf("  go     : %s\n", runtime.Version())
 	fmt.Printf("  os/arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
+
