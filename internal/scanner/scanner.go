@@ -289,3 +289,4 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 		case <-ctx.Done():
 			return
 		case res, ok := <-s.resultCh:
+			if !ok {
