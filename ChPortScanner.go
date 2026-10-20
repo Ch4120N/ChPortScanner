@@ -109,3 +109,4 @@ func printVersion() {
 	} else {
 		fmt.Printf("%s v%s by %s\n", AppName, buildVersion, AppOwner)
 	}
+
