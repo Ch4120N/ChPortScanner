@@ -39,3 +39,4 @@ var (
 
 
 const (
+	AppName  = "ChPortScanner"
