@@ -115,3 +115,4 @@ func printVersion() {
 		fmt.Printf("  tag    : %s\n", buildTag)
 		fmt.Printf("  commit : %s\n", buildCommit)
 		fmt.Printf("  built  : %s\n", buildDate)
+	} else {
