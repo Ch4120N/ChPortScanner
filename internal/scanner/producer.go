@@ -40,3 +40,4 @@ func (s *Scanner) producer(ctx context.Context) {
 			portIdx = 0
 			return true
 		}
+		// Format IP once per host, reuse for all ports.
