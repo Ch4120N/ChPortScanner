@@ -128,3 +128,4 @@ func printVersion() {
 		if t, err := time.Parse(time.RFC3339, buildDate); err == nil {
 			age := time.Since(t)
 			fmt.Printf("  age    : %s ago\n", humanDuration(age))
+		}
