@@ -11,3 +11,4 @@
  *       -X main.buildCommit=$(git rev-parse --short HEAD) \
  *       -X main.buildDate=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
  *     -o chportscanner .
+ */
