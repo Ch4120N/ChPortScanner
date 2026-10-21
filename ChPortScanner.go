@@ -90,3 +90,4 @@ func main() {
 			ui.Red, ui.Reset)
 		s.Stop()
 		os.Exit(0)
+	}()
