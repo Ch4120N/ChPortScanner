@@ -13,3 +13,4 @@
  *     -o chportscanner .
  */
 
+package main
