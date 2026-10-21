@@ -142,3 +142,4 @@ func humanDuration(d time.Duration) string {
 		return fmt.Sprintf("%d minutes", int(d.Minutes()))
 	}
 	if d < 24*time.Hour {
+		return fmt.Sprintf("%d hours", int(d.Hours()))
