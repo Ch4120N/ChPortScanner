@@ -120,3 +120,4 @@ func printVersion() {
 	}
 
 	// Platform info
+	fmt.Printf("  go     : %s\n", runtime.Version())
