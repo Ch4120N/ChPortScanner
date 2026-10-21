@@ -126,3 +126,4 @@ func Load(args []string) (*Config, error) {
 	fs.IntVar(&c.BannerTimeout, "banner-timeout", 2, "Banner timeout (s)")
 	fs.BoolVar(&c.HTTPProbe, "http-probe", false, "Fetch HTTP page title")
 	fs.BoolVar(&c.TLSCert, "tls-cert", false, "Extract TLS cert info")
+	fs.BoolVar(&c.RDNS, "rdns", false, "Reverse DNS lookup")
