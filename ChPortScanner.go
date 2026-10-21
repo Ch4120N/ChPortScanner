@@ -134,3 +134,4 @@ func printVersion() {
 
 // humanDuration converts a duration into a human-readable string like
 // "3 days", "2 hours", "15 minutes".
+func humanDuration(d time.Duration) string {
