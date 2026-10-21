@@ -110,3 +110,4 @@ func (s *Scanner) Run() error {
 			portStrs[i] = strconv.Itoa(int(p))
 		}
 		s.state = State{
+			Targets:  specs,
