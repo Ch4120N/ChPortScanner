@@ -27,3 +27,4 @@ func (s *Scanner) loadState(path string) error {
 		return err
 	}
 	return json.Unmarshal(data, &s.state)
+}
