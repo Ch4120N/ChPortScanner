@@ -56,3 +56,4 @@ func main() {
 		ui.PrintHelp(os.Stdout, AppName, buildVersion, AppOwner)
 		return
 	}
+
