@@ -60,3 +60,4 @@ func (s *Scanner) producer(ctx context.Context) {
 		s.state.CurIP = ipStr
 		s.state.CurPort = 0
 		return true
+	}
