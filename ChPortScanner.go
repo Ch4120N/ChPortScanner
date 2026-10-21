@@ -114,3 +114,4 @@ func printVersion() {
 	if buildTag != "dev" || buildCommit != "unknown" || buildDate != "unknown" {
 		fmt.Printf("  tag    : %s\n", buildTag)
 		fmt.Printf("  commit : %s\n", buildCommit)
+		fmt.Printf("  built  : %s\n", buildDate)
