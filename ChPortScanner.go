@@ -130,3 +130,4 @@ func printVersion() {
 			fmt.Printf("  age    : %s ago\n", humanDuration(age))
 		}
 	}
+}
