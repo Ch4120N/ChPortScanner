@@ -92,3 +92,4 @@ func main() {
 		os.Exit(0)
 	}()
 
+	if err := s.Run(); err != nil {
