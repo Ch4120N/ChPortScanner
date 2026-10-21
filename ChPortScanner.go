@@ -57,3 +57,4 @@ func main() {
 		return
 	}
 
+	if cfg.ShowVersion {
