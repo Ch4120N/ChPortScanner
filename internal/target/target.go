@@ -73,3 +73,4 @@ func lastInPrefix(p netip.Prefix) netip.Addr {
 		ip := p.Masked().Addr().As4()
 		mask := net.CIDRMask(p.Bits(), 32)
 		for i := range ip {
+			ip[i] |= ^mask[i]
