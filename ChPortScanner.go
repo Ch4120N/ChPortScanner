@@ -62,3 +62,4 @@ func main() {
 		return
 	}
 	
+	ui.Init(cfg.NoColor, cfg.Quiet)
