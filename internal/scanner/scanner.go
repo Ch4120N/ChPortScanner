@@ -337,3 +337,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	if w < 50 {
 		w = 50
 	}
+	// If rate is set, no point having more workers than rate
