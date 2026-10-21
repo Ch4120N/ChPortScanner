@@ -355,3 +355,4 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 func jobBufferSize(total int64, cfg *config.Config) int {
 	if cfg.Lite {
 		return 5000
+	}
