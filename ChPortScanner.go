@@ -146,3 +146,4 @@ func humanDuration(d time.Duration) string {
 	}
 	days := int(d.Hours() / 24)
 	if days == 1 {
+		return "1 day"
