@@ -155,3 +155,4 @@ func humanDuration(d time.Duration) string {
 	if months == 1 {
 		return "1 month"
 	}
+	if months < 12 {
