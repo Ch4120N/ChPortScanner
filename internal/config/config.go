@@ -162,3 +162,4 @@ func Load(args []string) (*Config, error) {
 	if err := applyProfile(c); err != nil {
 		return nil, err
 	}
+	return c, nil
