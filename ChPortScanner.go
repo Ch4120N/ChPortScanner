@@ -111,3 +111,4 @@ func printVersion() {
 	}
 
 	// Build metadata (only meaningful when built with ldflags)
+	if buildTag != "dev" || buildCommit != "unknown" || buildDate != "unknown" {
