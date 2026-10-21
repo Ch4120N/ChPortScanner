@@ -98,3 +98,4 @@ func main() {
 	}
 }
 
+// printVersion prints the full version banner including build metadata.
