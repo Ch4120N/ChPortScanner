@@ -5,3 +5,4 @@
  *
  * Build with version metadata injection:
  *   go build -trimpath \
+ *     -ldflags "-s -w \
