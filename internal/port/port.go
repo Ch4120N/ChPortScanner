@@ -24,3 +24,4 @@ var ServiceMap = map[uint16]string{
 	8080: "http-proxy", 8081: "blackice", 8443: "https-alt", 8888: "sun-answerbook",
 	9000: "cslistener", 9090: "zeus-admin", 9200: "elasticsearch", 9300: "elasticsearch",
 	27017: "mongodb", 28017: "mongodb-web", 50000: "sap",
+}
