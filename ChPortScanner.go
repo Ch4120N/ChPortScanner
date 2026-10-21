@@ -136,3 +136,4 @@ func printVersion() {
 // "3 days", "2 hours", "15 minutes".
 func humanDuration(d time.Duration) string {
 	if d < time.Minute {
+		return "seconds"
