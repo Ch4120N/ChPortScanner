@@ -51,3 +51,4 @@ type Scanner struct {
 
 func New(cfg *config.Config) *Scanner {
 	return &Scanner{cfg: cfg}
+}
