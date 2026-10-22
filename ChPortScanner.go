@@ -76,3 +76,4 @@ func main() {
 		ui.Info("Go      : %s", runtime.Version())
 		ui.Info("CPUs    : %d", runtime.NumCPU())
 		if buildTag != "dev" {
+			ui.Info("Build   : %s (%s) built %s", buildTag, buildCommit, buildDate)
