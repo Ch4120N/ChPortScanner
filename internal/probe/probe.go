@@ -16,3 +16,4 @@ var (
 
 // HTTPTitle fetches the page title from a web port.
 func HTTPTitle(ip string, port int, timeout time.Duration) string {
+	dialer := net.Dialer{Timeout: timeout}
