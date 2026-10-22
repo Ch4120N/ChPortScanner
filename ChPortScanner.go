@@ -118,3 +118,4 @@ func printVersion() {
 	} else {
 		fmt.Println("  build  : development (no ldflags injected)")
 	}
+
