@@ -21,3 +21,4 @@ type Spec struct {
 func Parse(raw string) ([]Spec, error) {
 	if raw == "" {
 		return nil, nil
+	}
