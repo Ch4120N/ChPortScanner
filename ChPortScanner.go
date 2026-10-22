@@ -96,3 +96,4 @@ func main() {
 		fmt.Fprintf(os.Stderr, "%sError: %v%s\n", ui.Red, err, ui.Reset)
 		os.Exit(1)
 	}
+}
