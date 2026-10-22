@@ -182,3 +182,4 @@ func PrintHelp(w io.Writer, name, version, owner string) {
 			{"--stats", "Show final stats"},
 		}},
 		{"UTILITIES", [][2]string{
+			{"--extract FILE", "Extract unique IPs from output file"},
