@@ -48,3 +48,4 @@ type Config struct {
 	Verbose   bool
 	ShowStats bool
 
+	// Utilities
