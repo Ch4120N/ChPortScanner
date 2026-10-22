@@ -234,3 +234,4 @@ func (s *Scanner) Run() error {
 	if s.cfg.ShowStats {
 		s.printStats()
 	}
+	if !s.cfg.Quiet {
