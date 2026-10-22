@@ -8,3 +8,4 @@ import (
 	"time"
 
 	"github.com/Ch4120N/ChPortScanner/internal/netutil"
+	"github.com/Ch4120N/ChPortScanner/internal/output"
