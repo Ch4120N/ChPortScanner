@@ -70,3 +70,4 @@ func main() {
 			ui.Info("Raised file descriptor limit: %d → %d", old, newLimit)
 		}
 	}
+	
