@@ -55,3 +55,4 @@ func main() {
 	if cfg.ShowHelp {
 		ui.PrintHelp(os.Stdout, AppName, buildVersion, AppOwner)
 		return
+	}
