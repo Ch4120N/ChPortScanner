@@ -156,3 +156,4 @@ func humanDuration(d time.Duration) string {
 		return "1 month"
 	}
 	if months < 12 {
+		return fmt.Sprintf("%d months", months)
