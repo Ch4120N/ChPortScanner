@@ -7,3 +7,4 @@ import (
 	"github.com/Ch4120N/ChPortScanner/internal/target"
 )
 
+func (s *Scanner) producer(ctx context.Context) {
