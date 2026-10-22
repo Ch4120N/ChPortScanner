@@ -24,3 +24,4 @@ import (
 	"time"
 
 	"github.com/Ch4120N/ChPortScanner/internal/config"
+	"github.com/Ch4120N/ChPortScanner/internal/netutil"
