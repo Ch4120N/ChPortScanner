@@ -123,3 +123,4 @@ func printVersion() {
 	fmt.Printf("  go     : %s\n", runtime.Version())
 	fmt.Printf("  os/arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
 
+	// Build age (nice touch when built with ldflags)
