@@ -142,3 +142,4 @@ func (s *Scanner) Run() error {
 		rand.Shuffle(len(s.ports), func(i, j int) {
 			s.ports[i], s.ports[j] = s.ports[j], s.ports[i]
 		})
+		ui.Info("Scan order randomized")
