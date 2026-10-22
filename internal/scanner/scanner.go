@@ -192,3 +192,4 @@ func (s *Scanner) Run() error {
 	// Rate limiter
 	s.setupRateLimiter()
 
+	ctx, cancel := context.WithCancel(context.Background())
