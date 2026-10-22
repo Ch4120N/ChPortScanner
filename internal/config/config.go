@@ -60,3 +60,4 @@ type Config struct {
 	ShowVersion bool
 
 	// Internal
+	Lite    bool
