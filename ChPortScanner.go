@@ -104,3 +104,4 @@ func printVersion() {
 	// Colored output if terminal supports it
 	if ui.UseColor {
 		fmt.Printf("%s%s%s v%s%s by %s%s%s\n",
+			ui.Bold, ui.Cyan, AppName, buildVersion, ui.Reset,
