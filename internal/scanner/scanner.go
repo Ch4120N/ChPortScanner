@@ -83,3 +83,4 @@ func (s *Scanner) Run() error {
 		return fmt.Errorf("no targets specified (use -t or -iL)")
 	}
 
+	specs, err := target.Parse(targetStr)
