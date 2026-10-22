@@ -13,3 +13,4 @@ import (
 	"github.com/Ch4120N/ChPortScanner/internal/probe"
 )
 
+func (s *Scanner) worker(ctx context.Context) {
