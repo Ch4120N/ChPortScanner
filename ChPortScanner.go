@@ -46,3 +46,4 @@ const (
 
 func main() {
 	// Parse configuration (handles -h/--help, -v/--version, all flags)
+	cfg, err := config.Load(os.Args[1:])
