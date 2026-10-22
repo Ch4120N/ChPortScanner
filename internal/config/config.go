@@ -64,3 +64,4 @@ type Config struct {
 	Turbo   bool
 	IsUnix  bool
 	IsWin   bool
+}
