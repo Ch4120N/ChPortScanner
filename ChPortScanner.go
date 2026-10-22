@@ -116,3 +116,4 @@ func printVersion() {
 		fmt.Printf("  commit : %s\n", buildCommit)
 		fmt.Printf("  built  : %s\n", buildDate)
 	} else {
+		fmt.Println("  build  : development (no ldflags injected)")
