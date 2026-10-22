@@ -48,3 +48,4 @@ func main() {
 	// Parse configuration (handles -h/--help, -v/--version, all flags)
 	cfg, err := config.Load(os.Args[1:])
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
