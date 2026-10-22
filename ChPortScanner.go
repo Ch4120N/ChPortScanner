@@ -80,3 +80,4 @@ func main() {
 		}
 	}
 
+	s := scanner.New(cfg)
