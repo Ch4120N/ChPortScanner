@@ -86,3 +86,4 @@ func main() {
 	signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-sigCh
+		fmt.Fprintf(os.Stderr, "\n%s[!] Interrupted — saving state and exiting...%s\n",
