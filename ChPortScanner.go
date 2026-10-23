@@ -126,3 +126,4 @@ func printVersion() {
 	// Build age (nice touch when built with ldflags)
 	if buildDate != "unknown" {
 		if t, err := time.Parse(time.RFC3339, buildDate); err == nil {
+			age := time.Since(t)
