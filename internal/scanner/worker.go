@@ -107,3 +107,4 @@ func (s *Scanner) worker(ctx context.Context) {
 					res.Title = probe.HTTPTitle(job.IP, int(job.Port), timeout)
 				}
 				if s.cfg.TLSCert {
+					res.TLSInfo = probe.TLSCertInfo(job.IP, int(job.Port), timeout)
