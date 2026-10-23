@@ -53,3 +53,4 @@ func (s *Scanner) producer(ctx context.Context) {
 					return false
 				}
 			}
+			count++
