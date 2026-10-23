@@ -52,3 +52,4 @@ func main() {
 		os.Exit(1)
 	}
 
+	if cfg.ShowHelp {
