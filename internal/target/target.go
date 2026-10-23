@@ -135,3 +135,4 @@ func ReadLines(path string) ([]string, error) {
 	var out []string
 	for _, line := range strings.Split(string(data), "\n") {
 		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
