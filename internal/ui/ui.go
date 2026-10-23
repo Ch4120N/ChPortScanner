@@ -116,3 +116,4 @@ func (p *Progress) Run(ctx context.Context) {
 				if i < fill {
 					bar[i] = '#'
 				} else {
+					bar[i] = '.'
