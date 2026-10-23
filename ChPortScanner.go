@@ -75,3 +75,4 @@ func main() {
 		ui.Info("Runtime : %s/%s", runtime.GOOS, runtime.GOARCH)
 		ui.Info("Go      : %s", runtime.Version())
 		ui.Info("CPUs    : %d", runtime.NumCPU())
+		if buildTag != "dev" {
