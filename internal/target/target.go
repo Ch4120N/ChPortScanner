@@ -100,3 +100,4 @@ func Count(s Spec) uint64 {
 }
 
 func addrToInt(a netip.Addr) *big.Int {
+	b := a.As16()
