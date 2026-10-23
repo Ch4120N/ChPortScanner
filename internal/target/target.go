@@ -133,3 +133,4 @@ func ReadLines(path string) ([]string, error) {
 		return nil, err
 	}
 	var out []string
+	for _, line := range strings.Split(string(data), "\n") {
