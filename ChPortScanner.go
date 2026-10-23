@@ -64,3 +64,4 @@ func main() {
 	
 	ui.Init(cfg.NoColor, cfg.Quiet)
 	ui.Banner(AppName, buildVersion, AppOwner)
+	
