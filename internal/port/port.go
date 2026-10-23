@@ -48,3 +48,4 @@ func init() {
 	}
 	topPorts = deduped
 	sort.Slice(topPorts, func(i, j int) bool { return topPorts[i] < topPorts[j] })
+}
