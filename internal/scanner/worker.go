@@ -50,3 +50,4 @@ func (s *Scanner) worker(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
+			return
