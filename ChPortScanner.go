@@ -26,3 +26,4 @@ import (
 	"github.com/Ch4120N/ChPortScanner/internal/config"
 	"github.com/Ch4120N/ChPortScanner/internal/netutil"
 	"github.com/Ch4120N/ChPortScanner/internal/scanner"
+	"github.com/Ch4120N/ChPortScanner/internal/ui"
