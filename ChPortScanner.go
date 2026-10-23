@@ -100,3 +100,4 @@ func main() {
 
 // printVersion prints the full version banner including build metadata.
 // The dev fallback is shown when the binary was built without ldflags.
+func printVersion() {
