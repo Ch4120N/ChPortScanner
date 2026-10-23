@@ -65,3 +65,4 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			set[p] = struct{}{}
 		}
 	} else {
+		if spec == "" {
