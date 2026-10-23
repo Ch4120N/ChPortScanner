@@ -148,3 +148,4 @@ func humanDuration(d time.Duration) string {
 	if days == 1 {
 		return "1 day"
 	}
+	if days < 30 {
