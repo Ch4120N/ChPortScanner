@@ -59,3 +59,4 @@ func main() {
 
 	if cfg.ShowVersion {
 		printVersion()
+		return
