@@ -197,3 +197,4 @@ func applyProfile(c *Config) error {
 		c.Random = true
 		c.Timeout = 3
 	default:
+		return fmt.Errorf("unknown profile: %q", c.Profile)
