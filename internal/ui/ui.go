@@ -127,3 +127,4 @@ func (p *Progress) Run(ctx context.Context) {
 				fmt.Fprint(os.Stderr, line)
 			}
 		}
+	}
