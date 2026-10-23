@@ -31,3 +31,4 @@ func (s *Scanner) worker(ctx context.Context) {
 			if s.cfg.UDP {
 				dialer.LocalAddr = &net.UDPAddr{IP: ip}
 			} else {
+				dialer.LocalAddr = &net.TCPAddr{IP: ip}
