@@ -8,3 +8,4 @@
  *     -ldflags "-s -w \
  *       -X main.buildVersion=1.0.0 \
  *       -X main.buildTag=v1.0.0 \
+ *       -X main.buildCommit=$(git rev-parse --short HEAD) \
