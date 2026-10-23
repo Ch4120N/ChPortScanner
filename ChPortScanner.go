@@ -132,3 +132,4 @@ func printVersion() {
 	}
 }
 
+// humanDuration converts a duration into a human-readable string like
