@@ -31,3 +31,4 @@ import (
 
 
 var (
+	buildVersion = "1.0.0"    // e.g. "1.0.0"
