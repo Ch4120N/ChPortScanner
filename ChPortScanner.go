@@ -79,3 +79,4 @@ func main() {
 			ui.Info("Build   : %s (%s) built %s", buildTag, buildCommit, buildDate)
 		}
 	}
+
