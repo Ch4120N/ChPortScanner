@@ -161,3 +161,4 @@ func humanDuration(d time.Duration) string {
 	years := months / 12
 	if years == 1 {
 		return "1 year"
+	}
