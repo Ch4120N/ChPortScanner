@@ -7,3 +7,4 @@
  *   go build -trimpath \
  *     -ldflags "-s -w \
  *       -X main.buildVersion=1.0.0 \
+ *       -X main.buildTag=v1.0.0 \
