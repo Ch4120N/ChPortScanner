@@ -39,7 +39,7 @@ permissions:
   contents: write
 
 env:
-  APP_NAME: chportscanner
+  APP_NAME: ChPortScanner
   GO_VERSION: "1.21"
 
 jobs:
@@ -243,7 +243,7 @@ jobs:
           generate_release_notes: true
           fail_on_unmatched_files: true
           files: |
-            dist/chportscanner-*
+            dist/ChPortScanner-*
             dist/SHA256SUMS.txt
           body: |
             ## 🚀 ChPortScanner ${{ needs.prepare.outputs.tag }}
@@ -257,20 +257,20 @@ jobs:
 
             | OS | Architecture | File |
             |:---|:-------------|:-----|
-            | 🐧 **Linux** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64` |
-            | 🐧 **Linux** | ARM64 (aarch64) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-arm64` |
-            | 🐧 **Linux** | x86 (386) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-386` |
-            | 🐧 **Linux** | ARMv7 (Raspberry Pi) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-armv7` |
-            | 🐧 **Linux** | ARMv6 | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-armv6` |
-            | 🐧 **Linux** | RISC-V 64 | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-riscv64` |
-            | 🐧 **Linux** | PowerPC64 LE | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-ppc64le` |
-            | 🍎 **macOS** | Intel (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-darwin-amd64` |
-            | 🍎 **macOS** | Apple Silicon (arm64) | `chportscanner-${{ needs.prepare.outputs.tag }}-darwin-arm64` |
-            | 🪟 **Windows** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-amd64.exe` |
-            | 🪟 **Windows** | ARM64 | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-arm64.exe` |
-            | 🪟 **Windows** | x86 (386) | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-386.exe` |
-            | 😈 **FreeBSD** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-freebsd-amd64` |
-            | 😈 **FreeBSD** | ARM64 | `chportscanner-${{ needs.prepare.outputs.tag }}-freebsd-arm64` |
+            | **Linux** | x86_64 (amd64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-amd64` |
+            | **Linux** | ARM64 (aarch64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-arm64` |
+            | **Linux** | x86 (386) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-386` |
+            | **Linux** | ARMv7 (Raspberry Pi) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-armv7` |
+            | **Linux** | ARMv6 | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-armv6` |
+            | **Linux** | RISC-V 64 | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-riscv64` |
+            | **Linux** | PowerPC64 LE | `ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-ppc64le` |
+            | **macOS** | Intel (amd64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-darwin-amd64` |
+            | **macOS** | Apple Silicon (arm64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-darwin-arm64` |
+            | **Windows** | x86_64 (amd64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-windows-amd64.exe` |
+            | **Windows** | ARM64 | `ChPortScanner-${{ needs.prepare.outputs.tag }}-windows-arm64.exe` |
+            | **Windows** | x86 (386) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-windows-386.exe` |
+            | **FreeBSD** | x86_64 (amd64) | `ChPortScanner-${{ needs.prepare.outputs.tag }}-freebsd-amd64` |
+            | **FreeBSD** | ARM64 | `ChPortScanner-${{ needs.prepare.outputs.tag }}-freebsd-arm64` |
 
             ---
 
@@ -290,9 +290,9 @@ jobs:
 
             ```bash
             # Download the binary for your platform, then:
-            chmod +x chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64
-            sudo mv chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64 /usr/local/bin/chportscanner
-            chportscanner --version
+            chmod +x ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-amd64
+            sudo mv ChPortScanner-${{ needs.prepare.outputs.tag }}-linux-amd64 /usr/local/bin/ChPortScanner
+            ChPortScanner --version
             ```
 
             ---
@@ -301,13 +301,13 @@ jobs:
 
             ```bash
             # Scan a subnet
-            chportscanner -t 192.168.1.0/24 -p 22,80,443
+            ChPortScanner -t 192.168.1.0/24 -p 22,80,443
 
             # Full port scan (fast)
-            chportscanner -t 192.168.1.10 -p 1-65535 --turbo --stats
+            ChPortScanner -t 192.168.1.10 -p 1-65535 --turbo --stats
 
             # Recon with probes
-            chportscanner -t 10.0.0.0/24 --top-ports 1000 \
+            ChPortScanner -t 10.0.0.0/24 --top-ports 1000 \
               --http-probe --tls-cert --rdns -oJ
             ```
 
@@ -315,7 +315,7 @@ jobs:
 
             ### 📖 Documentation
 
-            See the [**README.md**](https://github.com/${{ github.repository }}#-chportscanner-v100) for full usage, flags, examples, and performance tuning.
+            See the [**README.md**](https://github.com/${{ github.repository }}#-ChPortScanner-v100) for full usage, flags, examples, and performance tuning.
 
             ---
 
