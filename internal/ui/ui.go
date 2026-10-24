@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"sync/atomic"
 	"time"
 )
@@ -59,24 +60,53 @@ func Warn(format string, a ...any) {
 	}
 }
 
+// ═══════════════════════════════════════════════════════════════════
+//  BANNER  —  ChPortScanner ASCII art with dynamic version + owner
+// ═══════════════════════════════════════════════════════════════════
+
 func Banner(name, version, owner string) {
 	if Quiet {
 		return
 	}
+
+	// Plain fallback for --no-color (avoids dumping ASCII art into piped output)
 	if !UseColor {
-		fmt.Fprintf(os.Stderr, "== %s v%s by %s ==\n\n", name, version, owner)
+		fmt.Fprintf(os.Stderr, "== %s v%s . Owned By %s ==\n\n", name, version, owner)
 		return
 	}
-	line := "══════════════════════════════════════════════════"
-	fmt.Fprintf(os.Stderr, "%s%s╔%s╗%s\n", Bold, Cyan, line, Reset)
-	fmt.Fprintf(os.Stderr, "%s%s║%s  %-46s%s%s║%s\n",
-		Bold, Cyan, Reset, fmt.Sprintf("%s v%s", name, version), Bold, Cyan, Reset)
-	fmt.Fprintf(os.Stderr, "%s%s║%s  %-46s%s%s║%s\n",
-		Bold, Cyan, Reset, "Owner: "+owner, Bold, Cyan, Reset)
-	fmt.Fprintf(os.Stderr, "%s%s╚%s╝%s\n\n", Bold, Cyan, line, Reset)
+
+	// ASCII art (3 backticks in the art are escaped via string concatenation)
+	art := ` _____ _    ______          _   _____                                 
+/  __ \ |   | ___ \        | | /  ___|                                
+| /  \/ |__ | |_/ /__  _ __| |_\ ` + "`" + `--.  ___ __ _ _ __  _ __   ___ _ __ 
+| |   | '_ \|  __/ _ \| '__| __|` + "`" + `--. \/ __/ _` + "`" + ` | '_ \| '_ \ / _ \ '__|
+| \__/\ | | | | | (_) | |  | |_/\__/ / (_| (_| | | | | | | |  __/ |   
+ \____/_| |_\_|  \___/|_|   \__\____/ \___\__,_|_| |_|_| |_|\___|_|   
+                                                                      `
+
+	// Print the art block in bold cyan
+	fmt.Fprintf(os.Stderr, "%s%s%s\n", Bold+Cyan, art, Reset)
+
+	// Print the footer line centered under the art
+	bottom := fmt.Sprintf("%s v%s . Owned By %s", name, version, owner)
+	fmt.Fprintf(os.Stderr, "%s%s%s%s\n\n", Bold+Cyan, centerIndent(bottom, 71), bottom, Reset)
 }
 
-// ---- Progress bar ----
+// centerIndent returns a string of spaces so that `text` is horizontally
+// centered within `width` columns. Returns an empty string if text already
+// fills or exceeds the width.
+func centerIndent(text string, width int) string {
+	pad := (width - len(text)) / 2
+	if pad <= 0 {
+		return ""
+	}
+	return strings.Repeat(" ", pad)
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PROGRESS BAR
+// ═══════════════════════════════════════════════════════════════════
+
 type Progress struct {
 	done  *atomic.Uint64
 	open  *atomic.Uint64
@@ -130,7 +160,10 @@ func (p *Progress) Run(ctx context.Context) {
 	}
 }
 
-// PrintHelp writes the full help to w.
+// ═══════════════════════════════════════════════════════════════════
+//  HELP
+// ═══════════════════════════════════════════════════════════════════
+
 func PrintHelp(w io.Writer, name, version, owner string) {
 	fmt.Fprintf(w, "%s%s %s%s — High-Speed Port Scanner by %s\n", Bold, name, version, Reset, owner)
 	fmt.Fprintf(w, "Designed for restricted lab environments (no raw sockets, no root required)\n\n")
