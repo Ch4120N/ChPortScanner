@@ -19,7 +19,6 @@ scan.state
 
 # Scan results
 results.*
-output.*
 recon.*
 scan.*.txt
 scan.*.json
