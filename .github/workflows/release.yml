@@ -1,0 +1,341 @@
+# ═══════════════════════════════════════════════════════════════════
+#  ChPortScanner — Automated Multi-Platform Release Workflow
+#  Owner: Ch4120N
+#
+#  Triggers:
+#    • Push of a tag matching v*.*.* (automatic release)
+#    • Manual dispatch (choose your own tag name from Actions tab)
+#
+#  Builds: Linux, macOS, Windows, FreeBSD
+#          × amd64, arm64, 386, arm (v6/v7)
+#          = 30+ binaries + checksums
+# ═══════════════════════════════════════════════════════════════════
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name for the release (e.g. v1.0.0 or v1.0.0-beta)"
+        required: true
+        type: string
+        default: "v1.0.0"
+      prerelease:
+        description: "Mark as pre-release?"
+        required: false
+        type: boolean
+        default: false
+      draft:
+        description: "Create as draft release?"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+env:
+  APP_NAME: chportscanner
+  GO_VERSION: "1.21"
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      version: ${{ steps.meta.outputs.version }}
+      release_name: ${{ steps.meta.outputs.release_name }}
+      is_prerelease: ${{ steps.meta.outputs.is_prerelease }}
+      is_draft: ${{ steps.meta.outputs.is_draft }}
+    steps:
+      - name: Resolve tag name
+        id: meta
+        run: |
+          # Tag: from push event OR manual input
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+            PRE="${{ inputs.prerelease }}"
+            DRAFT="${{ inputs.draft }}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+            # Auto-detect prerelease from tag (e.g. v1.0.0-beta)
+            if echo "$TAG" | grep -qE '-(alpha|beta|rc|pre|dev)'; then
+              PRE="true"
+            else
+              PRE="false"
+            fi
+            DRAFT="false"
+          fi
+
+          VERSION="${TAG#v}"
+          echo "tag=${TAG}"                     >> "$GITHUB_OUTPUT"
+          echo "version=${VERSION}"             >> "$GITHUB_OUTPUT"
+          echo "release_name=ChPortScanner ${TAG}" >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=${PRE}"           >> "$GITHUB_OUTPUT"
+          echo "is_draft=${DRAFT}"              >> "$GITHUB_OUTPUT"
+
+          echo "🏷️  Tag:      ${TAG}"
+          echo "📦 Version:  ${VERSION}"
+          echo "⚠️  Prerelease: ${PRE}"
+          echo "📝 Draft:     ${DRAFT}"
+
+      - name: Summary
+        run: |
+          echo "### 📦 Release Prep" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Field | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Tag | \`${{ steps.meta.outputs.tag }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Version | \`${{ steps.meta.outputs.version }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Prerelease | ${{ steps.meta.outputs.is_prerelease }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Draft | ${{ steps.meta.outputs.is_draft }} |" >> "$GITHUB_STEP_SUMMARY"
+  build:
+    name: Build ${{ matrix.goos }}/${{ matrix.goarch }}${{ matrix.goarm && format('/v{0}', matrix.goarm) || '' }}
+    runs-on: ubuntu-latest
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # ── Linux ──
+          - { goos: linux,   goarch: amd64, goarm: "" }
+          - { goos: linux,   goarch: arm64, goarm: "" }
+          - { goos: linux,   goarch: "386", goarm: "" }
+          - { goos: linux,   goarch: arm,   goarm: "6" }
+          - { goos: linux,   goarch: arm,   goarm: "7" }
+          - { goos: linux,   goarch: ppc64le, goarm: "" }
+          - { goos: linux,   goarch: s390x, goarm: "" }
+          - { goos: linux,   goarch: riscv64, goarm: "" }
+
+          # ── macOS (Darwin) ──
+          - { goos: darwin,  goarch: amd64, goarm: "" }
+          - { goos: darwin,  goarch: arm64, goarm: "" }
+
+          # ── Windows ──
+          - { goos: windows, goarch: amd64, goarm: "" }
+          - { goos: windows, goarch: arm64, goarm: "" }
+          - { goos: windows, goarch: "386", goarm: "" }
+
+          # ── FreeBSD ──
+          - { goos: freebsd, goarch: amd64, goarm: "" }
+          - { goos: freebsd, goarch: arm64, goarm: "" }
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Build binary
+        id: build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          GOARM: ${{ matrix.goarm }}
+          CGO_ENABLED: "0"
+          VERSION: ${{ needs.prepare.outputs.version }}
+          TAG: ${{ needs.prepare.outputs.tag }}
+        run: |
+          # Compose output filename
+          OUT="${APP_NAME}-${TAG}-${GOOS}-${GOARCH}"
+          if [ -n "${GOARM}" ]; then
+            OUT="${OUT}v${GOARM}"
+          fi
+          if [ "${GOOS}" = "windows" ]; then
+            OUT="${OUT}.exe"
+          fi
+
+          echo "🔨 Building: ${OUT}"
+
+          # LDFLAGS inject version + build metadata
+          LDFLAGS="-s -w \
+            -X main.buildVersion=${VERSION} \
+            -X main.buildTag=${TAG} \
+            -X main.buildCommit=${GITHUB_SHA::7} \
+            -X main.buildDate=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          # -trimpath strips local paths (smaller + reproducible)
+          go build -trimpath -ldflags "${LDFLAGS}" -o "dist/${OUT}" .
+
+          echo "filename=${OUT}" >> "$GITHUB_OUTPUT"
+          ls -lh "dist/${OUT}"
+
+      - name: Verify binary
+        if: matrix.goos != 'windows' && matrix.goos != 'freebsd' && !(matrix.goos == 'linux' && matrix.goarch == 'arm')
+        run: |
+          file "dist/${{ steps.build.outputs.filename }}"
+          ./dist/${{ steps.build.outputs.filename }} --version || true
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.build.outputs.filename }}
+          path: dist/${{ steps.build.outputs.filename }}
+          if-no-files-found: error
+          retention-days: 7
+  checksums:
+    name: Checksums
+    runs-on: ubuntu-latest
+    needs: [prepare, build]
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          merge-multiple: true
+
+      - name: Generate SHA256 sums
+        run: |
+          cd dist
+          ls -lh
+          echo "─── Computing SHA256 ───"
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: SHA256SUMS.txt
+          path: dist/SHA256SUMS.txt
+          retention-days: 7
+  release:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    needs: [prepare, build, checksums]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          merge-multiple: true
+
+      - name: List release files
+        run: |
+          echo "─── Files to publish ───"
+          ls -lh dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare.outputs.tag }}
+          name: ${{ needs.prepare.outputs.release_name }}
+          draft: ${{ needs.prepare.outputs.is_draft == 'true' }}
+          prerelease: ${{ needs.prepare.outputs.is_prerelease == 'true' }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            dist/chportscanner-*
+            dist/SHA256SUMS.txt
+          body: |
+            ## 🚀 ChPortScanner ${{ needs.prepare.outputs.tag }}
+
+            **High-Speed Port Scanner for Restricted Lab Environments**
+            *Fast • Modular • Zero-Dependency • Cross-Platform • No Root Required*
+
+            ---
+
+            ### 📦 Downloads
+
+            | OS | Architecture | File |
+            |:---|:-------------|:-----|
+            | 🐧 **Linux** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64` |
+            | 🐧 **Linux** | ARM64 (aarch64) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-arm64` |
+            | 🐧 **Linux** | x86 (386) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-386` |
+            | 🐧 **Linux** | ARMv7 (Raspberry Pi) | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-armv7` |
+            | 🐧 **Linux** | ARMv6 | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-armv6` |
+            | 🐧 **Linux** | RISC-V 64 | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-riscv64` |
+            | 🐧 **Linux** | PowerPC64 LE | `chportscanner-${{ needs.prepare.outputs.tag }}-linux-ppc64le` |
+            | 🍎 **macOS** | Intel (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-darwin-amd64` |
+            | 🍎 **macOS** | Apple Silicon (arm64) | `chportscanner-${{ needs.prepare.outputs.tag }}-darwin-arm64` |
+            | 🪟 **Windows** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-amd64.exe` |
+            | 🪟 **Windows** | ARM64 | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-arm64.exe` |
+            | 🪟 **Windows** | x86 (386) | `chportscanner-${{ needs.prepare.outputs.tag }}-windows-386.exe` |
+            | 😈 **FreeBSD** | x86_64 (amd64) | `chportscanner-${{ needs.prepare.outputs.tag }}-freebsd-amd64` |
+            | 😈 **FreeBSD** | ARM64 | `chportscanner-${{ needs.prepare.outputs.tag }}-freebsd-arm64` |
+
+            ---
+
+            ### ✅ Verify Download Integrity
+
+            Each release includes `SHA256SUMS.txt`. Verify with:
+
+            ```bash
+            sha256sum -c SHA256SUMS.txt
+            # or on macOS:
+            shasum -a 256 -c SHA256SUMS.txt
+            ```
+
+            ---
+
+            ### 🚀 Quick Install (Linux/macOS)
+
+            ```bash
+            # Download the binary for your platform, then:
+            chmod +x chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64
+            sudo mv chportscanner-${{ needs.prepare.outputs.tag }}-linux-amd64 /usr/local/bin/chportscanner
+            chportscanner --version
+            ```
+
+            ---
+
+            ### 🎯 Quick Start
+
+            ```bash
+            # Scan a subnet
+            chportscanner -t 192.168.1.0/24 -p 22,80,443
+
+            # Full port scan (fast)
+            chportscanner -t 192.168.1.10 -p 1-65535 --turbo --stats
+
+            # Recon with probes
+            chportscanner -t 10.0.0.0/24 --top-ports 1000 \
+              --http-probe --tls-cert --rdns -oJ
+            ```
+
+            ---
+
+            ### 📖 Documentation
+
+            See the [**README.md**](https://github.com/${{ github.repository }}#-chportscanner-v100) for full usage, flags, examples, and performance tuning.
+
+            ---
+
+            ### 👤 Author
+
+            **Ch4120N** — [@Ch4120N](https://github.com/Ch4120N)
+
+            ---
+
+            <sub>🛡️ **Legal Notice:** Only scan networks you own or have explicit written permission to test.</sub>
+
+      - name: Release summary
+        run: |
+          echo "### 🎉 Release Published" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Tag:** \`${{ needs.prepare.outputs.tag }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Prerelease:** ${{ needs.prepare.outputs.is_prerelease }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Draft:** ${{ needs.prepare.outputs.is_draft }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Binaries published:**" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          ls -1 dist/ >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
