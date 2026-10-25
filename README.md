@@ -4,13 +4,13 @@
 
 ### *High-Speed Port Scanner for Restricted Lab Environments*
 
-**Fast • Modular • Zero-Dependency • Cross-Platform • No Root Required**
+**Fast • Modular • Real-time TUI • Cross-Platform • No Root Required**
 
 <br/>
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge&logo=go)](https://github.com/Ch4120N/ChPortScanner)
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPLv3-green?style=for-the-badge)](LICENSE)
 [![Owner](https://img.shields.io/badge/Owner-Ch4120N-red?style=for-the-badge)](https://github.com/Ch4120N)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey?style=for-the-badge)](https://github.com/Ch4120N/ChPortScanner)
 
@@ -26,6 +26,7 @@
 
 - [🔥 What is ChPortScanner?](#-what-is-ChPortScanner)
 - [✨ Key Features](#-key-features)
+- [🎨 Live TUI Dashboard](#-live-tui-dashboard)
 - [🏎️ Performance Highlights](#️-performance-highlights)
 - [📦 Installation](#-installation)
 - [🚀 Quick Start](#-quick-start)
@@ -36,6 +37,7 @@
   - [Probing](#-probing)
   - [Output Formats](#-output-formats)
   - [Utilities](#-utilities)
+- [🔢 Ports Above 65535](#-ports-above-65535)
 - [⚡ Performance Tuning](#-performance-tuning)
 - [🎯 Use Cases](#-use-cases)
 - [🏗️ Architecture](#️-architecture)
@@ -50,15 +52,15 @@
 
 ## 🔥 What is ChPortScanner?
 
-**ChPortScanner** is a **blazing-fast, modular TCP/UDP port scanner** built in pure **Go**, purpose-built for **restricted lab environments** where tools like `masscan` or `nmap` are blocked by policy, IDS signatures, or lack of root privileges.
+**ChPortScanner** is a **blazing-fast, modular TCP/UDP port scanner** built in pure **Go**, designed for **restricted lab environments** where raw-socket scanners are blocked by policy, IDS signatures, or missing privileges.
 
-It uses **TCP connect scanning** — meaning it **needs no root**, works in **unprivileged containers**, and looks like **normal traffic** to network sensors — while still hitting **thousands of ports per second** on local networks.
+It uses **TCP connect scanning** — meaning it **needs no root**, works in **unprivileged containers**, and looks like **normal client traffic** to network sensors — while still hitting **thousands of ports per second** on local networks.
 
-> 🎯 **Mission:** Give security researchers, penetration testers, and lab engineers a fast, safe, policy-compliant port scanner that runs anywhere — from a Raspberry Pi to a datacenter VM.
+> 🎯 **Mission:** Give security researchers, penetration testers, and lab engineers a **fast, safe, policy-compliant** port scanner that runs anywhere — from a Raspberry Pi to a datacenter VM — with a **modern real-time TUI dashboard**.
 
 <div align="center">
 
-### 🎁 **Written in Go — Zero External Dependencies**
+### 🎁 **Written in Go — Zero External Runtime Dependencies**
 
 *Single binary • Static compile • Cross-platform*
 
@@ -87,13 +89,14 @@ It uses **TCP connect scanning** — meaning it **needs no root**, works in **un
 <td width="50%">
 
 ### 🔍 **Advanced Probing**
-- ✅ **Banner grabbing** — grab service banners
+- ✅ **Banner grabbing** — `--banner`
 - ✅ **HTTP title** — `--http-probe`
 - ✅ **TLS certificate** — CN, issuer, expiry
 - ✅ **Reverse DNS** — `--rdns`
-- ✅ **Service name** lookup (100+ ports)
 - ✅ **Retry** logic with jitter
 - ✅ **UDP scan** mode (`--udp`)
+- ✅ **Any port number** — including > 65535
+- ✅ **Custom source IP** binding
 
 </td>
 </tr>
@@ -113,17 +116,64 @@ It uses **TCP connect scanning** — meaning it **needs no root**, works in **un
 </td>
 <td>
 
-### 🎨 **Beautiful Output**
-- ✅ **5 formats**: `text`, `json`, `jsonl`, `csv`, `grep`
-- ✅ **Live progress bar** with ETA
-- ✅ **Colored output** (disable with `--no-color`)
+### 🎨 **Beautiful TUI & Output**
+- ✅ **Live bubbletea dashboard** — real-time stats
+- ✅ **Responsive layout** — adapts to any terminal size
+- ✅ **5 output formats**: `text`, `json`, `jsonl`, `csv`
+- ✅ **Colored CLI banner**
 - ✅ **Quiet** / **Verbose** modes
 - ✅ **Final statistics** (`--stats`)
 - ✅ **State file** auto-save
+- ✅ **Disable with `--no-tui`** for CI pipelines
 
 </td>
 </tr>
 </table>
+
+---
+
+## 🎨 Live TUI Dashboard
+
+When run in an interactive terminal, **ChPortScanner** renders a beautiful real-time dashboard built on [`bubbletea`](https://github.com/charmbracelet/bubbletea) + [`lipgloss`](https://github.com/charmbracelet/lipgloss):
+
+```
+ _____ _    ______          _   _____
+/  __ \ |   | ___ \        | | /  ___|
+| /  \/ |__ | |_/ /__  _ __| |_\ `--.  ___ __ _ _ __  _ __   ___ _ __
+| |   | '_ \|  __/ _ \| '__| __|`--. \/ __/ _` | '_ \| '_ \ / _ \ '__|
+| \__/\ | | | | | (_) | |  | |_/\__/ / (_| (_| | | | | | | |  __/ |
+ \____/_| |_\_|  \___/|_|   \__\____/ \___\__,_|_| |_|_| |_|\___|_|
+ChPortScanner v1.0.0 . Owned By Ch4120N
+
+Targets:   192.168.1.0/24                       Mode:      TURBO
+Output:    scanned.txt                          Workers:   4000
+
+[##########################........................]  42.18%
+
+Tried:     11,221 / 26,556        Elapsed:   00:00:54
+Open:      3                      Remaining: 00:01:15
+Closed:    11,218                 Rate:      198 pps
+Retries:   0                      Avg:       207 pps
+
+Found:
+  >  192.168.1.1:80    |  HTTP/1.1 200 OK Server: nginx
+  >  192.168.1.5:22    |  SSH-2.0-OpenSSH_8.9p1
+  >  192.168.1.5:443   |  TLS CN=example.lan
+
+q/esc: quit  •  ctrl+c: stop scan
+```
+
+### 🎛️ Dashboard Features
+
+| Feature | Behavior |
+|:--------|:---------|
+| **Real-time** | Updates every 100ms with rate smoothing |
+| **Responsive** | Auto-hides banner on short terminals, single-column on narrow |
+| **Found list** | Shows **up to 5 latest open ports** (bounded by terminal height) |
+| **Configuration panel** | Top section shows flags: target, output, mode, workers |
+| **Graceful quit** | `q` / `esc` / `ctrl+c` — **single press** exits cleanly |
+| **CI-safe** | Automatically disabled when stdout is not a TTY |
+| **Manual override** | `--no-tui` falls back to classic progress bar |
 
 ---
 
@@ -163,14 +213,14 @@ Download the latest release for your platform from the [**Releases page**](https
 
 ```bash
 # Linux (amd64)
-wget https://github.com/Ch4120N/ChPortScanner/releases/download/v1.0.0/ChPortScanner-linux-amd64
-chmod +x ChPortScanner-linux-amd64
-sudo mv ChPortScanner-linux-amd64 /usr/local/bin/ChPortScanner
+wget https://github.com/Ch4120N/ChPortScanner/releases/download/v1.0.0/ChPortScanner-v1.0.0-linux-amd64
+chmod +x ChPortScanner-v1.0.0-linux-amd64
+sudo mv ChPortScanner-v1.0.0-linux-amd64 /usr/local/bin/ChPortScanner
 
 # macOS (Apple Silicon)
-curl -LO https://github.com/Ch4120N/ChPortScanner/releases/download/v1.0.0/ChPortScanner-darwin-arm64
-chmod +x ChPortScanner-darwin-arm64
-sudo mv ChPortScanner-darwin-arm64 /usr/local/bin/ChPortScanner
+curl -LO https://github.com/Ch4120N/ChPortScanner/releases/download/v1.0.0/ChPortScanner-v1.0.0-darwin-arm64
+chmod +x ChPortScanner-v1.0.0-darwin-arm64
+sudo mv ChPortScanner-v1.0.0-darwin-arm64 /usr/local/bin/ChPortScanner
 ```
 
 ### 🐹 **Install via Go**
@@ -201,14 +251,23 @@ GOOS=linux   GOARCH=arm64 go build -ldflags="-s -w" -o ChPortScanner-arm64
 
 ```bash
 ChPortScanner --version
-# ChPortScanner v1.0.0 by Ch4120N
+```
+
+```
+ChPortScanner v1.0.0 by Ch4120N
+  tag    : v1.0.0
+  commit : a1b2c3d
+  built  : 2026-10-24T12:34:56Z
+  go     : go1.21.13
+  os/arch: linux/amd64
 ```
 
 ---
 
+
 ## 🚀 Quick Start
 
-**Scan a subnet for common ports:**
+**Scan a subnet for common ports (with live TUI dashboard):**
 
 ```bash
 ChPortScanner -t 192.168.1.0/24 -p 22,80,443
@@ -224,18 +283,20 @@ ChPortScanner -t 192.168.1.10 -p 1-65535 --turbo --stats
 
 ```bash
 ChPortScanner -t 10.0.0.0/24 --top-ports 1000 \
-  --http-probe --tls-cert --rdns -oJ -o results.jsonl
+  --http-probe --tls-cert --rdns --format jsonl
 ```
 
 **Distributed scan across 4 machines:**
 
 ```bash
 # On machine 1
-ChPortScanner -t 192.168.0.0/16 -p 22,80 --shard 1/4 -oJ -o part1.jsonl
+ChPortScanner -t 192.168.0.0/16 -p 22,80 --shard 1/4 -o part1.txt
 # On machine 2
-ChPortScanner -t 192.168.0.0/16 -p 22,80 --shard 2/4 -oJ -o part2.jsonl
+ChPortScanner -t 192.168.0.0/16 -p 22,80 --shard 2/4 -o part2.txt
 # ... machines 3 & 4 with --shard 3/4 and 4/4
 ```
+
+> 📝 Results are **written to `scanned.txt` by default**. Override with `-o <file>` or `--format` to change the output style.
 
 ---
 
@@ -271,7 +332,7 @@ ChPortScanner -t 10.0.0.0/8 --exclude skip.txt -p 80
 
 | Flag | Description |
 |:-----|:------------|
-| `-p, --ports <spec>` | Ports to scan (e.g. `80,443,1000-2000`) |
+| `-p, --ports <spec>` | Ports to scan (e.g. `80,443,1000-2000`) — **any number up to 2³²** |
 | `--top-ports <N>` | Scan top N most common ports |
 | `--exclude-ports <spec>` | Ports to exclude from the scan |
 | `--profile <name>` | Preset: `quick`, `default`, `full`, `stealth` |
@@ -306,11 +367,12 @@ ChPortScanner -t 10.0.0.0/8 --exclude skip.txt -p 80
 
 | Flag | Description |
 |:-----|:------------|
-| `-o, --output <file>` | Write results to file (default: stdout) |
+| `-o, --output <file>` | Write results to file (default: **`scanned.txt`**) |
 | `-oJ` | JSON output (shortcut for `--format json`) |
-| `--format <fmt>` | `text` \| `json` \| `jsonl` \| `csv` \| `grep` |
+| `--format <fmt>` | `text` \| `json` \| `jsonl` \| `csv` |
 | `--no-color` | Disable colored output |
-| `-q, --quiet` | Suppress banner and info messages |
+| `--no-tui` | Disable the live TUI dashboard (for CI pipelines) |
+| `-q, --quiet` | Suppress banner, TUI, and info messages |
 | `-V, --verbose` | Verbose mode |
 | `--stats` | Show final statistics summary |
 
@@ -325,6 +387,25 @@ ChPortScanner -t 10.0.0.0/8 --exclude skip.txt -p 80
 | `-c <file>` | Load configuration from JSON file |
 | `-h, --help` | Show help |
 | `-v, --version` | Show version |
+
+---
+
+## 🔢 Ports Above 65535
+
+TCP and UDP headers use **16-bit port fields** — the maximum representable port is **65535**. This is a limitation of the protocol itself, not of ChPortScanner.
+
+To accept **any** port number you throw at it, ChPortScanner **wraps ports modulo 65536** before dialing, while **preserving the original value in the output**. This is the same technique masscan uses internally.
+
+| You request | Wire port sent | Printed |
+|:------------|:---------------|:--------|
+| `22` | `22` | `22` |
+| `65535` | `65535` | `65535` |
+| `65536` | `0` | `65536` |
+| `66389` | `853` | `66389` |
+| `77389` | `11853` | `77389` |
+| `99999` | `34463` | `99999` |
+
+**Nothing is skipped.** Every port you provide appears in the output. The remote host only responds if the **wrapped** port is actually open.
 
 ---
 
@@ -364,9 +445,10 @@ For **2-core / <4 GB RAM** systems:
 ChPortScanner -t 192.168.1.0/24 --top-ports 1000 --lite
 ```
 
-This auto-sets **200 workers**, **5k job buffer**, and **disables heavy probes**.
+This auto-sets **200 workers**, **5k job buffer**, and disables heavy probes.
 
 ---
+
 
 ## 🎯 Use Cases
 
@@ -421,6 +503,7 @@ Scan your own infra without needing `sudo` or raw sockets.
 
 ---
 
+
 ## 🏗️ Architecture
 
 **ChPortScanner** is built with **clean modular design** — every package is independently testable and reusable.
@@ -440,21 +523,28 @@ ChPortScanner/
     ├── target/                      # CIDR / range / IP parsing
     │   └── target.go
     │
-    ├── port/                        # Port ranges + service names
+    ├── port/                        # Port ranges (any uint32 value)
     │   └── port.go
     │
     ├── netutil/                     # Socket options (cross-platform)
-    │   ├── sockopt_unix.go          # SO_LINGER=0, ulimit
-    │   └── sockopt_windows.go       # no-op fallbacks
+    │   ├── sockopt_unix.go          # SO_LINGER=0
+    │   ├── sockopt_windows.go       # no-op fallback
+    │   ├── ulimit_linux.go          # uint64 rlimit
+    │   ├── ulimit_darwin.go         # uint64 rlimit
+    │   ├── ulimit_freebsd.go        # int64 rlimit
+    │   └── ulimit_stub.go           # no-op fallback
     │
     ├── probe/                       # HTTP title, TLS, rDNS
     │   └── probe.go
     │
-    ├── output/                      # Writers: text/json/jsonl/csv/grep
+    ├── output/                      # Writers: text/json/jsonl/csv
     │   └── output.go
     │
-    ├── ui/                          # Banner, progress, help, colors
-    │   └── ui.go
+    ├── ui/                          # Banner, TUI dashboard, progress
+    │   ├── banner_art.go            # Shared ASCII art
+    │   ├── dashboard.go             # Bubbletea TUI
+    │   ├── progress.go              # Plain CLI progress bar
+    │   └── ui.go                    # Help, colors, messages
     │
     └── scanner/                     # Core scan engine
         ├── scanner.go               # Orchestration
@@ -468,7 +558,7 @@ ChPortScanner/
 1. **🎯 Separation of concerns** — Config, parsing, scanning, output are decoupled
 2. **⚡ Hot path = zero allocations** — Reusable buffers, pre-formatted strings
 3. **🔒 Cross-platform** — Unix-specific syscalls behind build tags
-4. **📊 Observable** — Progress bar, stats, state files
+4. **📊 Observable** — Real-time TUI dashboard, stats, state files
 5. **🧪 Testable** — Each package has a clear, narrow API
 
 ---
@@ -482,23 +572,13 @@ ChPortScanner/
 ChPortScanner -t 192.168.1.0/24 --top-ports 100 --stats
 ```
 
-**Output:**
+**Output (`scanned.txt`):**
 ```
-╔══════════════════════════════════════════════════╗
-║  ChPortScanner v1.0.0                            ║
-║  Owner: Ch4120N                                  ║
-╚══════════════════════════════════════════════════╝
-
-[i] Starting scan: 1000 workers | rate=unlimited | timeout=1s | jobs=25600
-[####################] 100.00% | done:25600 open:12 | 12800 pps
-
-192.168.1.1:80 (http)
-192.168.1.1:443 (https)
-192.168.1.10:22 (ssh)
-192.168.1.10:80 (http)
+192.168.1.1:80
+192.168.1.1:443
+192.168.1.10:22
+192.168.1.10:80
 ...
-
-[+] Scan completed: 12 open port(s)
 ```
 
 ### 🔍 **2. Deep Scan with All Probes**
@@ -518,8 +598,8 @@ ChPortScanner \
 
 **Sample output (`recon.jsonl`):**
 ```json
-{"ip":"10.0.0.5","port":22,"proto":"tcp","state":"open","service":"ssh","banner":"SSH-2.0-OpenSSH_8.9p1"}
-{"ip":"10.0.0.5","port":443,"proto":"tcp","state":"open","service":"https","tls":"CN=example.com issuer=R3 expiry=2025-03-15","hostname":"web01.lab.local"}
+{"ip":"10.0.0.5","port":22,"banner":"SSH-2.0-OpenSSH_8.9p1"}
+{"ip":"10.0.0.5","port":443,"banner":"CN=example.com issuer=R3 expiry=2025-03-15"}
 ```
 
 ### 🥷 **3. Stealth Scan**
@@ -542,17 +622,18 @@ ENTRYPOINT ["ChPortScanner"]
 ```
 
 ```bash
-docker run --rm --network host ChPortScanner -t 10.0.0.0/24 -p 22,80,443
+docker run --rm --network host ChPortScanner \
+  -t 10.0.0.0/24 -p 22,80,443 --no-tui -o /dev/stdout
 ```
 
 ### 📂 **5. Extract Results**
 
 ```bash
 # From a saved text output, extract unique IPs
-ChPortScanner --extract scan.txt
+ChPortScanner --extract scanned.txt
 
 # Keep port information
-ChPortScanner --extract scan.txt --extract-ports > unique_targets.txt
+ChPortScanner --extract scanned.txt --extract-ports > unique_targets.txt
 ```
 
 ### 🔄 **6. Resume an Interrupted Scan**
@@ -573,6 +654,14 @@ ChPortScanner --resume bigscan.state
 ChPortScanner -t 2001:db8::/64 -p 22,80,443 --top-ports 100
 ```
 
+### 🔢 **8. Ports Beyond 65535 (wrapped modulo 65536)**
+
+```bash
+ChPortScanner -t 192.168.1.1 -p "66389,77389,88389,99389,3389,443"
+```
+
+These are printed exactly as typed in `scanned.txt` (wrapped to valid 16-bit ports on the wire).
+
 ---
 
 ## 🛠️ Building from Source
@@ -587,7 +676,7 @@ ChPortScanner -t 2001:db8::/64 -p 22,80,443 --top-ports 100
 
 ```bash
 # Development build
-go build -o ChPortScanner .
+go build -o ChPortScanner
 
 # Optimized release build
 go build -ldflags="-s -w" -trimpath -o ChPortScanner
@@ -597,11 +686,11 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
   go build -ldflags="-s -w" -trimpath -o ChPortScanner-linux-amd64
 
 # All platforms
-for os in linux darwin windows; do
+for os in linux darwin windows freebsd; do
   for arch in amd64 arm64; do
     CGO_ENABLED=0 GOOS=$os GOARCH=$arch \
       go build -ldflags="-s -w" -trimpath \
-      -o dist/ChPortScanner-$os-$arch .
+      -o dist/ChPortScanner-$os-$arch
   done
 done
 ```
@@ -614,10 +703,6 @@ go test ./... -race -coverprofile=coverage.out
 ```
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!--                        FAQ                                     -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
 
 ## ❓ FAQ
 
@@ -654,13 +739,25 @@ Common causes:
 <details>
 <summary><b>🪟 Does it work on Windows?</b></summary>
 
-**Yes.** Windows builds are fully supported. Some Unix-specific optimizations (`SO_LINGER=0`, `ulimit` auto-raise) are Unix-only, but scanning works correctly on all platforms.
+**Yes.** Windows builds are fully supported, including the TUI dashboard. Some Unix-specific optimizations (`SO_LINGER=0`, `ulimit` auto-raise) are Unix-only, but scanning works correctly on all platforms.
+</details>
+
+<details>
+<summary><b>🔢 Why does ChPortScanner accept ports above 65535?</b></summary>
+
+TCP/UDP headers have **16-bit port fields** — the maximum is **65535**. To accept any port number you throw at it, ChPortScanner **wraps ports modulo 65536** before dialing while **preserving the original value in output**. Ports above 65535 are **never silently skipped** — they appear in the output exactly as typed. The remote host only responds if the **wrapped** port is actually open.
 </details>
 
 <details>
 <summary><b>📁 Where is the state file saved?</b></summary>
 
 By default: `./scan.state`. Override with `--state <path>`. Use `--resume <file>` to continue an interrupted scan.
+</details>
+
+<details>
+<summary><b>🎨 How do I disable the TUI dashboard?</b></summary>
+
+Add `--no-tui` to fall back to a classic progress bar. The dashboard is also **automatically disabled** when stdout is not a TTY (e.g., in CI, pipes, or `--quiet` mode).
 </details>
 
 <details>
@@ -678,7 +775,6 @@ By default: `./scan.state`. Override with `--state <path>`. Use `--resume <file>
 
 ---
 
----
 
 ## 🤝 Contributing
 
@@ -700,11 +796,13 @@ Contributions are **warmly welcome**! Whether you're fixing a typo or adding a f
 
 ---
 
+
 ## 📜 License
 
-**MIT License** — see [LICENSE](LICENSE) for full text.
+**GPLv3 License** — see [LICENSE](LICENSE) for full text.
 
 ---
+
 
 ## 👤 Author
 
@@ -715,7 +813,7 @@ Contributions are **warmly welcome**! Whether you're fixing a typo or adding a f
 *Security Researcher • Tool Builder • Open Source Enthusiast*
 
 [![GitHub](https://img.shields.io/badge/GitHub-Ch4120N-181717?style=for-the-badge&logo=github)](https://github.com/Ch4120N)
-[![Twitter](https://img.shields.io/badge/Twitter-@Ch4120N-1DA1F2?style=for-the-badge&logo=twitter)](https://twitter.com/Ch4120N)
+[![Twitter](https://img.shields.io/badge/Telegram-@Ch4120N-1DA1F2?style=for-the-badge&logo=telegram)](https://t.me/Ch4120N)
 
 </div>
 
@@ -738,17 +836,16 @@ Contributions are **warmly welcome**! Whether you're fixing a typo or adding a f
 Made with ❤️  and ☕ by Ch4120N
 © 2026 — ChPortScanner v1.0.0
 
-
 **[⬆ Back to Top](#-ChPortScanner-v100)**
 
 </div>
 
 <!--
   Tags: port scanner, golang port scanner, fast port scanner, network scanner,
-  tcp scanner, udp scanner, cidr scanner, masscan alternative, nmap alternative,
-  no root port scanner, unprivileged port scanner, go security tools,
-  penetration testing tools, network recon, port scanning tool,
-  cross-platform port scanner, lightweight port scanner, modular port scanner,
+  tcp scanner, udp scanner, cidr scanner, no root port scanner,
+  unprivileged port scanner, go security tools, penetration testing tools,
+  network recon, port scanning tool, cross-platform port scanner,
+  lightweight port scanner, modular port scanner, bubbletea tui, terminal dashboard,
   ChPortScanner, Ch4120N, cybersecurity tools, lab tools, CTF tools,
   containerized port scanner, docker port scanner, kubernetes scanner,
   security research tools, ethical hacking tools, recon tools
