@@ -33,14 +33,12 @@ func (s *Scanner) producer(ctx context.Context) {
 		}
 	}
 
-	// Pre-size the string buffer used for ip.String() to minimize allocations.
 	emit := func(ip netip.Addr) bool {
 		if target.IsExcluded(ip, s.excl) {
 			count += int64(len(ports))
 			portIdx = 0
 			return true
 		}
-		// Format IP once per host, reuse for all ports.
 		ipStr := ip.String()
 		for portIdx < len(ports) {
 			if count >= shardEnd {

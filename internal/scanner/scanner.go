@@ -13,6 +13,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/Ch4120N/ChPortScanner/internal/config"
 	"github.com/Ch4120N/ChPortScanner/internal/output"
 	"github.com/Ch4120N/ChPortScanner/internal/port"
@@ -21,31 +22,35 @@ import (
 )
 
 type Job struct {
-	IP   string // pre-formatted string (avoid allocation in worker)
-	Port uint16
+	IP   string
+	Port uint32
 }
 
 type Scanner struct {
 	cfg   *config.Config
-	ports []uint16
+	ports []uint32
 	excl  []target.Spec
 	state State
 
-	total int64
-	done  atomic.Uint64
-	open  atomic.Uint64
-	start time.Time
+	total   int64
+	done    atomic.Uint64
+	open    atomic.Uint64
+	retries atomic.Uint64
+	start   time.Time
 
 	jobCh    chan Job
 	resultCh chan output.Result
 	tokens   chan struct{}
 	ticker   *time.Ticker
 
-	wg       sync.WaitGroup
-	cancel   context.CancelFunc
-	stopOnce sync.Once
-	writer   output.Writer
-	progress *ui.Progress
+	wg            sync.WaitGroup
+	cancel        context.CancelFunc
+	stopOnce      sync.Once
+	writer        output.Writer
+	progress      *ui.Progress
+	dashboardProg *tea.Program
+	dashboardDone chan struct{}
+	dashQuitOnce  sync.Once
 }
 
 func New(cfg *config.Config) *Scanner {
@@ -87,18 +92,21 @@ func (s *Scanner) Run() error {
 		return err
 	}
 
-	ports, err := port.Parse(s.cfg.Ports, s.cfg.ExcludePorts, s.cfg.TopPorts)
+	ports, warnings, err := port.Parse(s.cfg.Ports, s.cfg.ExcludePorts, s.cfg.TopPorts)
 	if err != nil {
 		return err
 	}
 	s.ports = ports
+	for _, w := range warnings {
+		ui.Warn("%s", w)
+	}
 
 	if s.cfg.Resume != "" {
 		if err := s.loadState(s.cfg.Resume); err != nil {
 			return fmt.Errorf("loading resume state: %w", err)
 		}
 		specs = s.state.Targets
-		ports, err = port.Parse(s.state.PortSpec, "", 0)
+		ports, _, err = port.Parse(s.state.PortSpec, "", 0)
 		if err != nil {
 			return fmt.Errorf("resume ports: %w", err)
 		}
@@ -106,7 +114,7 @@ func (s *Scanner) Run() error {
 	} else {
 		portStrs := make([]string, len(ports))
 		for i, p := range ports {
-			portStrs[i] = strconv.Itoa(int(p))
+			portStrs[i] = strconv.FormatUint(uint64(p), 10)
 		}
 		s.state = State{
 			Targets:  specs,
@@ -121,7 +129,6 @@ func (s *Scanner) Run() error {
 		return nil
 	}
 
-	// Excludes
 	exclLines, err := target.ReadLines(s.cfg.ExcludeFile)
 	if err != nil && s.cfg.ExcludeFile != "" {
 		return fmt.Errorf("reading excludes: %w", err)
@@ -133,7 +140,6 @@ func (s *Scanner) Run() error {
 		}
 	}
 
-	// Randomize
 	if s.cfg.Random {
 		rand.Shuffle(len(s.state.Targets), func(i, j int) {
 			s.state.Targets[i], s.state.Targets[j] = s.state.Targets[j], s.state.Targets[i]
@@ -141,10 +147,8 @@ func (s *Scanner) Run() error {
 		rand.Shuffle(len(s.ports), func(i, j int) {
 			s.ports[i], s.ports[j] = s.ports[j], s.ports[i]
 		})
-		ui.Info("Scan order randomized")
 	}
 
-	// Totals
 	var totalIPs uint64
 	for _, sp := range s.state.Targets {
 		totalIPs += target.Count(sp)
@@ -158,7 +162,6 @@ func (s *Scanner) Run() error {
 		s.total = int64(totalIPs * uint64(len(s.ports)))
 	}
 
-	// Shard
 	s.state.ShardIdx = 0
 	s.state.ShardEnd = s.total
 	if s.cfg.Shard != "" {
@@ -178,17 +181,14 @@ func (s *Scanner) Run() error {
 		} else {
 			s.state.ShardEnd = int64(x) * chunk
 		}
-		ui.Info("Shard %s: jobs %d → %d", s.cfg.Shard, s.state.ShardIdx, s.state.ShardEnd)
 	}
 
-	// Writer
 	s.writer, err = output.NewWriter(s.cfg)
 	if err != nil {
 		return err
 	}
 	defer s.writer.Close()
 
-	// Rate limiter
 	s.setupRateLimiter()
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -199,33 +199,60 @@ func (s *Scanner) Run() error {
 	s.resultCh = make(chan output.Result, 512)
 
 	s.start = time.Now()
+	workers := computeWorkers(s.cfg, len(s.ports))
 
-	if !s.cfg.Quiet {
+	// ─── TUI dashboard ────────────────────────────────────────────
+	useTUI := !s.cfg.NoTUI && !s.cfg.Quiet && isTTY()
+	if useTUI {
+		dcfg := ui.DashboardConfig{
+			Targets: targetDisplay(s.cfg),
+			Output:  s.cfg.Output,
+			Mode:    dashboardMode(s.cfg),
+			Workers: workers,
+			Banner:  s.cfg.Banner,
+			Total:   s.total,
+			Start:   s.start,
+			Tried:   &s.done,
+			Open:    &s.open,
+			Retries: &s.retries,
+		}
+		dash := ui.NewDashboard(dcfg, ui.UseColor)
+		// KEY FIX: q / esc / ctrl+c must stop the SCAN, not just the TUI.
+		dash.OnQuit = func() {
+			s.Stop()
+		}
+		s.dashboardProg = tea.NewProgram(dash, tea.WithAltScreen())
+		s.dashboardDone = make(chan struct{})
+		go func() {
+			if _, err := s.dashboardProg.Run(); err != nil {
+				fmt.Fprintf(os.Stderr, "dashboard error: %v\n", err)
+			}
+			close(s.dashboardDone)
+		}()
+	} else if !s.cfg.Quiet {
 		s.progress = ui.NewProgress(&s.done, &s.open, s.total, s.start)
 		go s.progress.Run(ctx)
+		ui.Info("Ports: %d | Workers: %d | Rate: %s | Timeout: %ds | Jobs: %d",
+			len(s.ports), workers, rateLabel(s.cfg.Rate), s.cfg.Timeout, s.total)
 	}
 
 	go s.stateSaver(ctx)
 	go s.resultCollector(ctx)
 
-	// Worker count
-	workers := computeWorkers(s.cfg, len(s.ports))
-	ui.Info("Starting scan: %d workers | rate=%s | timeout=%ds | jobs=%d",
-		workers, rateLabel(s.cfg.Rate), s.cfg.Timeout, s.total)
-
 	s.wg.Add(1)
 	go s.producer(ctx)
-
 	for i := 0; i < workers; i++ {
 		s.wg.Add(1)
 		go s.worker(ctx)
 	}
 
+	// Wait for scan to finish (naturally or via Stop)
 	s.wg.Wait()
-
-	// Drain result channel
 	close(s.resultCh)
 	time.Sleep(100 * time.Millisecond)
+
+	// Ensure TUI is closed cleanly (handles both "user pressed q" and "scan finished")
+	s.closeDashboard()
 
 	s.state.Finished = true
 	s.saveState()
@@ -234,10 +261,30 @@ func (s *Scanner) Run() error {
 		s.printStats()
 	}
 	if !s.cfg.Quiet {
-		fmt.Fprintln(os.Stderr)
-		ui.Success("Scan completed: %d open port(s)", s.open.Load())
+		open := s.open.Load()
+		if open == 0 {
+			ui.Warn("No open ports found across %d attempts.", s.done.Load())
+		} else {
+			ui.Success("Scan completed: %d open port(s)", open)
+		}
+		fmt.Fprintf(os.Stderr, "Results written to: %s\n", s.cfg.Output)
 	}
 	return nil
+}
+
+// closeDashboard triggers TUI shutdown (idempotent) and waits for it to exit.
+func (s *Scanner) closeDashboard() {
+	if s.dashboardProg == nil {
+		return
+	}
+	s.dashQuitOnce.Do(func() {
+		s.dashboardProg.Quit()
+	})
+	select {
+	case <-s.dashboardDone:
+	case <-time.After(2 * time.Second):
+		// Fallback so we never hang
+	}
 }
 
 func (s *Scanner) setupRateLimiter() {
@@ -245,8 +292,6 @@ func (s *Scanner) setupRateLimiter() {
 		s.tokens = nil
 		return
 	}
-	// Batch-fill: 10ms tick, fill rate/100 tokens per tick.
-	// Keeps timer overhead low even at very high rates.
 	rate := s.cfg.Rate
 	s.tokens = make(chan struct{}, rate)
 	batchSize := rate / 100
@@ -292,6 +337,13 @@ func (s *Scanner) resultCollector(ctx context.Context) {
 				return
 			}
 			s.writer.Write(res)
+			if s.dashboardProg != nil {
+				s.dashboardProg.Send(ui.FoundMsg{
+					IP:     res.IP,
+					Port:   res.Port,
+					Banner: res.Banner,
+				})
+			}
 		}
 	}
 }
@@ -302,13 +354,12 @@ func (s *Scanner) printStats() {
 	open := s.open.Load()
 	rate := float64(done) / elapsed
 	ui.Info("\n=== Final Stats ===")
-	ui.Info("Scanned     : %d", done)
+	ui.Info("Attempts    : %d", done)
 	ui.Info("Open        : %d", open)
 	ui.Info("Elapsed     : %.2fs", elapsed)
 	ui.Info("Avg rate    : %.0f pps", rate)
 }
 
-// computeWorkers auto-sizes the worker pool based on hardware and config.
 func computeWorkers(cfg *config.Config, numPorts int) int {
 	if cfg.Workers > 0 {
 		return cfg.Workers
@@ -317,7 +368,7 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	var w int
 	switch {
 	case cfg.Lite || cpus <= 2:
-		w = 200 // low-end default
+		w = 200
 	case cpus <= 4:
 		w = 1000
 	case cpus <= 8:
@@ -336,21 +387,15 @@ func computeWorkers(cfg *config.Config, numPorts int) int {
 	if w < 50 {
 		w = 50
 	}
-	// If rate is set, no point having more workers than rate
 	if cfg.Rate > 0 && w > cfg.Rate {
 		w = cfg.Rate
 	}
-	// Small job sets don't need huge pools
-	if cfg.Rate == 0 && numPorts > 0 {
-		maxUseful := 5000
-		if w > maxUseful {
-			w = maxUseful
-		}
+	if cfg.Rate == 0 && numPorts > 0 && w > 5000 {
+		w = 5000
 	}
 	return w
 }
 
-// jobBufferSize returns a channel buffer sized to memory availability.
 func jobBufferSize(total int64, cfg *config.Config) int {
 	if cfg.Lite {
 		return 5000
@@ -371,4 +416,33 @@ func rateLabel(rate int) string {
 	return strconv.Itoa(rate)
 }
 
-// saveState + loadState live in state.go.
+func dashboardMode(cfg *config.Config) string {
+	if cfg.Turbo {
+		return "TURBO"
+	}
+	if cfg.Lite {
+		return "LITE"
+	}
+	if cfg.Profile != "" {
+		return strings.ToUpper(cfg.Profile)
+	}
+	if cfg.UDP {
+		return "UDP"
+	}
+	return "NORMAL"
+}
+
+func targetDisplay(cfg *config.Config) string {
+	if cfg.InputFile != "" && cfg.Target == "" {
+		return cfg.InputFile
+	}
+	return cfg.Target
+}
+
+func isTTY() bool {
+	fi, err := os.Stdout.Stat()
+	if err != nil {
+		return false
+	}
+	return (fi.Mode() & os.ModeCharDevice) != 0
+}

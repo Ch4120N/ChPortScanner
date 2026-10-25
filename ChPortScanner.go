@@ -63,6 +63,7 @@ func main() {
 	}
 	
 	ui.Init(cfg.NoColor, cfg.Quiet)
+	ui.SetDashboardIdentity(AppName, buildVersion, AppOwner)
 	ui.Banner(AppName, buildVersion, AppOwner)
 	
 	if cfg.IsUnix {

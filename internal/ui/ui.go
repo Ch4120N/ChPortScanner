@@ -69,25 +69,14 @@ func Banner(name, version, owner string) {
 		return
 	}
 
-	// Plain fallback for --no-color (avoids dumping ASCII art into piped output)
 	if !UseColor {
 		fmt.Fprintf(os.Stderr, "== %s v%s . Owned By %s ==\n\n", name, version, owner)
 		return
 	}
 
-	// ASCII art (3 backticks in the art are escaped via string concatenation)
-	art := ` _____ _    ______          _   _____                                 
-/  __ \ |   | ___ \        | | /  ___|                                
-| /  \/ |__ | |_/ /__  _ __| |_\ ` + "`" + `--.  ___ __ _ _ __  _ __   ___ _ __ 
-| |   | '_ \|  __/ _ \| '__| __|` + "`" + `--. \/ __/ _` + "`" + ` | '_ \| '_ \ / _ \ '__|
-| \__/\ | | | | | (_) | |  | |_/\__/ / (_| (_| | | | | | | |  __/ |   
- \____/_| |_\_|  \___/|_|   \__\____/ \___\__,_|_| |_|_| |_|\___|_|   
-                                                                      `
-
-	// Print the art block in bold cyan
+	art := strings.Join(BannerArt, "\n")
 	fmt.Fprintf(os.Stderr, "%s%s%s\n", Bold+Cyan, art, Reset)
 
-	// Print the footer line centered under the art
 	bottom := fmt.Sprintf("%s v%s . Owned By %s", name, version, owner)
 	fmt.Fprintf(os.Stderr, "%s%s%s%s\n\n", Bold+Cyan, centerIndent(bottom, 71), bottom, Reset)
 }

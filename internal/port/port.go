@@ -7,25 +7,7 @@ import (
 	"strings"
 )
 
-var ServiceMap = map[uint16]string{
-	20: "ftp-data", 21: "ftp", 22: "ssh", 23: "telnet", 25: "smtp", 53: "domain",
-	67: "bootps", 68: "bootpc", 69: "tftp", 80: "http", 88: "kerberos",
-	110: "pop3", 111: "rpcbind", 123: "ntp", 135: "msrpc", 137: "netbios-ns",
-	138: "netbios-dgm", 139: "netbios-ssn", 143: "imap", 161: "snmp",
-	162: "snmptrap", 179: "bgp", 389: "ldap", 443: "https", 445: "microsoft-ds",
-	465: "smtps", 514: "syslog", 515: "printer", 548: "afp", 554: "rtsp",
-	587: "submission", 631: "ipp", 636: "ldaps", 873: "rsync", 990: "ftps",
-	993: "imaps", 995: "pop3s", 1433: "ms-sql-s", 1434: "ms-sql-m",
-	1521: "oracle", 1723: "pptp", 2049: "nfs", 2082: "cpanel",
-	2083: "cpanel-ssl", 2181: "zookeeper", 2375: "docker", 2376: "docker-tls",
-	3000: "grafana", 3128: "squid", 3306: "mysql", 3389: "ms-wbt-server",
-	5000: "upnp", 5432: "postgresql", 5900: "vnc", 5985: "wsman",
-	5986: "wsmans", 6379: "redis", 6666: "irc", 8000: "http-alt",
-	8080: "http-proxy", 8081: "blackice", 8443: "https-alt", 8888: "sun-answerbook",
-	9000: "cslistener", 9090: "zeus-admin", 9200: "elasticsearch", 9300: "elasticsearch",
-	27017: "mongodb", 28017: "mongodb-web", 50000: "sap",
-}
-
+// topPorts is a static list of common ports. No service names attached.
 var topPorts = []uint16{
 	7, 9, 13, 21, 22, 23, 25, 26, 37, 53, 79, 80, 81, 88, 106, 110, 111, 113,
 	119, 135, 139, 143, 144, 179, 199, 389, 427, 443, 444, 445, 465, 513, 514,
@@ -37,36 +19,30 @@ var topPorts = []uint16{
 	49152, 49153, 49154, 49155, 49156, 49157,
 }
 
-func init() {
-	seen := map[uint16]bool{}
-	deduped := topPorts[:0]
-	for _, p := range topPorts {
-		if !seen[p] {
-			seen[p] = true
-			deduped = append(deduped, p)
-		}
-	}
-	topPorts = deduped
-	sort.Slice(topPorts, func(i, j int) bool { return topPorts[i] < topPorts[j] })
-}
-
-func TopN(n int) []uint16 {
-	if n <= 0 || n > len(topPorts) {
-		n = len(topPorts)
-	}
-	return topPorts[:n]
-}
-
-func Parse(spec, exclude string, topN int) ([]uint16, error) {
-	set := map[uint16]struct{}{}
+// Parse returns every port as uint32. Nothing is silently filtered.
+//
+// Ports above 65535 are preserved here; the scanner wraps them modulo
+// 65536 before dialing (the TCP/UDP header only carries 16 bits).
+//
+// Return values:
+//   ports    — deduplicated, sorted uint32 port list
+//   warnings — human-readable notes about entries that couldn't be parsed
+//   err      — only when zero ports remain after parsing/exclusion
+func Parse(spec, exclude string, topN int) ([]uint32, []string, error) {
+	set := map[uint32]struct{}{}
+	var warnings []string
 
 	if topN > 0 {
-		for _, p := range TopN(topN) {
-			set[p] = struct{}{}
+		n := topN
+		if n > len(topPorts) {
+			n = len(topPorts)
+		}
+		for i := 0; i < n; i++ {
+			set[uint32(topPorts[i])] = struct{}{}
 		}
 	} else {
 		if spec == "" {
-			return nil, fmt.Errorf("no ports given")
+			return nil, nil, fmt.Errorf("no ports given")
 		}
 		for _, chunk := range strings.Split(spec, ",") {
 			chunk = strings.TrimSpace(chunk)
@@ -75,21 +51,33 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			}
 			if strings.Contains(chunk, "-") {
 				b := strings.SplitN(chunk, "-", 2)
-				lo, _ := strconv.Atoi(strings.TrimSpace(b[0]))
-				hi, _ := strconv.Atoi(strings.TrimSpace(b[1]))
+				if len(b) != 2 {
+					warnings = append(warnings, fmt.Sprintf("skipped invalid range %q", chunk))
+					continue
+				}
+				lo, errLo := strconv.ParseUint(strings.TrimSpace(b[0]), 10, 32)
+				hi, errHi := strconv.ParseUint(strings.TrimSpace(b[1]), 10, 32)
+				if errLo != nil || errHi != nil {
+					warnings = append(warnings, fmt.Sprintf("skipped invalid range %q", chunk))
+					continue
+				}
 				if lo > hi {
 					lo, hi = hi, lo
 				}
+				if hi-lo > 2_000_000 {
+					warnings = append(warnings, fmt.Sprintf("range %q too large (>2M entries), skipped", chunk))
+					continue
+				}
 				for p := lo; p <= hi; p++ {
-					if p >= 1 && p <= 65535 {
-						set[uint16(p)] = struct{}{}
-					}
+					set[uint32(p)] = struct{}{}
 				}
 			} else {
-				p, err := strconv.Atoi(chunk)
-				if err == nil && p >= 1 && p <= 65535 {
-					set[uint16(p)] = struct{}{}
+				p, err := strconv.ParseUint(chunk, 10, 32)
+				if err != nil {
+					warnings = append(warnings, fmt.Sprintf("skipped invalid port %q", chunk))
+					continue
 				}
+				set[uint32(p)] = struct{}{}
 			}
 		}
 	}
@@ -102,28 +90,37 @@ func Parse(spec, exclude string, topN int) ([]uint16, error) {
 			}
 			if strings.Contains(chunk, "-") {
 				b := strings.SplitN(chunk, "-", 2)
-				lo, _ := strconv.Atoi(strings.TrimSpace(b[0]))
-				hi, _ := strconv.Atoi(strings.TrimSpace(b[1]))
+				if len(b) != 2 {
+					continue
+				}
+				lo, errLo := strconv.ParseUint(strings.TrimSpace(b[0]), 10, 32)
+				hi, errHi := strconv.ParseUint(strings.TrimSpace(b[1]), 10, 32)
+				if errLo != nil || errHi != nil {
+					continue
+				}
 				if lo > hi {
 					lo, hi = hi, lo
 				}
 				for p := lo; p <= hi; p++ {
-					delete(set, uint16(p))
+					delete(set, uint32(p))
 				}
 			} else {
-				p, _ := strconv.Atoi(chunk)
-				delete(set, uint16(p))
+				p, err := strconv.ParseUint(chunk, 10, 32)
+				if err == nil {
+					delete(set, uint32(p))
+				}
 			}
 		}
 	}
 
 	if len(set) == 0 {
-		return nil, fmt.Errorf("no valid ports")
+		return nil, warnings, fmt.Errorf("no ports after parsing")
 	}
-	out := make([]uint16, 0, len(set))
+
+	out := make([]uint32, 0, len(set))
 	for p := range set {
 		out = append(out, p)
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i] < out[j] })
-	return out, nil
+	return out, warnings, nil
 }

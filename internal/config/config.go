@@ -44,6 +44,7 @@ type Config struct {
 	JSONOut   bool
 	Format    string
 	NoColor   bool
+	NoTUI     bool
 	Quiet     bool
 	Verbose   bool
 	ShowStats bool
@@ -60,23 +61,24 @@ type Config struct {
 	ShowVersion bool
 
 	// Internal
-	Lite    bool
-	Turbo   bool
-	IsUnix  bool
-	IsWin   bool
+	Lite   bool
+	Turbo  bool
+	IsUnix bool
+	IsWin  bool
 }
 
 func New() *Config {
 	return &Config{
 		Ports:         "80,443",
-		Rate:          0, // unlimited by default = fast
-		Workers:       0, // auto-size
+		Rate:          0,
+		Workers:       0,
 		Timeout:       1,
 		Retries:       0,
 		RetryDelay:    500,
 		BannerTimeout: 2,
 		Format:        "text",
 		StateFile:     "scan.state",
+		Output:        "scanned.txt",
 		IsUnix:        runtime.GOOS != "windows",
 		IsWin:         runtime.GOOS == "windows",
 	}
@@ -94,7 +96,7 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.ShowVersion, "version", false, "Show version")
 
 	// Targeting
-	fs.StringVar(&c.Target, "t", "", "Targets: IPs/CIDRs/ranges (comma-separated)")
+	fs.StringVar(&c.Target, "t", "", "Targets")
 	fs.StringVar(&c.Target, "target", "", "Targets (long)")
 	fs.StringVar(&c.InputFile, "iL", "", "Input file with targets")
 	fs.StringVar(&c.InputFile, "input", "", "Input file (long)")
@@ -118,7 +120,7 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.Random, "random", false, "Randomize scan order")
 	fs.StringVar(&c.Shard, "shard", "", "Shard X/Y")
 	fs.StringVar(&c.SourceIP, "S", "", "Source IP to bind")
-	fs.BoolVar(&c.Lite, "lite", false, "Low-resource mode (for low-end PCs)")
+	fs.BoolVar(&c.Lite, "lite", false, "Low-resource mode")
 	fs.BoolVar(&c.Turbo, "turbo", false, "Maximum speed mode")
 
 	// Probing
@@ -129,11 +131,12 @@ func Load(args []string) (*Config, error) {
 	fs.BoolVar(&c.RDNS, "rdns", false, "Reverse DNS lookup")
 
 	// Output
-	fs.StringVar(&c.Output, "o", "", "Output file")
-	fs.StringVar(&c.Output, "output", "", "Output file (long)")
+	fs.StringVar(&c.Output, "o", "scanned.txt", "Output file")
+	fs.StringVar(&c.Output, "output", "scanned.txt", "Output file (long)")
 	fs.BoolVar(&c.JSONOut, "oJ", false, "JSON output")
-	fs.StringVar(&c.Format, "format", "text", "text|json|jsonl|csv|grep")
+	fs.StringVar(&c.Format, "format", "text", "text|json|jsonl|csv")
 	fs.BoolVar(&c.NoColor, "no-color", false, "Disable colors")
+	fs.BoolVar(&c.NoTUI, "no-tui", false, "Disable TUI dashboard (simple progress)")
 	fs.BoolVar(&c.Quiet, "q", false, "Quiet mode")
 	fs.BoolVar(&c.Quiet, "quiet", false, "Quiet (long)")
 	fs.BoolVar(&c.Verbose, "V", false, "Verbose mode")

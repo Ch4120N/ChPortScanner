@@ -4,37 +4,27 @@ import (
 	"bufio"
 	"encoding/csv"
 	"encoding/json"
-	"fmt"
 	"io"
 	"os"
 	"sync"
 	"time"
 
 	"github.com/Ch4120N/ChPortScanner/internal/config"
-	"github.com/Ch4120N/ChPortScanner/internal/ui"
 )
 
-// Result is a single scan finding.
+// Result is a single open-port finding.
+// The output shows only IP and Port (+ optional banner).
 type Result struct {
-	IP       string    `json:"ip"`
-	Port     int       `json:"port,omitempty"`
-	Protocol string    `json:"proto,omitempty"`
-	State    string    `json:"state,omitempty"`
-	Service  string    `json:"service,omitempty"`
-	Banner   string    `json:"banner,omitempty"`
-	Title    string    `json:"title,omitempty"`
-	TLSInfo  string    `json:"tls,omitempty"`
-	Hostname string    `json:"hostname,omitempty"`
-	Time     time.Time `json:"ts,omitempty"`
+	IP     string `json:"ip"`
+	Port   int    `json:"port"`
+	Banner string `json:"banner,omitempty"`
 }
 
-// Writer is the output abstraction used by the scanner.
 type Writer interface {
 	Write(Result)
 	Close()
 }
 
-// NewWriter builds the correct Writer for the configured format.
 func NewWriter(cfg *config.Config) (Writer, error) {
 	var raw io.Writer = os.Stdout
 	var f *os.File
@@ -46,14 +36,8 @@ func NewWriter(cfg *config.Config) (Writer, error) {
 		}
 		raw = f
 	}
-	isFile := cfg.Output != ""
 	bw := bufio.NewWriterSize(raw, 64*1024)
-
-	base := &bufferedWriter{
-		bw:   bw,
-		file: f,
-		done: make(chan struct{}),
-	}
+	base := &bufferedWriter{bw: bw, file: f, done: make(chan struct{})}
 	go base.flushLoop()
 
 	switch cfg.Format {
@@ -63,16 +47,13 @@ func NewWriter(cfg *config.Config) (Writer, error) {
 		return &jsonlWriter{base: base}, nil
 	case "csv":
 		cw := csv.NewWriter(bw)
-		_ = cw.Write([]string{"ip", "port", "proto", "state", "service", "banner", "title", "tls", "hostname"})
+		_ = cw.Write([]string{"ip", "port", "banner"})
 		return &csvWriter{base: base, csv: cw}, nil
-	case "grep":
-		return &grepWriter{base: base}, nil
 	default:
-		return &textWriter{base: base, useColor: ui.UseColor && !isFile}, nil
+		return &textWriter{base: base}, nil
 	}
 }
 
-// ─── buffered writer ───
 type bufferedWriter struct {
 	mu     sync.Mutex
 	bw     *bufio.Writer
@@ -114,61 +95,36 @@ func (b *bufferedWriter) close() {
 	})
 }
 
-// ─── text ───
-type textWriter struct {
-	base     *bufferedWriter
-	useColor bool
-}
+type textWriter struct{ base *bufferedWriter }
 
 func (t *textWriter) Write(r Result) {
 	line := r.IP + ":" + itoa(r.Port)
-	if r.Service != "" {
-		line += " (" + r.Service + ")"
-	}
-	if r.Title != "" {
-		line += " [title:" + r.Title + "]"
-	}
-	if r.TLSInfo != "" {
-		line += " [tls:" + r.TLSInfo + "]"
-	}
-	if r.Hostname != "" {
-		line += " [rdns:" + r.Hostname + "]"
-	}
 	if r.Banner != "" {
-		line += " - " + r.Banner
+		line += " " + r.Banner
 	}
-	if t.useColor {
-		t.base.writeLine(ui.Green + line + ui.Reset + "\n")
-	} else {
-		t.base.writeLine(line + "\n")
-	}
+	t.base.writeLine(line + "\n")
 }
 
 func (t *textWriter) Close() { t.base.close() }
 
-// ─── json ───
 type jsonWriter struct{ base *bufferedWriter }
 
 func (j *jsonWriter) Write(r Result) {
-	r.Time = time.Now()
 	b, _ := json.MarshalIndent(r, "", "  ")
 	j.base.writeLine(string(b) + "\n")
 }
 
 func (j *jsonWriter) Close() { j.base.close() }
 
-// ─── jsonl ───
 type jsonlWriter struct{ base *bufferedWriter }
 
 func (j *jsonlWriter) Write(r Result) {
-	r.Time = time.Now()
 	b, _ := json.Marshal(r)
 	j.base.writeLine(string(b) + "\n")
 }
 
 func (j *jsonlWriter) Close() { j.base.close() }
 
-// ─── csv ───
 type csvWriter struct {
 	base *bufferedWriter
 	csv  *csv.Writer
@@ -176,27 +132,13 @@ type csvWriter struct {
 
 func (c *csvWriter) Write(r Result) {
 	c.base.mu.Lock()
-	_ = c.csv.Write([]string{
-		r.IP, itoa(r.Port), r.Protocol, r.State,
-		r.Service, r.Banner, r.Title, r.TLSInfo, r.Hostname,
-	})
+	_ = c.csv.Write([]string{r.IP, itoa(r.Port), r.Banner})
 	c.csv.Flush()
 	c.base.mu.Unlock()
 }
 
 func (c *csvWriter) Close() { c.base.close() }
 
-// ─── grep ───
-type grepWriter struct{ base *bufferedWriter }
-
-func (g *grepWriter) Write(r Result) {
-	g.base.writeLine(fmt.Sprintf("Host: %s () Ports: %d/%s/%s//%s///\n",
-		r.IP, r.Port, r.State, r.Protocol, r.Service))
-}
-
-func (g *grepWriter) Close() { g.base.close() }
-
-// ─── helpers ───
 func itoa(n int) string {
 	if n == 0 {
 		return "0"

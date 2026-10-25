@@ -3,13 +3,11 @@ package scanner
 import (
 	"context"
 	"net"
-	"strconv"
 	"strings"
 	"time"
 
 	"github.com/Ch4120N/ChPortScanner/internal/netutil"
 	"github.com/Ch4120N/ChPortScanner/internal/output"
-	"github.com/Ch4120N/ChPortScanner/internal/port"
 	"github.com/Ch4120N/ChPortScanner/internal/probe"
 )
 
@@ -23,7 +21,7 @@ func (s *Scanner) worker(ctx context.Context) {
 
 	dialer := &net.Dialer{
 		Timeout:   timeout,
-		KeepAlive: -1, // disable TCP keepalive — saves syscalls
+		KeepAlive: -1,
 		Control:   netutil.SetFastClose,
 	}
 	if s.cfg.SourceIP != "" {
@@ -44,7 +42,6 @@ func (s *Scanner) worker(ctx context.Context) {
 	retryDelay := time.Duration(s.cfg.RetryDelay) * time.Millisecond
 	retries := s.cfg.Retries
 
-	// Small scratch buffer for building addresses (avoids JoinHostPort allocation)
 	var addrBuf [64]byte
 
 	for {
@@ -56,7 +53,6 @@ func (s *Scanner) worker(ctx context.Context) {
 				return
 			}
 
-			// Rate limiting (only if configured)
 			if s.tokens != nil {
 				select {
 				case <-s.tokens:
@@ -65,12 +61,14 @@ func (s *Scanner) worker(ctx context.Context) {
 				}
 			}
 
-			// Build "ip:port" without allocation
-			addr := buildAddr(addrBuf[:], job.IP, job.Port)
+			// Wrap the port: TCP/UDP fields are 16 bits wide.
+			// Any uint32 is sent modulo 65536 on the wire; the
+			// original value is preserved in the result.
+			wirePort := uint16(job.Port % 65536)
+			addr := buildAddr(addrBuf[:], job.IP, wirePort)
 
-			var open bool
 			var conn net.Conn
-
+			var open bool
 			for attempt := 0; attempt <= retries; attempt++ {
 				c, err := dialer.DialContext(ctx, network, addr)
 				if err == nil {
@@ -82,50 +80,63 @@ func (s *Scanner) worker(ctx context.Context) {
 					break
 				}
 				if attempt < retries {
+					s.retries.Add(1)
 					time.Sleep(retryDelay)
 				}
 			}
 
-			if open && conn != nil {
-				res := output.Result{
-					IP:       job.IP,
-					Port:     int(job.Port),
-					Protocol: network,
-					State:    "open",
-				}
-				if svc, ok := port.ServiceMap[job.Port]; ok {
-					res.Service = svc
-				}
-
-				if s.cfg.Banner && network == "tcp" {
-					res.Banner = grabBanner(conn, s.cfg.BannerTimeout)
-				}
-				conn.Close()
-
-				// Optional probes
-				if s.cfg.HTTPProbe {
-					res.Title = probe.HTTPTitle(job.IP, int(job.Port), timeout)
-				}
-				if s.cfg.TLSCert {
-					res.TLSInfo = probe.TLSCertInfo(job.IP, int(job.Port), timeout)
-				}
-				if s.cfg.RDNS {
-					res.Hostname = probe.RDNS(job.IP)
-				}
-
-				select {
-				case s.resultCh <- res:
-				case <-ctx.Done():
-					return
-				}
-				s.open.Add(1)
+			if !open {
+				s.done.Add(1)
+				continue
 			}
+
+			res := output.Result{
+				IP:   job.IP,
+				Port: int(job.Port),
+			}
+
+			if s.cfg.Banner && network == "tcp" {
+				res.Banner = grabBanner(conn, s.cfg.BannerTimeout)
+			}
+			conn.Close()
+
+			if s.cfg.HTTPProbe {
+				if t := probe.HTTPTitle(job.IP, int(wirePort), timeout); t != "" {
+					res.Banner = joinBanner(res.Banner, t)
+				}
+			}
+			if s.cfg.TLSCert {
+				if t := probe.TLSCertInfo(job.IP, int(wirePort), timeout); t != "" {
+					res.Banner = joinBanner(res.Banner, t)
+				}
+			}
+			if s.cfg.RDNS {
+				if host := probe.RDNS(job.IP); host != "" {
+					res.Banner = joinBanner(res.Banner, "rdns:"+host)
+				}
+			}
+
+			select {
+			case s.resultCh <- res:
+			case <-ctx.Done():
+				return
+			}
+			s.open.Add(1)
 			s.done.Add(1)
 		}
 	}
 }
 
-// buildAddr formats "ip:port" into dst without allocation.
+func joinBanner(a, b string) string {
+	if a == "" {
+		return b
+	}
+	if b == "" {
+		return a
+	}
+	return a + " " + b
+}
+
 func buildAddr(dst []byte, ip string, port uint16) string {
 	n := copy(dst, ip)
 	dst[n] = ':'
@@ -149,7 +160,6 @@ func appendUint16(dst []byte, v uint16) int {
 	return copy(dst, tmp[i:])
 }
 
-// grabBanner reads up to 512 bytes from the connection.
 func grabBanner(conn net.Conn, timeoutSec int) string {
 	_ = conn.SetReadDeadline(time.Now().Add(time.Duration(timeoutSec) * time.Second))
 	buf := make([]byte, 512)
@@ -157,8 +167,7 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	if n <= 0 {
 		return ""
 	}
-	b := string(buf[:n])
-	b = strings.TrimSpace(b)
+	b := strings.TrimSpace(string(buf[:n]))
 	b = strings.ReplaceAll(b, "\n", "\\n")
 	b = strings.ReplaceAll(b, "\r", "\\r")
 	if len(b) > 200 {
@@ -166,6 +175,3 @@ func grabBanner(conn net.Conn, timeoutSec int) string {
 	}
 	return b
 }
-
-// keep strconv used (unused guard)
-var _ = strconv.Itoa

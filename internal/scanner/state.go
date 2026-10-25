@@ -3,6 +3,7 @@ package scanner
 import (
 	"encoding/json"
 	"os"
+	"sync"
 
 	"github.com/Ch4120N/ChPortScanner/internal/target"
 )
@@ -21,6 +22,8 @@ type State struct {
 	ShardEnd  int64         `json:"shard_end_idx"`
 }
 
+var stateWriteMu sync.Mutex
+
 func (s *Scanner) loadState(path string) error {
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -30,6 +33,9 @@ func (s *Scanner) loadState(path string) error {
 }
 
 func (s *Scanner) saveState() {
+	stateWriteMu.Lock()
+	defer stateWriteMu.Unlock()
+
 	s.state.OpenCount = s.open.Load()
 	data, _ := json.MarshalIndent(s.state, "", "  ")
 	_ = os.WriteFile(s.cfg.StateFile, data, 0644)
